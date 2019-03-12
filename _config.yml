@@ -13,9 +13,9 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: keji94.top
+url: kejishouxin.com
 root: /
-permalink: :category/:title
+permalink: :category/:title/
 permalink_defaults:
 
 # Directory
@@ -81,4 +81,3 @@ deploy:
   type: git
   repo: https://github.com/keji94/keji94.github.io.git
   branch: master
-
