@@ -28,10 +28,10 @@ after_script:
 
 branches:
   only:
-    - hexo_source  #只监测master分支，master是我的分支的名称，可根据自己情况设置
+    - hexo_source
 env:
  global:
-   - GH_REF: https://github.com/keji94/keji94.github.io.git  #设置GH_REF，注意更改yourname
+   - GH_REF: github.com/keji94/keji94.github.io.git  #设置GH_REF，注意更改yourname
 
 # configure notifications (email, IRC, campfire etc)
 # https://docs.travis-ci.com/user/notifications/
