@@ -38,7 +38,6 @@ env:
    - GH_REF: https://github.com/keji94/keji94.github.io.git  #设置GH_REF，注意更改yourname
 
 # configure notifications (email, IRC, campfire etc)
-# please update this section to your needs!
 # https://docs.travis-ci.com/user/notifications/
 notifications:
   email:
