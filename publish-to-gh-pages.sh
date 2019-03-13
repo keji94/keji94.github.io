@@ -20,3 +20,9 @@ git commit -m "Travis CI Auto Builder at `date +"%Y-%m-%d %H:%M"`"
 
 # Github Pages
 git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+
+cd ../public
+
+./ossutil64 config -e oss-cn-hangzhou.aliyuncs.com -i LTAILxlNnWg41hEp -k tkudYbKYLHivTLU59nCOUKMgXZDzx6
+
+./ossutil64 cp public oss://keji-image/ -r -f
