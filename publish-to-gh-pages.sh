@@ -23,6 +23,6 @@ git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
 
 cd ../
 
-./ossutil64 config -e oss-cn-hangzhou.aliyuncs.com -i LTAILxlNnWg41hEp -k tkudYbKYLHivTLU59nCOUKMgXZDzx6
+./ossutil64 config -e oss-cn-beijing.aliyuncs.com -i LTAILxlNnWg41hEp -k tkudYbKYLHivTLU59nCOUKMgXZDzx6
 
 ./ossutil64 cp public oss://oss://keji-blog-hexo// -r -f
