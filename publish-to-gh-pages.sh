@@ -11,15 +11,15 @@ mv .deploy_git/.git/ ./public/
 
 cd ./public
 
-# git config user.name "keji"
-# git config user.email "798631828@qq.com"
+git config user.name "keji"
+git config user.email "798631828@qq.com"
 
-# # add commit timestamp
-# git add .
-# git commit -m "Travis CI Auto Builder at `date +"%Y-%m-%d %H:%M"`"
+# add commit timestamp
+git add .
+git commit -m "Travis CI Auto Builder at `date +"%Y-%m-%d %H:%M"`"
 
-# # Github Pages
-# git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+# Github Pages
+git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
 
 cd ../
 chmod 755 ossutil64
