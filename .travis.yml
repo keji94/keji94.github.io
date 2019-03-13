@@ -1,42 +1,36 @@
-language: node_js  #设置语言
-
-node_js: stable  #设置相应的版本
-
-cache:
-    apt: true
-    directories:
-        - node_modules # 缓存不经常更改的内容
-
-before_install:
-    - export TZ='Asia/Shanghai' # 更改时区
-
-install:
-  - npm install  #安装hexo及插件
-
-script:
-  - hexo clean  #清除
-  - hexo g
-
-after_script:
-- cd ./public 
-- git init 
-- git config user.name “keji” 
-- git config user.email 798631828@qq.com” 
-- git add . 
-- git commit -m “Update with TRAVIS-CI.” 
-- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
-
+# 使用语言
+language: node_js
+# node版本
+node_js: stable
+# 设置只监听哪个分支
 branches:
   only:
-    - hexo_source
-env:
- global:
-   - GH_REF: github.com/keji94/keji94.github.io.git  #设置GH_REF，注意更改yourname
-
-# configure notifications (email, IRC, campfire etc)
-# https://docs.travis-ci.com/user/notifications/
-notifications:
-  email:
-    - 798631828@qq.com
-  on_success: change
-  on_failure: always
+  - hexo_source
+# 缓存，可以节省集成的时间，这里我用了yarn，如果不用可以删除
+cache:
+  apt: true
+  yarn: true
+  directories:
+    - node_modules
+# tarvis生命周期执行顺序详见官网文档
+before_install:
+- git config --global user.name "keji"
+- git config --global user.email "798631828@qq.com"
+# 由于使用了yarn，所以需要下载，如不用yarn这两行可以删除
+- curl -o- -L https://yarnpkg.com/install.sh | bash
+- export PATH=$HOME/.yarn/bin:$PATH
+- npm install -g hexo-cli
+install:
+# 不用yarn的话这里改成 npm i 即可
+- yarn
+script:
+- hexo clean
+- hexo generate
+after_success:
+- cd ./public
+- git init
+- git add --all .
+- git commit -m "Travis CI Auto Builder"
+# 这里的 REPO_TOKEN 即之前在 travis 项目的环境变量里添加的
+- git push --quiet --force https://$GH_TOKEN@github.com/keji94/keji94.github.io.git
+  master
