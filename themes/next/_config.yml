@@ -93,13 +93,13 @@ index_with_subtitle: false
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, question icon will be loaded.
 menu:
   home: / || home
-  about: /about/ || user
-  tags: /tags/ || tags
-  categories: /categories/ || th
-  archives: /archives/ || archive
-  schedule: /schedule/ || calendar
+  about: /about/index.html || user
+  tags: /tags/index.html || tags
+  categories: /categories/index.html || th
+  archives: /archives/index.html || archive
+  schedule: /schedule/index.html || calendar
   sitemap: /sitemap.xml || sitemap
-  commonweal: /404/ || heartbeat
+  commonweal: /404/index.html || heartbeat
 
 # Enable/Disable menu icons.
 menu_icons:
