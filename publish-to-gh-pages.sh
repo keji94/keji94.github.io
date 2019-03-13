@@ -25,4 +25,4 @@ cd ../
 
 ./ossutil64 config -e oss-cn-hangzhou.aliyuncs.com -i LTAILxlNnWg41hEp -k tkudYbKYLHivTLU59nCOUKMgXZDzx6
 
-./ossutil64 cp public oss://keji-image/ -r -f
+./ossutil64 cp public oss://keji-image/ -r -f --loglevel=debug
