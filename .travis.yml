@@ -32,6 +32,7 @@ after_script:
 branches:
     only:
         - hexo_source
+        - hexo_oss
 
 env:
     global:
