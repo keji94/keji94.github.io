@@ -86,10 +86,12 @@
 <meta property="og:site_name" content="克己的博客">
 <meta property="og:description" content="这两天抽空用hexo搭建了一个静态博客，并且使用travis+github pages做持续集成。后来对github pages的响应速度不是很满意，便将博客换成了hexo+travis+oss。 实现的效果是只需要提交代码，便自动将博客更新到github pages 和oss上面。 使用hexo+travis+github pages 完成持续部署的过程不在赘述，网上有很多教程，不过质量参差不齐">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-14T05:13:06.238Z">
+<meta property="og:image" content="/images/ossutil.png">
+<meta property="og:updated_time" content="2019-03-14T05:19:03.379Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo+travis+阿里云oss持续集成个人博客">
 <meta name="twitter:description" content="这两天抽空用hexo搭建了一个静态博客，并且使用travis+github pages做持续集成。后来对github pages的响应速度不是很满意，便将博客换成了hexo+travis+oss。 实现的效果是只需要提交代码，便自动将博客更新到github pages 和oss上面。 使用hexo+travis+github pages 完成持续部署的过程不在赘述，网上有很多教程，不过质量参差不齐">
+<meta name="twitter:image" content="/images/ossutil.png">
 
 
 
@@ -366,7 +368,7 @@
 <p>有关oss如何部署静态页面，参考<a href="https://juejin.im/post/5afba05b6fb9a07aa2138699" target="_blank" rel="noopener">如何将 hexo 生成的博客部署至阿里云 OSS 并全站启用 CDN 加速访问</a></p>
 <p>值得一提的是，如果需要将oss绑定到域名，需要备案。</p>
 <p>接下来需要做的是在push代码的时候，将构建出来的静态文件上传到oss中。这里我使用的是阿里云oss提供的工具类：<br><a href="https://help.aliyun.com/document_detail/50452.html?spm=a2c4g.11186623.6.1355.73af58d518E5T7" target="_blank" rel="noopener">命令行工具ossutil</a></p>
-<p>首先将ossutil下载，放到hexo源码根目录:</p>
+<p>首先将ossutil下载，放到hexo源码根目录:<br><img src="/images/ossutil.png" alt></p>
 <p>在上传只github pages的基础上，增加以下代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 进入根目录</span><br><span class="line">cd ../</span><br><span class="line"># 开启权限</span><br><span class="line">chmod 755 ossutil64</span><br><span class="line"># 配置endpoint，id 秘钥</span><br><span class="line">./ossutil64 config -e &lt;your oss endpoint&gt; -i &lt;your AccessKey ID&gt; -k &lt;your Access Key Secret&gt;</span><br><span class="line"># 先删除所有文件，防止出现文件改名后不能覆盖的问题</span><br><span class="line">./ossutil64 rm oss://keji-blog-hexo -r -f</span><br><span class="line"># 上传public文件至oss</span><br><span class="line">./ossutil64 cp public oss://keji-blog-hexo/ -r -f --loglevel=debug</span><br></pre></td></tr></table></figure></p>
 <p>这样，便可以了。</p>
 
