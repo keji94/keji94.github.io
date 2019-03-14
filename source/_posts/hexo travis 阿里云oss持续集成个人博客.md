@@ -20,7 +20,7 @@ date: 2019-03-11 19:41:29
 [命令行工具ossutil](https://help.aliyun.com/document_detail/50452.html?spm=a2c4g.11186623.6.1355.73af58d518E5T7)
 
 首先将ossutil下载，放到hexo源码根目录:
-
+![](/images/ossutil.png)
 
 
 
