@@ -1,7 +1,6 @@
 title: hexo+travis+阿里云oss持续集成个人博客
 author: keji
 date: 2019-03-11 19:41:29
-tags:
 ---
 这两天抽空用hexo搭建了一个静态博客，并且使用travis+github pages做持续集成。后来对github pages的响应速度不是很满意，便将博客换成了hexo+travis+oss。
 
@@ -19,6 +18,11 @@ tags:
 
 接下来需要做的是在push代码的时候，将构建出来的静态文件上传到oss中。这里我使用的是阿里云oss提供的工具类：
 [命令行工具ossutil](https://help.aliyun.com/document_detail/50452.html?spm=a2c4g.11186623.6.1355.73af58d518E5T7)
+
+首先将ossutil下载，放到hexo源码根目录:
+
+
+
 
 在上传只github pages的基础上，增加以下代码:
 ```
