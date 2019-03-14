@@ -41,7 +41,7 @@
                   <i class="fa fa-thumb-tack"></i>
                 </span>
               {% endif %}
-              <a class="post-title-link post-title-link-external" target="_blank" href="{{ url_for(post.link) }}index.html" itemprop="url">
+              <a class="post-title-link post-title-link-external" target="_blank" href="{{ url_for(post.link) }}" itemprop="url">
                 {{ post.title or post.link }}
                 <i class="fa fa-external-link"></i>
               </a>
@@ -52,7 +52,7 @@
                     <i class="fa fa-thumb-tack"></i>
                   </span>
                 {% endif %}
-                <a class="post-title-link" href="{{ url_for(post.path) }}index.html" itemprop="url">{#
+                <a class="post-title-link" href="{{ url_for(post.path) }}" itemprop="url">{#
                 #}{{ post.title | default(__('post.untitled'))}}{#
               #}</a>{#
             #}{% else %}{{ post.title }}{% endif %}{#
@@ -104,7 +104,7 @@
               {% endif %}
               {% for cat in post.categories %}
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="{{ url_for(cat.path) }}" itemprop="url" rel="index">
+                  <a href="{{ url_for(cat.path) }}index.html" itemprop="url" rel="index">
                     <span itemprop="name">{{ cat.name }}</span>
                   </a>
                 </span>
