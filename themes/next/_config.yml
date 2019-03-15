@@ -105,14 +105,6 @@ menu:
 menu_icons:
   enable: true
 
-gitalk:
-  enable: true
-  githubID: keji94  # 例：asdfv1929   
-  repo: keji94.github.io   # 例：asdfv1929.github.io
-  ClientID: dfcc6062f2143951a6b9
-  ClientSecret: c5e0eb16f92a41796acebbeb5f0759ec147c8df8
-  adminUser: keji94 #指定可初始化评论账户
-  distractionFreeMode: true
 
 # ---------------------------------------------------------------
 # Scheme Settings
@@ -386,15 +378,24 @@ changyan:
 # You can get your appid and appkey from https://leancloud.cn
 # more info please open https://valine.js.org
 valine:
-  enable: flase
+  enable: false
   appid:  ljHEux5H7WaMIoLGxevdPbu9-gzGzoHsz
-  appkey:  PPWOqpdiafR79PtojDKGiqzx
-  notify: true # mail notifier , https://github.com/xCss/Valine/wiki
-  verify: false # Verification code
-  placeholder: comments # comment box placeholder
+  appkey: PPWOqpdiafR79PtojDKGiqzx
+  notify: false # mail notifier , https://github.com/xCss/Valine/wiki
+  verify: true # Verification code
+  placeholder: write something here # comment box placeholder
   avatar: mm # gravatar style
   guest_info: nick,mail # custom comment header
   pageSize: 10 # pagination size
+
+gitalk:
+  enable: true
+  githubID: keji94  # 例：asdfv1929   
+  repo: keji94.github.io   # 例：asdfv1929.github.io
+  ClientID: feb8237600f9f0c823d6
+  ClientSecret: a6946bf9fc8d4793a60df4fedc526595b2f04cb3
+  adminUser: keji94 #指定可初始化评论账户
+  distractionFreeMode: false
 
 
 # Support for youyan comments system.
