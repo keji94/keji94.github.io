@@ -1,5 +1,5 @@
 {% if page.comments && theme.gitalk.enable %}
-  https://cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css
+  <link rel="stylesheet" href="https://cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
   <script src="https://cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
    <script type="text/javascript">
         var gitalk = new Gitalk({
