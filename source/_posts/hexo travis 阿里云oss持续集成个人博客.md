@@ -1,6 +1,7 @@
 title: hexo+travis+阿里云oss持续集成个人博客
 author: keji
 date: 2019-03-11 19:41:29
+categories: other
 ---
 这两天抽空用hexo搭建了一个静态博客，并且使用travis+github pages做持续集成。后来对github pages的响应速度不是很满意，便将博客换成了hexo+travis+oss。
 
