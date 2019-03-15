@@ -1,6 +1,6 @@
 {% if page.comments && theme.gitalk.enable %}
-  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  https://cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css
+  <script src="https://cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
    <script type="text/javascript">
         var gitalk = new Gitalk({
           clientID: '{{ theme.gitalk.ClientID }}',
