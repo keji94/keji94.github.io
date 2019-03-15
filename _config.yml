@@ -81,3 +81,10 @@ deploy:
   type: git
   repo: https://github.com/keji94/keji94.github.io.git
   branch: master
+
+algolia:
+  applicationID: 'RMUKEP7JUV'
+  apiKey: '12b3ad684c5e18d4c15e55dddc183406'
+  indexName: 'keji-blog-hexo'
+
+  chunkSize: 5000
