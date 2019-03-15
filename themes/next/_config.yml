@@ -105,6 +105,14 @@ menu:
 menu_icons:
   enable: true
 
+gitalk:
+  enable: true
+  githubID: keji94  # 例：asdfv1929   
+  repo: keji94.github.io   # 例：asdfv1929.github.io
+  ClientID: dfcc6062f2143951a6b9
+  ClientSecret: c5e0eb16f92a41796acebbeb5f0759ec147c8df8
+  adminUser: keji94 #指定可初始化评论账户
+  distractionFreeMode: true
 
 # ---------------------------------------------------------------
 # Scheme Settings
@@ -154,7 +162,7 @@ links_layout: block
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
 # in site  directory(source/uploads): /uploads/avatar.gif
-#avatar: /images/avatar.gif
+avatar: /images/keji.jpg
 
 # Table Of Contents in the Sidebar
 toc:
@@ -353,7 +361,7 @@ han: false
 #swiftype_key:
 
 # Baidu Analytics ID
-#baidu_analytics:
+baidu_analytics: b6a5ba0ede6adca5bc5c4042599338ca
 
 # Duoshuo ShortName
 #duoshuo_shortname:
@@ -489,7 +497,7 @@ duoshuo_info:
   ua_enable: true
   admin_enable: false
   user_id: 0
-  #admin_nickname: Author
+  admin_nickname: 克己
 
 # Post widgets & FB/VK comments settings.
 # ---------------------------------------------------------------
@@ -531,9 +539,9 @@ rating:
 # Show number of visitors to each article.
 # You can visit https://leancloud.cn get AppID and AppKey.
 leancloud_visitors:
-  enable: false
-  app_id: #<app_id>
-  app_key: #<app_key>
+  enable: true
+  app_id: FvalnKzIszMJbOKGGiVSI295-gzGzoHsz
+  app_key: zNxPvDhWLB6hUySme9HepOIi
 
 # Another tool to show number of visitors to each article.
 # visit https://console.firebase.google.com/u/0/ to get apiKey and projectId
