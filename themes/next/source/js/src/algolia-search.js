@@ -38,6 +38,7 @@ $(document).ready(function () {
       templates: {
         item: function (data) {
           var link = data.permalink ? data.permalink : (CONFIG.root + data.path);
+          link = link.replace("kejishouxin.com","");
           return (
             '<a href="' + link + 'index.html" class="algolia-hit-item-link">' +
               data._highlightResult.title.value +
