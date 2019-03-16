@@ -24,7 +24,7 @@ install:
 
 script:
     - hexo clean
-    - hexo g
+    - hexo g && gulp
 
 after_script:
     - ./publish-to-gh-pages.sh
