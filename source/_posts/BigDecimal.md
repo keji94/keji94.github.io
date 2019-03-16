@@ -1,7 +1,9 @@
 title: BigDecimal使用案例
 author: keji
 date: 2019-03-11 19:40:36
-categories: java基础
+categories: 
+    - java基础
+    - BigDecimal
 ---
 # 创建BigDecimal对象
 创建BigDecimal对象常用的方式有2种：
@@ -37,7 +39,7 @@ System.out.println(a.toString().equals(b)); //fasle
 
 # 加法
 加法的方法有两种，方法签名如下:
-```
+```java
 public BigDecimal add(BigDecimal augend)
 public BigDecimal add(BigDecimal augend, MathContext mc)
 ```
@@ -45,7 +47,7 @@ public BigDecimal add(BigDecimal augend, MathContext mc)
 MathContext 用于指定精度和舍入模式，具体查看[官方javadoc](https://docs.oracle.com/javase/7/docs/api/java/math/MathContext.html)
 
 demo:
-```
+```java
 BigDecimal a = BigDecimal.valueOf(1);
 BigDecimal b = BigDecimal.valueOf(1.5);
 BigDecimal c = BigDecimal.valueOf(1.4);
@@ -61,7 +63,7 @@ System.out.println("addResult2: "+addResult2);
 System.out.println("addResult3: "+addResult3);
 ```
 result:
-```
+```java
 addResult: 2.5
 addResult1: 2.5
 addResult2: 3
@@ -72,13 +74,13 @@ mc 设置保留几位小数，舍入按四舍五入
 
 # 减法
 方法签名如下：
-```
+```java
 public BigDecimal subtract(BigDecimal subtrahend)
 public BigDecimal subtract(BigDecimal subtrahend, MathContext mc)
 ```
 
 demo：
-```
+```java
 BigDecimal a = BigDecimal.valueOf(1);
 BigDecimal b = BigDecimal.valueOf(1.5);
 BigDecimal c = BigDecimal.valueOf(1.4);
@@ -95,7 +97,7 @@ System.out.println("subtract3: "+subtract3);
 ```
 
 result：
-```
+```java
 subtract: -0.5
 subtract1: -0.5
 subtract2: -0.5
@@ -104,13 +106,13 @@ subtract3: -0.4
 
 # 乘法：
 方法签名:
-```
+```java
 public BigDecimal multiply(BigDecimal multiplicand)
 public BigDecimal multiply(BigDecimal multiplicand, MathContext mc)
 ```
 
 demo:
-```
+```java
 BigDecimal a = BigDecimal.valueOf(1);
 BigDecimal b = BigDecimal.valueOf(1.5);
 BigDecimal c = BigDecimal.valueOf(1.4);
@@ -127,7 +129,7 @@ System.out.println("multiply3: "+multiply3);
 ```
 
 result:
-```
+```java
 multiply: 1.5
 multiply1: 1.5
 multiply2: 2
@@ -135,7 +137,7 @@ multiply3: 1
 ```
 
 # 除法:
-```
+```java
 public BigDecimal divide(BigDecimal divisor)
 public BigDecimal divide(BigDecimal divisor, MathContext mc)
 public BigDecimal divide(BigDecimal divisor, int roundingMode)
@@ -154,14 +156,14 @@ Inspection info: Reports calls to divide() or setScale() without a rounding mode
 ```
 
 所以用除法的时候，我们需要指定其舍入模式。推荐使用:
-```
+```java
 public BigDecimal divide(BigDecimal divisor, int scale, RoundingMode roundingMode)
 public BigDecimal divide(BigDecimal divisor, int scale, int roundingMode)
 ```
 指定舍入模式，和保留几位小数
 
 demo:
-```
+```java
 BigDecimal divide = a.divide(b, 2, BigDecimal.ROUND_HALF_UP);
 System.out.println("divide: "+divide);
 ```
