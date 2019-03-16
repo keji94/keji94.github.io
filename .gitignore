@@ -6,7 +6,5 @@ node_modules/
 public/
 .deploy*/
 .idea
-yulib.config
-yulib.resource/source/_posts/yufolder.config
-yulib.resource/source/yufolder.config
-yulib.resource/yufolder.config
+yulib*
+
