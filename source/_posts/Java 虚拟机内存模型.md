@@ -10,6 +10,8 @@ categories:
 
 ![在这里插入图片描述](https://keji-image.oss-cn-hangzhou.aliyuncs.com/super-blog/Jvm%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.png)
 
+<!-- more -->
+
 ### 程序计数器
 程序计数器是一块较小的内存空间，它可以看做当前线程所执行的字节码的行号指示器,每个线程都有一个程序计数器。如果线程执行的是Java方法，程序计数器记录的是正在执行的虚拟机字节码指令的地址；如果正在执行的Native方法，这个计数器的值则为空。
 
