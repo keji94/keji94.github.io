@@ -14,6 +14,8 @@ Java 的 IO 模型本质上还是利用操作系统提供的接口来实现,所�
 
 在JDK1.4之前，基于Java的所有Socket通信都采用同步阻塞模式(BIO)，这种一请求一应答的通信模型简化了上层的应用开发，但是在性能和可靠性方面却存在着巨大的瓶颈。当并发量增大，响应时间延迟增大之后，采用Java BIO开发的服务端只有通过硬件的不断扩容来满足高并发和低延迟，它极大的增加了企业的成本，笨企鹅随着集群规模的不断膨胀，系统的可维护性也面临巨大的挑战。
 
+<!-- more -->
+
 代码类似这样:
 
 ```java
@@ -256,7 +258,352 @@ Channel的类继承图如下。
 
 因为Channel是全双工的，所以它可以比流更好地映射底层操作系统的API。特别是在UNIX网络编程模型中，底层操作系统的通道都是全双工的，同时支持读写操作。
 
+### 多路复用器Selector
 
+多路复用器提供选择已经就绪的任务的能力。 简单来讲， Selector会不断地轮询注册在其上的Channel,如果某个Channel上面有新的TCP 连接接入、 读和写事件， 这个Channel就处于就绪状态， 会被Selector轮询出来， 然后通
+过SelectionKey可以获取就绪Channel的集合， 进行后续的I/O操作。
+
+多路复用器提供选择已经就绪的任务的能力。 简单来讲， Selector会不断地轮询注册在其上的Channel,如果某个Channel上面有新的TCP 连接接入、 读和写事件， 这个Channel就处于就绪状态， 会被Selector轮询出来， 然后通过SelectionKey可以获取就绪Channel的集合， 进行后续的I/O操作。
+
+#### 使用NIO实现服务端
+![nioserver](images/nioserver.png)
+
+```java
+public class TimeServerNio {
+
+    public static void main(String[] args) {
+        //设置监听端口
+        int port = 8080;
+        if (args != null && args.length > 0) {
+            try {
+                port = Integer.valueOf(args[0]);
+            } catch (NumberFormatException e) {
+                //采用默认值
+            }
+        }
+        
+        //创建了一个被称为MultiplexerTimeServer的多路复用类， 它是个一个独立
+        //的线程， 负责轮洵多路复用器Selctor,可以处理多个客户端的并发接入
+        MultiplexerTimeServer timeServer = new MultiplexerTimeServer(port);
+
+        new Thread(timeServer, "NIO-MultiplexerTirneServer-001H").start();
+    }
+
+}
+
+```
+
+```java
+public class MultiplexerTimeServer implements Runnable {
+
+    private Selector selector;
+
+    private ServerSocketChannel servChannel;
+
+    private volatile boolean stop;
+
+    /**
+     * 在构造方法中进行资源初始化， 创建多路复用器Selector、
+     * ServerSocketChannel,对 Channel 和 TCP 参数进行配置
+     *
+     * @param port
+     */
+    public MultiplexerTimeServer(int port) {
+        try {
+            selector = Selector.open();
+            servChannel = ServerSocketChannel.open();
+            //设置为异步非阻塞模式
+            servChannel.configureBlocking(false);
+            servChannel.socket().bind(new InetSocketAddress(port), 1024);
+            //注册selector
+            servChannel.register(selector, SelectionKey.OP_ACCEPT);
+            System.out.println("The time server is start in port : " + port);
+        } catch (IOException e) {
+            //资源初始化失败，退出系统
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    public void stop() {
+        this.stop = true;
+    }
+
+
+    @Override
+    public void run() {
+        while (!stop) {
+            try {
+                //循环遍历selector,它的休眠时间为1s
+                selector.select(1000);
+                //返回就绪状态的Channel的SelectionKey集合
+                Set<SelectionKey> selectedKeys = selector.selectedKeys();
+                Iterator<SelectionKey> it = selectedKeys.iterator();
+                SelectionKey key = null;
+
+                //通过对就绪状态的Channel集合进行迭代， 可以进行网络的异步读写操作
+                while (it.hasNext()) {
+                    key = it.next();
+                    it.remove();
+                    try {
+                        handleInput(key);
+                    } catch (Exception e) {
+                        if (key != null) {
+                            key.cancel();
+                            if (key.channel() != null) {
+                                key.channel().close();
+                            }
+                        }
+                    }
+                }
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
+        }
+
+        // 多路复用器关闭后，所有注册在上面的Channel和Pipe等资源都会被自动去注册并关闭，所以不需要重复释放资源
+        if (selector != null) {
+            try {
+                selector.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void handleInput(SelectionKey key) throws IOException {
+
+        if (key.isValid()) {
+            // 处理新接入的请求消息
+            if (key.isAcceptable()) {
+                // Accept the new connection
+                ServerSocketChannel ssc = (ServerSocketChannel) key.channel();
+                SocketChannel sc = ssc.accept();
+                sc.configureBlocking(false);
+                // Add the new connection to the selector
+                sc.register(selector, SelectionKey.OP_READ);
+            }
+            if (key.isReadable()) {
+                // Read the data
+                SocketChannel sc = (SocketChannel) key.channel();
+                ByteBuffer readBuffer = ByteBuffer.allocate(1024);
+                int readBytes = sc.read(readBuffer);
+                if (readBytes > 0) {
+                    readBuffer.flip();
+                    byte[] bytes = new byte[readBuffer.remaining()];
+                    readBuffer.get(bytes);
+                    String body = new String(bytes, "UTF-8");
+                    System.out.println("The time server receive order : "
+                                       + body);
+                    String currentTime = "QUERY TIME ORDER"
+                                                 .equalsIgnoreCase(body) ? new java.util.Date(
+                            System.currentTimeMillis()).toString()
+                                                                         : "BAD ORDER";
+                    doWrite(sc, currentTime);
+                } else if (readBytes < 0) {
+                    // 对端链路关闭
+                    key.cancel();
+                    sc.close();
+                } else {
+                    ; // 读到0字节，忽略
+                }
+            }
+        }
+    }
+
+    /**
+     * 将应答消息异步发送给客户端
+     *
+     * @param channel channel
+     * @param response response
+     * @throws IOException exception
+     */
+    private void doWrite(SocketChannel channel, String response)
+            throws IOException {
+        if (response != null && response.trim().length() > 0) {
+            //将字符串编码成字节数组， 根据字节数组的容量创建ByteBuff
+            byte[] bytes = response.getBytes();
+            ByteBuffer writeBuffer = ByteBuffer.allocate(bytes.length);
+            //将字节数据复制到缓冲区
+            writeBuffer.put(bytes);
+            writeBuffer.flip();
+            //将缓冲区中的字节数组发送出去
+            channel.write(writeBuffer);
+        }
+    }
+}
+
+```
+
+#### 使用NIO实现客户端
+![TimeClient](images/TimeClient.png)
+
+```java
+public class TimeClientNio {
+
+    public static void main(String[] args) {
+
+        int port = 8080;
+        if (args != null && args.length > 0) {
+            try {
+                port = Integer.valueOf(args[0]);
+            } catch (NumberFormatException e) {
+                // 采用默认值
+            }
+        }
+        new Thread(new TimeClientHandle("127.0.0.1", port), "TimeClient-001")
+                .start();
+    }
+}
+
+```
+
+```java
+public class TimeClientHandle implements Runnable{
+    private String host;
+    private int port;
+
+    private Selector selector;
+    private SocketChannel socketChannel;
+
+    private volatile boolean stop;
+
+    /**
+     * implements Runnable
+     *
+     * @param host host
+     * @param port port
+     */
+    public TimeClientHandle(String host, int port) {
+        this.host = host == null ? "127.0.0.1" : host;
+        this.port = port;
+        try {
+            selector = Selector.open();
+            socketChannel = SocketChannel.open();
+            //设置为异步非阻塞模式
+            socketChannel.configureBlocking(false);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    @Override
+    public void run() {
+        try {
+            //发送连接请求
+            doConnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        while (!stop) {
+            try {
+                selector.select(1000);
+                Set<SelectionKey> selectedKeys = selector.selectedKeys();
+                Iterator<SelectionKey> it = selectedKeys.iterator();
+                SelectionKey key = null;
+                while (it.hasNext()) {
+                    key = it.next();
+                    it.remove();
+                    try {
+                        handleInput(key);
+                    } catch (Exception e) {
+                        if (key != null) {
+                            key.cancel();
+                            if (key.channel() != null)
+                                key.channel().close();
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
+        }
+
+        // 多路复用器关闭后，所有注册在上面的Channel和Pipe等资源都会被自动去注册并关闭，所以不需要重复释放资源
+        if (selector != null){
+            try {
+                selector.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    private void handleInput(SelectionKey key) throws IOException {
+
+        if (key.isValid()) {
+            // 判断是否连接成功
+            SocketChannel sc = (SocketChannel) key.channel();
+            //如果返回值为true,说明客户端连接成功
+            if (key.isConnectable()) {
+                if (sc.finishConnect()) {
+                    sc.register(selector, SelectionKey.OP_READ);
+                    doWrite(sc);
+                } else {
+                    System.exit(1);// 连接失败，进程退出
+                }
+            }
+            if (key.isReadable()) {
+                //预分配1M的接收缓冲K用于读取应答消息， 调川Socketchannel的read()方法进行异步读取操作
+                ByteBuffer readBuffer = ByteBuffer.allocate(1024);
+                int readBytes = sc.read(readBuffer);
+
+                if (readBytes > 0) {
+                    readBuffer.flip();
+                    byte[] bytes = new byte[readBuffer.remaining()];
+                    readBuffer.get(bytes);
+                    String body = new String(bytes, "UTF-8");
+                    System.out.println("Now is : " + body);
+                    this.stop = true;
+                } else if (readBytes < 0) {
+                    // 对端链路关闭
+                    key.cancel();
+                    sc.close();
+                } else
+                    ; // 读到0字节，忽略
+            }
+        }
+
+    }
+
+    private void doConnect() throws IOException {
+        // 如果直接连接成功，则注册到多路复用器上，发送请求消息，读应答
+        if (socketChannel.connect(new InetSocketAddress(host, port))) {
+            socketChannel.register(selector, SelectionKey.OP_READ);
+            doWrite(socketChannel);
+        } else {
+            //如果没有直接连接成功， 则说明服务端没有返回TCP握手应答消息， 但这并不代表连接失败， 我们需要将SocketChannel
+            //注册到多路复用器Selector上， 注册SelectionKey.OP CONNECT»当服务端返回TCP
+            //syn-ack消息后， Selector就能够轮询到这个SocketChannel处于连接就绪状态
+            socketChannel.register(selector, SelectionKey.OP_CONNECT);
+        }
+    }
+
+    private void doWrite(SocketChannel sc) throws IOException {
+        byte[] req = "QUERY TIME ORDER".getBytes();
+        ByteBuffer writeBuffer = ByteBuffer.allocate(req.length);
+        writeBuffer.put(req);
+        writeBuffer.flip();
+        sc.write(writeBuffer);
+        //hasRemaining()方法对发送结果进行判断， 是否全部发送完成
+        if (!writeBuffer.hasRemaining()) {
+            System.out.println("Send order 2 server succeed.");
+        }
+    }
+}
+
+```
+
+通过源码对比分析， 我们发现N1O编程难度确实比同步阻塞BIO大很多， 我们的NIO 例程并没有考虑“ 半包读” 和“ 半包写” ， 如果加上这些， 代码将会更加复杂。
+
+### NIO有点总结
+1. 客户端发起的连接操作是异步的， 可以通过在多路复用器注册OP_CONNECT等待后续结果， 不需要像之前的客户端那样被同步阻塞。
+2. Socketchannel的读写操作都是异步的， 如果没有可读写的数据它不会同步等待，直接返回， 这样I/O通信线程就可以处理其他的链路， 不需要同步等待这个链路可用。 
+3. 线程模型的优化： 由于JDK的Selector在Linux等主流操作系统上通过epoll实现， 它没有连接句柄数的限制(只受限丁• 操作系统的最大句柄数或者对单个进程的句柄限制)， 这意味着一个Selector线程可以同时处理成千上万个客户端连接， 而且性能不会随着客户端的增加而线性下降， 因此， 它非常适合做高性能、 高负载的网络服务器。
 
 # AIO
 
