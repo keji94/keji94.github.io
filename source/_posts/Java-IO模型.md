@@ -70,7 +70,7 @@ Send reply (利用底层IO发送已编码的字节响应)
 不同之处在于，每一个步骤底层使用的技术和手段不同，比如:
 XML解析,文件传输,Web页面生成,计算服务.....
 
-![classic_service_design](images/classic_service_design.png)
+![classic_service_design](/images/classic_service_design.png)
 
 经典(传统)的网络服务设计如上图所示，对每个请求都会产生一个新的线程来进行处理，这种设计的缺点是，线程的创建本身是系统资源的一个开销，如果并发请求达到一定数量，响应将会变慢，甚至有可能因为系统资源不足而造成系统崩溃。
 
@@ -78,7 +78,7 @@ XML解析,文件传输,Web页面生成,计算服务.....
 
 为了解决同步阻塞I/O面临的一个链路需要一个线程处理的问题，后来有人对它的线程模型进行了优化，后端通过一个线程池来处理多个客户端的请求接入，形成客户端个数线程池最大线程数W的比例关系，其中A/可以远远大于M通过线程池可以灵活的调配线程资源， 设置线程的最大值， 防止由于海量并发接入导致线程耗尽。
 
-![746143-20171024093026988-682603426](images/746143-20171024093026988-682603426.png)
+![746143-20171024093026988-682603426](/images/746143-20171024093026988-682603426.png)
 
 当有新的客户端接入的吋候，将客户端的Socket封装成一个Task （该任务实现java.lang.Runnable接口）投递到后端的线程池中进行处理，JDK的线程池维护一个消息队列和/V个活跃线程对消息队列中的任务进行处理。由于线程池可以设置消息队列的大小和最大线程数，因此，它的资源占用是可控的，无论多少个客户端并发访问，都不会导致资
 源的耗尽和宕机。
@@ -244,7 +244,7 @@ Buffer是一个对象，它包含一些要写入或者要读出的数据。在NI
 * FloatBuffer：浮点型缓冲区
 * DoubleBuffer： 双精度浮点型缓冲区
 
-![BufferUml](images/BufferUml.png)
+![BufferUml](/images/BufferUml.png)
 
 每—个Buffer类都是Buffer接口的一个T实例。除了 ByteBuffer,每一个Buffe类都有完全一样的操作，只是它们所处理的数据类型不一样。因为大多数标准I/O操作都使用ByteBuffer,所以它除了具有一般缓冲区的操作之外还提供一些特有的操作，方便网络读写。
 
@@ -253,7 +253,7 @@ Buffer是一个对象，它包含一些要写入或者要读出的数据。在NI
 Channel是一个通道，可以通过它读取和写入数据，它就像自来水管一样，网络数据通过Channel读取和写入。通道与流的不同之处在于通道是双向的，流只是在一个方向上移动（一个流必须是InputStream或者OutputStream的子类），而且通道可以用于读、写或者同时用于读写。
 
 Channel的类继承图如下。
-![ChannelUml](images/ChannelUml.png)
+![ChannelUml](/images/ChannelUml.png)
 
 
 因为Channel是全双工的，所以它可以比流更好地映射底层操作系统的API。特别是在UNIX网络编程模型中，底层操作系统的通道都是全双工的，同时支持读写操作。
@@ -266,7 +266,7 @@ Channel的类继承图如下。
 多路复用器提供选择已经就绪的任务的能力。 简单来讲， Selector会不断地轮询注册在其上的Channel,如果某个Channel上面有新的TCP 连接接入、 读和写事件， 这个Channel就处于就绪状态， 会被Selector轮询出来， 然后通过SelectionKey可以获取就绪Channel的集合， 进行后续的I/O操作。
 
 #### 使用NIO实现服务端
-![nioserver](images/nioserver.png)
+![nioserver](/images/nioserver.png)
 
 ```java
 public class TimeServerNio {
@@ -436,7 +436,7 @@ public class MultiplexerTimeServer implements Runnable {
 ```
 
 #### 使用NIO实现客户端
-![TimeClient](images/TimeClient.png)
+![TimeClient](/images/TimeClient.png)
 
 ```java
 public class TimeClientNio {
