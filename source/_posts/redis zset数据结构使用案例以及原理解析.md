@@ -18,6 +18,8 @@ zset 可以用来存粉丝列表，value 值是粉丝的用户 ID，score 是关
 
 zset 还可以用来存储学生的成绩，value 值是学生的 ID，score 是他的考试成绩。我们可以对成绩按分数进行排序就可以得到他的名次。
 
+<!-- more --> 
+
 ```java
 > zadd books 9.0 "think in java"
 (integer) 1
