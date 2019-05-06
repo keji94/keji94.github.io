@@ -20,8 +20,7 @@ before_install:
     - chmod +x ./publish-to-gh-pages.sh
 
 install:
-    - npm audit fix
-    - npm audit fix --force
+    - gulp -v
     - npm install
 
 script:
