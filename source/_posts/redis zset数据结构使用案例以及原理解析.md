@@ -1,7 +1,7 @@
 ---
 layout: post
 title: redis zset数据结构使用案例以及原理解析
-date: 2019-04-29 19:40:36
+date: 2019-05-6 19:40:36
 categories: 
   - redis
 tags:
@@ -18,7 +18,7 @@ zset 中最后一个 value 被移除后，数据结构自动删除，内存被�
 zset 可以用来存粉丝列表，value 值是粉丝的用户 ID，score 是关注时间。我们可以对粉丝列表按关注时间进行排序。
 
 zset 还可以用来存储学生的成绩，value 值是学生的 ID，score 是他的考试成绩。我们可以对成绩按分数进行排序就可以得到他的名次。
-
+<!-- more -->
 ```java
 > zadd books 9.0 "think in java"
 (integer) 1
