@@ -6,13 +6,13 @@ var uglify = require('gulp-uglify');
 var htmlmin = require('gulp-htmlmin');
 var htmlclean = require('gulp-htmlclean');
 //压缩css
-gulp.task('minify-css', function () {
+gulp.task('minify-css', function (done) {
 return gulp.src('./public/**/*.css')
 .pipe(minifycss())
 .pipe(gulp.dest('./public'));
 });
 //压缩html
-gulp.task('minify-html', function () {
+gulp.task('minify-html', function (done) {
 return gulp.src('./public/**/*.html')
 .pipe(htmlclean())
 .pipe(htmlmin({
@@ -25,7 +25,7 @@ minifyURLs: true,
 .pipe(gulp.dest('./public'))
 });
 //压缩js 不压缩min.js
-gulp.task('minify-js', function () {
+gulp.task('minify-js', function (done) {
 return gulp.src(['./public/**/*.js', '!./public/**/*.min.js'])
 .pipe(uglify())
 .pipe(gulp.dest('./public'));
@@ -37,6 +37,7 @@ return gulp.src(['./public/**/*.js', '!./public/**/*.min.js'])
 //]);
 //4.0以后的写法
 // 执行 gulp 命令时执行的任务
-gulp.task('default', gulp.parallel('minify-html', 'minify-css', 'minify-js', function() {
+gulp.task('default', gulp.parallel('minify-html', 'minify-css', 'minify-js', function(done) {
   // Do something after a, b, and c are finished.
+  console.log('finished!');
 }));
