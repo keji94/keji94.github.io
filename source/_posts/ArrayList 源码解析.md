@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ArrayList 源码解析
+title: Java集合之ArrayList 源码解析
 date: 2019-03-16 19:40:36
 categories: 
   - java基础
@@ -131,18 +131,32 @@ private int size;
 看下ensureCapacityInternal()的源码:
 ```java
 private void ensureCapacityInternal(int minCapacity) {
-　　if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
-　　　　minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);
-　　}
+    ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));
+}
 
-　　ensureExplicitCapacity(minCapacity);
+```
+简单点说，该方法做了一件事情，判断当前数组能不能方法即将被添加的元素，如果不能，扩容。
+
+首先调用了calculateCapacity()计算容量，代码如下:
+```java
+private static int calculateCapacity(Object[] elementData, int minCapacity) {
+    if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
+        return Math.max(DEFAULT_CAPACITY, minCapacity);
+    }
+    return minCapacity;
 }
 ```
-可以看到，该方法首先判断elementData是否是默认数组，如果是则判断传递进来的容量minCapacity是否比默认容量DEFAULT_CAPACITY大,如果没有，则设置容量为默认容量。
+如果集合还没有被初始化，则初始化容量为10。如果已经初始化过了，直接返回。
+```java
+/**
+  * Default initial capacity.
+  */
+private static final int DEFAULT_CAPACITY = 10;
+```
 
-之后调用了ensureExplicitCapacity()方法。这个方法做了两件事情：
+调用完calculateCapacity()后，调用ensureExplicitCapacity(),这个方法做了两件事情：
 1.将modCount自增
-2.如果所需最小容量比elementData的大，扩容。
+2.如果容量不够，扩容。
 ```java
 private void ensureExplicitCapacity(int minCapacity) {
 　　modCount++;
@@ -199,7 +213,7 @@ hugeCapacity方法只在扩容时可能被调用，它的逻辑很简单，先�
 　*/
 private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
 ```
-int的最大值为2的31次方-1，所以说ArrayList的最大值为2的31次方-1。
+int的最大值为2的31次方-1，所以说ArrayList的最大容量为2的31次方-1。
 ```java
 /**
 　* A constant holding the maximum value an {@code int} can
@@ -215,6 +229,8 @@ int的最大值为2的31次方-1，所以说ArrayList的最大值为2的31次方
 《阿里巴巴Java开发手册》里面建议初始化集合时尽量显示的指定集合大小。为什么？读了上面的源码之后，应该可以知道答案了。
 1.节约内存，实际编码中，很多时候我们都可以知道ArrayList里面会放什么元素以及放多少元素。恰当的设置容器大小可以节约内存。
 2.避免扩容产生的性能损耗。
+比如我知道这个集合要放11个元素，那么我可以将集合的大小初始化为11，这样可以避免在添加第11个元素的时候，ArrayList扩容。
+
 ArrayList的扩容底层调用了native方法System.arraycopy()简单点说就是将原来的数组中的元素拷贝到一个新的更大的数组中去。
 
 看下指定初始容量构造的源码:
@@ -458,7 +474,7 @@ private void rangeCheck(int index) {
 　　　　throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
 }
 ```
-注意rangeCheck检查的是size的大小，也就是实际存储元素个数，而不是容器的实际容量。这个地方所有了检索的范围，确保获取到的元素不是null。
+注意rangeCheck检查的是size的大小，也就是实际存储元素个数，而不是容器的实际容量。
 
 
 #遍历元素 iterator()
@@ -579,11 +595,11 @@ public int lastIndexOf(Object o) {
 ```
 
 #总结
-ArrayList的底层是数组，初始容量是10，当数组满了之后，继续添加元素时，会扩容到原来的1.5倍+1。
-ArrayList保存了一个modCount属性，修改集合的操作都会让其自增。如果在遍历的时候modCount被修改，则会抛出异常，产生fail-fast事件。
-另外，ArrayList内部还维护了一个size属性，它是用来记录数组中的实际元素个数。
+1.ArrayList的底层是数组，初始容量是10，当数组满了之后，继续添加元素时，会扩容到原来的1.5倍+1。
+2.ArrayList保存了一个modCount属性，修改集合的操作都会让其自增。如果在遍历的时候modCount被修改，则会抛出异常，产生fail-fast事件。
+3.ArrayList内部还维护了一个size属性，它是用来记录数组中的实际元素个数。
 size,modCount，elementData这些成员变量，都注定了ArrayList线程不安全。
-
+4.ArrayList实现了Iterator接口，这表明遍历ArrayList使用普通for循环比使用foreach更快，至于为什么可以参考[ArrayList集合实现RandomAccess接口有何作用？为何LinkedList集合却没实现这接口？](https://blog.csdn.net/weixin_39148512/article/details/79234817)
 
 
 
