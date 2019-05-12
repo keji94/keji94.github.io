@@ -1,0 +1,320 @@
+<!DOCTYPE html><html class="theme-next gemini use-motion" lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4"><link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222"><meta name="keywords" content="Hexo, NexT"><meta name="description" content="第一部分 Java基础关键字staticstatic 关键字的作用?static关键字可以让我们在不创建对象的情况下访问方法或变量。static除了可以修饰方法和变量外，还有static代码块，以及修饰内部类。被static修饰的数据，在内存中只会存在一份。合理利用static合理提升程序性能 静态变量 static变量也称作静态变量，静态变量和非静态变量的区别是：静态变量被所有的对象所共享，在内"><meta property="og:type" content="article"><meta property="og:title" content="java面试宝典"><meta property="og:url" content="/面试/java面试宝典/index.html"><meta property="og:site_name" content="克己的博客"><meta property="og:description" content="第一部分 Java基础关键字staticstatic 关键字的作用?static关键字可以让我们在不创建对象的情况下访问方法或变量。static除了可以修饰方法和变量外，还有static代码块，以及修饰内部类。被static修饰的数据，在内存中只会存在一份。合理利用static合理提升程序性能 静态变量 static变量也称作静态变量，静态变量和非静态变量的区别是：静态变量被所有的对象所共享，在内"><meta property="og:locale" content="zh-Hans"><meta property="og:updated_time" content="2019-05-12T13:44:56.674Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="java面试宝典"><meta name="twitter:description" content="第一部分 Java基础关键字staticstatic 关键字的作用?static关键字可以让我们在不创建对象的情况下访问方法或变量。static除了可以修饰方法和变量外，还有static代码块，以及修饰内部类。被static修饰的数据，在内存中只会存在一份。合理利用static合理提升程序性能 静态变量 static变量也称作静态变量，静态变量和非静态变量的区别是：静态变量被所有的对象所共享，在内"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Gemini",version:"5.1.4",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!0,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},duoshuo:{userId:"0",author:"克己"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="canonical" href="/面试/java面试宝典/"><title>java面试宝典 | 克己的博客</title><script type="text/javascript">var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?b6a5ba0ede6adca5bc5c4042599338ca";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">克己的博客</span><span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle"></p></div><div class="site-nav-toggle"> <button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br> 首页</a></li><li class="menu-item menu-item-about"><a href="/about/index.html" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br> 关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/index.html" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br> 分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/index.html" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br> 归档</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br> 搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i></span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"> <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="/面试/java面试宝典/index.html"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="克己"><meta itemprop="description" content><meta itemprop="image" content="/images/keji.jpg"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="克己的博客"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">java面试宝典</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-12T21:44:56+08:00">2019-05-12</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/面试/index.html" itemprop="url" rel="index"><span itemprop="name">面试</span></a></span></span> <span id="/面试/java面试宝典/index.html" class="leancloud_visitors" data-flag-title="java面试宝典"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span> <span class="post-meta-item-text">阅读次数&#58;</span><span class="leancloud-visitors-count"></span></span></div></header><div class="post-body" itemprop="articleBody"><h1 id="第一部分-Java基础"><a href="#第一部分-Java基础" class="headerlink" title="第一部分 Java基础"></a>第一部分 Java基础</h1><h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><h4 id="static-关键字的作用"><a href="#static-关键字的作用" class="headerlink" title="static 关键字的作用?"></a>static 关键字的作用?</h4><p>static关键字可以让我们在不创建对象的情况下访问方法或变量。static除了可以修饰方法和变量外，还有static代码块，以及修饰内部类。被static修饰的数据，在内存中只会存在一份。合理利用static合理提升程序性能</p><p><strong>静态变量</strong></p><p>static变量也称作静态变量，静态变量和非静态变量的区别是：静态变量被所有的对象所共享，在内存中只有一个副本，它当且仅当在类初次加载时会被初始化。而非静态变量是对象所拥有的，在创建对象的时候被初始化，存在多个副本，各个对象拥有的副本互不影响。</p><p>static成员变量的初始化顺序按照定义的顺序进行初始化。</p><p><strong>静态方法</strong></p><p>static方法一般称作静态方法，由于静态方法不依赖于任何对象就可以进行访问，因此对于静态方法来说，是没有this的，因为它不依附于任何对象，既然都没有对象，就谈不上this了。并且由于这个特性，在静态方法中不能访问类的非静态成员变量和非静态成员方法，因为非静态成员方法/变量都是必须依赖具体的对象才能够被调用。</p><p><strong>静态代码块</strong></p><p>static代码块在类初次被加载的时候，会按照static块的顺序来执行每个static块，并且只会执行一次。</p><h4 id="为什么不能通过this访问static变量或者方法？"><a href="#为什么不能通过this访问static变量或者方法？" class="headerlink" title="为什么不能通过this访问static变量或者方法？"></a>为什么不能通过this访问static变量或者方法？</h4><p>this代表的是当前对象，被static修饰的变量或者方法，在类被加载的时候就会初始化，这个时候还没有创建对象。</p><h4 id="static笔试题"><a href="#static笔试题" class="headerlink" title="static笔试题"></a>static笔试题</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticDemo</span> <span class="keyword">extends</span> <span class="title">ParentStaticDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"static block run"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StaticDemo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"child constructor run"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> StaticDemo();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ParentStaticDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"parent static block run "</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ParentStaticDemo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"parent constructor run"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行StaticDemo类的main()方法，输出顺序是怎样的？</p><p>答案：</p><pre><code>parent static block run 
+static block run
+parent constructor run
+child constructor run
+</code></pre><p>在main()方法中，使用new StaticDemo()创建一个StaticDemo对象，但是在创建对象前需要先加载StaticDemo类，由于StaticDemo继承ParentStaticDemo，所以需要先加载ParentStaticDemo类，所以先执行的是”parent static block run “。加载完ParentStaticDemo后，开始加载StaticDemo，所以下一个输出的是static block run。StaticDemo加载完之后，开始创建StaticDemo，由于继承ParentStaticDemo，先执行父类的构造方法，所以先输出parent constructor run，最后是child constructor run。</p><h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><p>final 通常表示无法被改变，在java中，final可以修饰变量、方法和类。</p><p><strong>final变量</strong></p><p>对于基本类型，final使数值恒定不变，而对于对象引用，final使引用恒定不变，一旦引用被初始化指向一个对象，就无法在将它指向另外一个变量。然而，对象其自身是可以修改的。</p><p><strong>final方法</strong></p><p>使用final方法的原因有两个，一是将方法锁定，确保在继承中是方法行为保持不变，不会被覆盖。二是效率。</p><p>在Java早期实现中，将一个方法指明为final，就是同意编译器将针对该方法的所有调用都改为内嵌调用。当编译器发现一个final方法调用命令时，它会跳过插入程序代码这种正常方式而执行方法调用机制(将参数调入栈，跳至方法方法代码处并执行，然后跳回并清理栈中的参数，处理返回值)，并且以方法体中的实际代码的副本来代替方法调用。这可以消除方法调用的开销。当然，如果一个方法很大，你的程序代码就会膨胀，所带来的性能提高会因为花费与方法内的时间量而被缩减。</p><p>需要注意的，JDK5以后，已经不推荐因为效率而使用final修饰方法，因为早期的虚拟机能够自动优化这种情况，只有你想明确禁止方法被覆盖时，才需要考虑使用final修饰方法。</p><p><strong>final类</strong></p><p>当将某个类定义为final类时，表名该类不能被集成。</p><h3 id="transient"><a href="#transient" class="headerlink" title="transient"></a>transient</h3><p>在对象序列化的时候，有些变量不需要序列化，比如密码等，可以使用transient关键字来解决这个问题，transient修饰的变量不会被序列化。</p><h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><h3 id="finalize"><a href="#finalize" class="headerlink" title="finalize"></a>finalize</h3><h3 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h3><h3 id="访问修饰符"><a href="#访问修饰符" class="headerlink" title="访问修饰符"></a>访问修饰符</h3><h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><h3 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h3><h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><h2 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h2><h2 id="反射和动态代理"><a href="#反射和动态代理" class="headerlink" title="反射和动态代理"></a>反射和动态代理</h2><h1 id="第二部分-常用框架"><a href="#第二部分-常用框架" class="headerlink" title="第二部分 常用框架"></a>第二部分 常用框架</h1><h2 id="spinrgmvc"><a href="#spinrgmvc" class="headerlink" title="spinrgmvc"></a>spinrgmvc</h2><h2 id="spring"><a href="#spring" class="headerlink" title="spring"></a>spring</h2><h2 id="mybatis"><a href="#mybatis" class="headerlink" title="mybatis"></a>mybatis</h2><h2 id="springboot"><a href="#springboot" class="headerlink" title="springboot"></a>springboot</h2><h2 id="dubbo"><a href="#dubbo" class="headerlink" title="dubbo"></a>dubbo</h2><h2 id="shiro"><a href="#shiro" class="headerlink" title="shiro"></a>shiro</h2><h2 id="solr和es"><a href="#solr和es" class="headerlink" title="solr和es"></a>solr和es</h2><h2 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h2><h2 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h2><h1 id="第三部分-数据库"><a href="#第三部分-数据库" class="headerlink" title="第三部分 数据库"></a>第三部分 数据库</h1><h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><h2 id="mongodb"><a href="#mongodb" class="headerlink" title="mongodb"></a>mongodb</h2><h1 id="第四部分-Java虚拟机"><a href="#第四部分-Java虚拟机" class="headerlink" title="第四部分 Java虚拟机"></a>第四部分 Java虚拟机</h1><h1 id="第五部分-JavaWeb"><a href="#第五部分-JavaWeb" class="headerlink" title="第五部分 JavaWeb"></a>第五部分 JavaWeb</h1><h1 id="第六部分-设计模式"><a href="#第六部分-设计模式" class="headerlink" title="第六部分 设计模式"></a>第六部分 设计模式</h1><h1 id="第七部分-项目相关"><a href="#第七部分-项目相关" class="headerlink" title="第七部分 项目相关"></a>第七部分 项目相关</h1><h1 id="第八部分-算法相关"><a href="#第八部分-算法相关" class="headerlink" title="第八部分 算法相关"></a>第八部分 算法相关</h1><h1 id="第九部分-Linux"><a href="#第九部分-Linux" class="headerlink" title="第九部分 Linux"></a>第九部分 Linux</h1><h1 id="第十部分-HR面试"><a href="#第十部分-HR面试" class="headerlink" title="第十部分 HR面试"></a>第十部分 HR面试</h1></div><div><div style="padding:10px 0;margin:20px auto;width:90%;text-align:center"><div></div> <button id="rewardButton" disable="enable" onclick='var qr=document.getElementById("QR");"none"===qr.style.display?qr.style.display="block":qr.style.display="none"'> <span>打赏</span></button><div id="QR" style="display:none"><div id="wechat" style="display:inline-block"> <img id="wechat_qr" src="/images/wchatpay.png" alt="克己 微信支付"><p>微信支付</p></div><div id="alipay" style="display:inline-block"> <img id="alipay_qr" src="/images/alipay.jpg" alt="克己 支付宝"><p>支付宝</p></div></div></div></div><footer class="post-footer"><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/redis/redis zset数据结构使用案例以及原理解析/index.html" rel="next" title="redis zset数据结构使用案例以及原理解析"><i class="fa fa-chevron-left"></i> redis zset数据结构使用案例以及原理解析</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"></div></div></footer></div></article><div class="post-spread"></div></div></div><div id="gitalk-container"></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap"> 站点概览</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="/images/keji.jpg" alt="克己"><p class="site-author-name" itemprop="name">克己</p><p class="site-description motion-element" itemprop="description">有志，则不甘为下流；有识，则知学问无尽；有恒，则断无不成之事</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives/index.html"><span class="site-state-item-count">11</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/index.html"><span class="site-state-item-count">11</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <span class="site-state-item-count">1</span> <span class="site-state-item-name">标签</span></div></nav></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一部分-Java基础"><span class="nav-number">1.</span> <span class="nav-text">第一部分 Java基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关键字"><span class="nav-number">1.1.</span> <span class="nav-text">关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#static"><span class="nav-number">1.1.1.</span> <span class="nav-text">static</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#static-关键字的作用"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">static 关键字的作用?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么不能通过this访问static变量或者方法？"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">为什么不能通过this访问static变量或者方法？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#static笔试题"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">static笔试题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final"><span class="nav-number">1.1.2.</span> <span class="nav-text">final</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transient"><span class="nav-number">1.1.3.</span> <span class="nav-text">transient</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile"><span class="nav-number">1.1.4.</span> <span class="nav-text">volatile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finalize"><span class="nav-number">1.1.5.</span> <span class="nav-text">finalize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized"><span class="nav-number">1.1.6.</span> <span class="nav-text">synchronized</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问修饰符"><span class="nav-number">1.1.7.</span> <span class="nav-text">访问修饰符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合"><span class="nav-number">1.2.</span> <span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList"><span class="nav-number">1.2.1.</span> <span class="nav-text">ArrayList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap"><span class="nav-number">1.2.2.</span> <span class="nav-text">HashMap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">1.3.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO"><span class="nav-number">1.4.</span> <span class="nav-text">IO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射和动态代理"><span class="nav-number">1.5.</span> <span class="nav-text">反射和动态代理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二部分-常用框架"><span class="nav-number">2.</span> <span class="nav-text">第二部分 常用框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#spinrgmvc"><span class="nav-number">2.1.</span> <span class="nav-text">spinrgmvc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring"><span class="nav-number">2.2.</span> <span class="nav-text">spring</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mybatis"><span class="nav-number">2.3.</span> <span class="nav-text">mybatis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#springboot"><span class="nav-number">2.4.</span> <span class="nav-text">springboot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dubbo"><span class="nav-number">2.5.</span> <span class="nav-text">dubbo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shiro"><span class="nav-number">2.6.</span> <span class="nav-text">shiro</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solr和es"><span class="nav-number">2.7.</span> <span class="nav-text">solr和es</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zookeeper"><span class="nav-number">2.8.</span> <span class="nav-text">zookeeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maven"><span class="nav-number">2.9.</span> <span class="nav-text">maven</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三部分-数据库"><span class="nav-number">3.</span> <span class="nav-text">第三部分 数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">3.1.</span> <span class="nav-text">mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis"><span class="nav-number">3.2.</span> <span class="nav-text">redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodb"><span class="nav-number">3.3.</span> <span class="nav-text">mongodb</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第四部分-Java虚拟机"><span class="nav-number">4.</span> <span class="nav-text">第四部分 Java虚拟机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第五部分-JavaWeb"><span class="nav-number">5.</span> <span class="nav-text">第五部分 JavaWeb</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第六部分-设计模式"><span class="nav-number">6.</span> <span class="nav-text">第六部分 设计模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第七部分-项目相关"><span class="nav-number">7.</span> <span class="nav-text">第七部分 项目相关</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第八部分-算法相关"><span class="nav-number">8.</span> <span class="nav-text">第八部分 算法相关</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第九部分-Linux"><span class="nav-number">9.</span> <span class="nav-text">第九部分 Linux</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第十部分-HR面试"><span class="nav-number">10.</span> <span class="nav-text">第十部分 HR面试</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2019</span><span class="with-love"><i class="fa fa-user"></i></span> <span class="author" itemprop="copyrightHolder">克己</span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><link rel="stylesheet" href="https://cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css"><script src="https://cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script><script src="/js/src/md5.min.js"></script><script type="text/javascript">var gitalk=new Gitalk({clientID:"feb8237600f9f0c823d6",clientSecret:"a6946bf9fc8d4793a60df4fedc526595b2f04cb3",repo:"keji94.github.io",owner:"keji94",admin:["keji94"],id:md5(location.pathname),distractionFreeMode:"false"});gitalk.render("gitalk-container")</script><script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script><script>AV.initialize("FvalnKzIszMJbOKGGiVSI295-gzGzoHsz","zNxPvDhWLB6hUySme9HepOIi")</script><script>function showTime(e){var t=new AV.Query(e),c=[],u=$(".leancloud_visitors");u.each(function(){c.push($(this).attr("id").trim())}),t.containedIn("url",c),t.find().done(function(e){var t=".leancloud-visitors-count";if(0!==e.length){for(var n=0;n<e.length;n++){var o=e[n],i=o.get("url"),s=o.get("time"),r=document.getElementById(i);$(r).find(t).text(s)}for(n=0;n<c.length;n++){i=c[n],r=document.getElementById(i);var l=$(r).find(t);""==l.text()&&l.text(0)}}else u.find(t).text(0)}).fail(function(e,t){console.log("Error: "+t.code+" "+t.message)})}function addCount(i){var e=$(".leancloud_visitors"),s=e.attr("id").trim(),r=e.attr("data-flag-title").trim(),t=new AV.Query(i);t.equalTo("url",s),t.find({success:function(e){if(0<e.length){var t=e[0];t.fetchWhenSave(!0),t.increment("time"),t.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to save Visitor num, with error message: "+t.message)}})}else{var n=new i,o=new AV.ACL;o.setPublicReadAccess(!0),o.setPublicWriteAccess(!0),n.setACL(o),n.set("title",r),n.set("url",s),n.set("time",1),n.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to create")}})}},error:function(e){console.log("Error:"+e.code+" "+e.message)}})}$(function(){var e=AV.Object.extend("Counter");1==$(".leancloud_visitors").length?addCount(e):1<$(".post-title-link").length&&showTime(e)})</script></body></html>
