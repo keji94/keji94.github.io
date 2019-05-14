@@ -20,6 +20,8 @@ categories:
 
 ![](https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/382306343-5c07cde261b29_articlex.png)
 
+<!-- more -->
+
 - 编码层
 
 在同一个项目中创建多个数据源，采用if else的方式，直接根据条件在代码中路由。Spring中有动态切换数据源的抽象类，具体参见
