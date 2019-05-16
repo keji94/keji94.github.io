@@ -103,8 +103,9 @@ final 通常表示无法被改变，在java中，final可以修饰变量、方�
 
 在对象序列化的时候，有些变量不需要序列化，比如密码等，可以使用transient关键字来解决这个问题，transient修饰的变量不会被序列化。
 
+### volatile
 
-### volatile 
+
 
 ### finalize
 
@@ -151,6 +152,18 @@ final 通常表示无法被改变，在java中，final可以修饰变量、方�
 ## mysql
 
 ## redis
+
+### redis有哪些数据结构？
+
+### 介绍下zset，它底层原理是什么？
+
+### 布隆过滤器和hyperloglog
+
+### redis哨兵
+
+### redis是怎么保证高可用的？
+
+### redis为什么是单线程？
 
 ## mongodb
 
