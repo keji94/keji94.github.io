@@ -135,146 +135,10 @@ yysy_jianyanbg的影响:文字报告、图片报告、健康档案、Job、报�
 
 ## sql整理
 
-yjsj_jianyancgjg 
+分表分表前，需要将表结构涉及到的所有sql拉出来，充分评估分表后对原有sql的影响。原有sql很大程度上是需要修改的，比如加上分片字段作为条件。
 
-        select
-        <include refid="Base_Column_List" />
-        from yjsj_jianyancgjg
-        where  jigoubh=#{jigoubh} and JIANYANID=#{jianyanId}  and shanchubz='0'
+而在业务中，需要考虑是否能够职称sql改写，会不会缺少参数等。如果缺少，还需要对业务代码进行改造。
 
-        delete from yjsj_jianyancgjg
-        where LIUSHUIHAO in
-        <foreach collection="list" index="index" item="item" open="(" close=")" separator=",">
-            #{item}
-        </foreach>
-
-        insert into yjsj_jianyancgjg (LIUSHUIHAO, JIGOUBH, JIAOHUANPTBH,
-        JIAOHUANPTLSH, YANGBENHAO, JIANYANID,
-        XIANGMUMXBH, XIANGMUMXMC, YINGWENSX,
-        XIANSHISX, JIANYANJG, JIEGUOTS,
-        DANWEI, CANKAOFW, YICHANGBZ,
-        JINGJIEBZ, YIQIBH, YIQIMC,
-        ZHUYUANBZ, SHANCHUBZ, SHIJIANCHUO
-        )
-        values
-        <foreach collection="list" item="data" index="index" separator="," >
-        (#{data.liushuihao,jdbcType=BIGINT}, #{data.jigoubh,jdbcType=BIGINT}, #{data.jiaohuanptbh,jdbcType=BIGINT},
-        #{data.jiaohuanptlsh,jdbcType=BIGINT}, #{data.yangbenhao,jdbcType=VARCHAR}, #{data.jianyanid,jdbcType=VARCHAR},
-        #{data.xiangmumxbh,jdbcType=VARCHAR}, #{data.xiangmumxmc,jdbcType=VARCHAR}, #{data.yingwensx,jdbcType=VARCHAR},
-        #{data.xianshisx,jdbcType=INTEGER}, #{data.jianyanjg,jdbcType=VARCHAR}, #{data.jieguots,jdbcType=VARCHAR},
-        #{data.danwei,jdbcType=VARCHAR}, #{data.cankaofw,jdbcType=VARCHAR}, #{data.yichangbz,jdbcType=CHAR},
-        #{data.jingjiebz,jdbcType=CHAR}, #{data.yiqibh,jdbcType=VARCHAR}, #{data.yiqimc,jdbcType=VARCHAR},
-        #{data.zhuyuanbz,jdbcType=CHAR}, #{data.shanchubz,jdbcType=CHAR}, #{data.shijianchuo,jdbcType=TIMESTAMP}
-        )
-        </foreach>
-
-yysy_jianyanbg sql:
-
-        select DISTINCT jigoubh, jianyanid, jianyanrq,jianyanxmmc
-        from yysy_jianyanbg
-        where shenfenzh=#{shenFenZH} and SHANCHUBZ='0' and JIANYANID is not null and JIANYANID!=''
-        and SHIJIANCHUO BETWEEN #{startTime} and #{endTime}
-        order by JIANYANRQ desc, SHIJIANCHUO desc limit 200
-
-        
-        select
-        <include refid="Base_Column_List" />
-        from yysy_jianyanbg
-        where LIUSHUIHAO = #{liushuihao,jdbcType=BIGINT}
-
-        select
-        <include refid="Base_Column_List" />
-        from yysy_jianyanbg
-        where shenfenzh=#{idCard,jdbcType=VARCHAR}
-        <if test="institutionId != null" >
-            and jigoubh=#{institutionId}
-        </if>
-         and SHANCHUBZ='0'
-        order by JIANYANRQ desc,SHIJIANCHUO desc
-
-        select
-        <include refid="Base_Column_List" />
-        from yysy_jianyanbg
-        where jigoubh=#{jigoubh} and jianyanid in
-        <foreach collection="jianyanIdList" index="index" item="item" open="(" separator="," close=")">
-            #{item}
-        </foreach>
-        and SHANCHUBZ='0'
-
-        insert into yysy_jianyanbg (LIUSHUIHAO, JIGOUBH, JIAOHUANPTBH,
-        JIAOHUANPTLSH, TUPIANBGID, HUANZHEID,
-        XINGMING, XINGBIE, NIANLING,
-        NIANLINGDW, SHENFENZH, JIUZHENID,
-        JIANYANID, BINGRENBSLB, SHENQINGDH,
-        JIANYANBGLX, JIANYANLXMC, JIANYANXMMC,
-        JIANYANRQ, BAOGAOYSXM, SHENHEYSXM,
-        BAOGAOZT, FEIYONGHJ, SHANGCHUANSJ,
-        CHAYUECS, ZHUYUANBZ, SHANCHUBZ,
-        SHIJIANCHUO)
-        values
-        <foreach collection="list" item="data" index="index" separator="," >
-        (#{data.liushuihao,jdbcType=BIGINT}, #{data.jigoubh,jdbcType=BIGINT}, #{data.jiaohuanptbh,jdbcType=BIGINT},
-        #{data.jiaohuanptlsh,jdbcType=BIGINT}, #{data.tupianbgid,jdbcType=VARCHAR}, #{data.huanzheid,jdbcType=VARCHAR},
-        #{data.xingming,jdbcType=VARCHAR}, #{data.xingbie,jdbcType=VARCHAR}, #{data.nianling,jdbcType=INTEGER},
-        #{data.nianlingdw,jdbcType=VARCHAR}, #{data.shenfenzh,jdbcType=VARCHAR}, #{data.jiuzhenid,jdbcType=VARCHAR},
-        #{data.jianyanid,jdbcType=VARCHAR}, #{data.bingrenbslb,jdbcType=VARCHAR}, #{data.shenqingdh,jdbcType=VARCHAR},
-        #{data.jianyanbglx,jdbcType=VARCHAR}, #{data.jianyanlxmc,jdbcType=VARCHAR}, #{data.jianyanxmmc,jdbcType=VARCHAR},
-        #{data.jianyanrq,jdbcType=TIMESTAMP}, #{data.baogaoysxm,jdbcType=VARCHAR}, #{data.shenheysxm,jdbcType=VARCHAR},
-        #{data.baogaozt,jdbcType=CHAR}, #{data.feiyonghj,jdbcType=DECIMAL}, #{data.shangchuansj,jdbcType=TIMESTAMP},
-        #{data.chayuecs,jdbcType=INTEGER}, #{data.zhuyuanbz,jdbcType=CHAR}, #{data.shanchubz,jdbcType=CHAR},
-        #{data.shijianchuo,jdbcType=TIMESTAMP})
-        </foreach>
-
-        update yysy_jianyanbg
-        set JIGOUBH = #{jigoubh,jdbcType=BIGINT},
-        JIAOHUANPTBH = #{jiaohuanptbh,jdbcType=BIGINT},
-        JIAOHUANPTLSH = #{jiaohuanptlsh,jdbcType=BIGINT},
-        TUPIANBGID = #{tupianbgid,jdbcType=VARCHAR},
-        HUANZHEID = #{huanzheid,jdbcType=VARCHAR},
-        XINGMING = #{xingming,jdbcType=VARCHAR},
-        XINGBIE = #{xingbie,jdbcType=VARCHAR},
-        NIANLING = #{nianling,jdbcType=INTEGER},
-        NIANLINGDW = #{nianlingdw,jdbcType=VARCHAR},
-        SHENFENZH = #{shenfenzh,jdbcType=VARCHAR},
-        JIUZHENID = #{jiuzhenid,jdbcType=VARCHAR},
-        JIANYANID = #{jianyanid,jdbcType=VARCHAR},
-        BINGRENBSLB = #{bingrenbslb,jdbcType=VARCHAR},
-        SHENQINGDH = #{shenqingdh,jdbcType=VARCHAR},
-        JIANYANBGLX = #{jianyanbglx,jdbcType=VARCHAR},
-        JIANYANLXMC = #{jianyanlxmc,jdbcType=VARCHAR},
-        JIANYANXMMC = #{jianyanxmmc,jdbcType=VARCHAR},
-        JIANYANRQ = #{jianyanrq,jdbcType=TIMESTAMP},
-        BAOGAOYSXM = #{baogaoysxm,jdbcType=VARCHAR},
-        SHENHEYSXM = #{shenheysxm,jdbcType=VARCHAR},
-        BAOGAOZT = #{baogaozt,jdbcType=CHAR},
-        FEIYONGHJ = #{feiyonghj,jdbcType=DECIMAL},
-        SHANGCHUANSJ = #{shangchuansj,jdbcType=TIMESTAMP},
-        CHAYUECS = #{chayuecs,jdbcType=INTEGER},
-        ZHUYUANBZ = #{zhuyuanbz,jdbcType=CHAR},
-        SHANCHUBZ = #{shanchubz,jdbcType=CHAR},
-        SHIJIANCHUO = #{shijianchuo,jdbcType=TIMESTAMP}
-        where LIUSHUIHAO = #{liushuihao,jdbcType=BIGINT}
-
-        select DISTINCT jigoubh, jianyanid, jianyanrq,jianyanxmmc
-        from yysy_jianyanbg
-        where jigoubh=#{jigoubh}
-        <choose>
-            <when test="huanzheid!=null and huanzheid!=''">
-                and (huanzheid=#{huanzheid})
-            </when>
-            <otherwise>
-                AND shenfenzh=#{shenfenzh}
-            </otherwise>
-        </choose>
-        <choose>
-            <when test="isZhuyuan">
-                AND ZHUYUANBZ='1'
-            </when>
-            <otherwise>
-                AND (ZHUYUANBZ='0' or ZHUYUANBZ='' or ZHUYUANBZ is null)
-            </otherwise>
-        </choose>
-        and SHANCHUBZ='0' and JIANYANID is not null and JIANYANID!='' order by JIANYANRQ desc, SHIJIANCHUO desc limit 200
 
 
 # 历史数据处理
@@ -286,9 +150,7 @@ step3: 对于新产生的数据，通过mq的方式，在新系统插入。
 
 step4: 前面三步弄好之后，进行业务迁移，业务迁移完毕之后，关闭DTS数据同步
 
+# 对数据部分的影响
 
+分库分表的改造，涉及表结构以及数据的变更。需要和大数据部门沟通，让他们配合改造。
 
-注意事项:
-    1. 注意和大数据部门沟通
-    2.再次check配置的主键生成策略是否生效，昨天看没生效，弄明白为什么？
-    
