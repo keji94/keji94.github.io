@@ -104,7 +104,7 @@ final 通常表示无法被改变，在java中，final可以修饰变量、方�
 在对象序列化的时候，有些变量不需要序列化，比如密码等，可以使用transient关键字来解决这个问题，transient修饰的变量不会被序列化。
 
 ### volatile
-[volatile关键字的作用以及原理](http://kejishouxin.com/java%25E5%259F%25BA%25E7%25A1%2580/volatile/volatile%25E5%2585%25B3%25E9%2594%25AE%25E5%25AD%2597%25E7%259A%2584%25E4%25BD%259C%25E7%2594%25A8%25E4%25BB%25A5%25E5%258F%258A%25E5%258E%259F%25E7%2590%2586/index.html)
+[volatile关键字的作用以及原理](http://kejishouxin.com/java%E5%9F%BA%E7%A1%80/volatile/volatile%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%9C%E7%94%A8%E4%BB%A5%E5%8F%8A%E5%8E%9F%E7%90%86/index.html)
 
 ### synchronized
 
@@ -129,6 +129,8 @@ final 通常表示无法被改变，在java中，final可以修饰变量、方�
 ## spinrgmvc
 
 ## spring
+
+### Spring bean的生命周期
 
 ## mybatis
 
