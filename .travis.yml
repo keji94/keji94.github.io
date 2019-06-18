@@ -20,12 +20,13 @@ before_install:
     - chmod +x ./publish-to-gh-pages.sh
 
 install:
-    - gulp -v
+#    - gulp -v
     - npm install
 
 script:
     - hexo clean
-    - hexo g && gulp
+    - hexo g
+#    - hexo g && gulp
 
 after_script:
     - ./publish-to-gh-pages.sh
