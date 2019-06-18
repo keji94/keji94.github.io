@@ -1,8 +1,839 @@
-<!DOCTYPE html><html class="theme-next gemini use-motion" lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4"><link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222"><meta name="keywords" content="Hexo, NexT"><meta name="description" content="前言 做好面试前的准备工作第一部分 Java基础关键字staticstatic 关键字的作用?static关键字可以让我们在不创建对象的情况下访问方法或变量。static除了可以修饰方法和变量外，还有static代码块，以及修饰内部类。被static修饰的数据，在内存中只会存在一份。合理利用static合理提升程序性能"><meta property="og:type" content="article"><meta property="og:title" content="java面试宝典"><meta property="og:url" content="/面试/java面试宝典/index.html"><meta property="og:site_name" content="克己的博客"><meta property="og:description" content="前言 做好面试前的准备工作第一部分 Java基础关键字staticstatic 关键字的作用?static关键字可以让我们在不创建对象的情况下访问方法或变量。static除了可以修饰方法和变量外，还有static代码块，以及修饰内部类。被static修饰的数据，在内存中只会存在一份。合理利用static合理提升程序性能"><meta property="og:locale" content="zh-Hans"><meta property="og:updated_time" content="2019-06-06T06:38:12.275Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="java面试宝典"><meta name="twitter:description" content="前言 做好面试前的准备工作第一部分 Java基础关键字staticstatic 关键字的作用?static关键字可以让我们在不创建对象的情况下访问方法或变量。static除了可以修饰方法和变量外，还有static代码块，以及修饰内部类。被static修饰的数据，在内存中只会存在一份。合理利用static合理提升程序性能"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Gemini",version:"5.1.4",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!0,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},duoshuo:{userId:"0",author:"克己"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="canonical" href="/面试/java面试宝典/"><title>java面试宝典 | 克己的博客</title><script type="text/javascript">var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?b6a5ba0ede6adca5bc5c4042599338ca";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">克己的博客</span><span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle"></p></div><div class="site-nav-toggle"> <button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br> 首页</a></li><li class="menu-item menu-item-about"><a href="/about/index.html" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br> 关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/index.html" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br> 分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/index.html" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br> 归档</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br> 搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i></span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"> <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="/面试/java面试宝典/index.html"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="克己"><meta itemprop="description" content><meta itemprop="image" content="/images/keji.jpg"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="克己的博客"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">java面试宝典</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-06T14:38:12+08:00">2019-06-06</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/面试/index.html" itemprop="url" rel="index"><span itemprop="name">面试</span></a></span></span> <span id="/面试/java面试宝典/index.html" class="leancloud_visitors" data-flag-title="java面试宝典"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span> <span class="post-meta-item-text">阅读次数&#58;</span><span class="leancloud-visitors-count"></span></span></div></header><div class="post-body" itemprop="articleBody"><h1 id="前言-做好面试前的准备工作"><a href="#前言-做好面试前的准备工作" class="headerlink" title="前言 做好面试前的准备工作"></a>前言 做好面试前的准备工作</h1><h1 id="第一部分-Java基础"><a href="#第一部分-Java基础" class="headerlink" title="第一部分 Java基础"></a>第一部分 Java基础</h1><h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><h4 id="static-关键字的作用"><a href="#static-关键字的作用" class="headerlink" title="static 关键字的作用?"></a>static 关键字的作用?</h4><p>static关键字可以让我们在不创建对象的情况下访问方法或变量。static除了可以修饰方法和变量外，还有static代码块，以及修饰内部类。被static修饰的数据，在内存中只会存在一份。合理利用static合理提升程序性能</p><a id="more"></a><p><strong>静态变量</strong></p><p>static变量也称作静态变量，静态变量和非静态变量的区别是：静态变量被所有的对象所共享，在内存中只有一个副本，它当且仅当在类初次加载时会被初始化。而非静态变量是对象所拥有的，在创建对象的时候被初始化，存在多个副本，各个对象拥有的副本互不影响。</p><p>static成员变量的初始化顺序按照定义的顺序进行初始化。</p><p><strong>静态方法</strong></p><p>static方法一般称作静态方法，由于静态方法不依赖于任何对象就可以进行访问，因此对于静态方法来说，是没有this的，因为它不依附于任何对象，既然都没有对象，就谈不上this了。并且由于这个特性，在静态方法中不能访问类的非静态成员变量和非静态成员方法，因为非静态成员方法/变量都是必须依赖具体的对象才能够被调用。</p><p><strong>静态代码块</strong></p><p>static代码块在类初次被加载的时候，会按照static块的顺序来执行每个static块，并且只会执行一次。</p><h4 id="为什么不能通过this访问static变量或者方法？"><a href="#为什么不能通过this访问static变量或者方法？" class="headerlink" title="为什么不能通过this访问static变量或者方法？"></a>为什么不能通过this访问static变量或者方法？</h4><p>this代表的是当前对象，被static修饰的变量或者方法，在类被加载的时候就会初始化，这个时候还没有创建对象。</p><h4 id="static笔试题"><a href="#static笔试题" class="headerlink" title="static笔试题"></a>static笔试题</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticDemo</span> <span class="keyword">extends</span> <span class="title">ParentStaticDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"static block run"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StaticDemo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"child constructor run"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> StaticDemo();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ParentStaticDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"parent static block run "</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ParentStaticDemo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"parent constructor run"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>执行StaticDemo类的main()方法，输出顺序是怎样的？</p><p>答案：</p><pre><code>parent static block run 
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言 做好面试前的准备工作第一部分 Java基础关键字staticstatic 关键字的作用?static关键字可以让我们在不创建对象的情况下访问方法或变量。static除了可以修饰方法和变量外，还有static代码块，以及修饰内部类。被static修饰的数据，在内存中只会存在一份。合理利用static合理提升程序性能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java面试宝典">
+<meta property="og:url" content="/面试/java面试宝典/index.html">
+<meta property="og:site_name" content="克己的博客">
+<meta property="og:description" content="前言 做好面试前的准备工作第一部分 Java基础关键字staticstatic 关键字的作用?static关键字可以让我们在不创建对象的情况下访问方法或变量。static除了可以修饰方法和变量外，还有static代码块，以及修饰内部类。被static修饰的数据，在内存中只会存在一份。合理利用static合理提升程序性能">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-18T03:25:58.086Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java面试宝典">
+<meta name="twitter:description" content="前言 做好面试前的准备工作第一部分 Java基础关键字staticstatic 关键字的作用?static关键字可以让我们在不创建对象的情况下访问方法或变量。static除了可以修饰方法和变量外，还有static代码块，以及修饰内部类。被static修饰的数据，在内存中只会存在一份。合理利用static合理提升程序性能">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '克己'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="/面试/java面试宝典/">
+
+
+
+
+
+  <title>java面试宝典 | 克己的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b6a5ba0ede6adca5bc5c4042599338ca";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">克己的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/index.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="/面试/java面试宝典/index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="克己">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/keji.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="克己的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java面试宝典</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-18T11:25:58+08:00">
+                2019-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/面试/index.html" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/面试/java面试宝典/index.html" class="leancloud_visitors" data-flag-title="java面试宝典">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言-做好面试前的准备工作"><a href="#前言-做好面试前的准备工作" class="headerlink" title="前言 做好面试前的准备工作"></a>前言 做好面试前的准备工作</h1><h1 id="第一部分-Java基础"><a href="#第一部分-Java基础" class="headerlink" title="第一部分 Java基础"></a>第一部分 Java基础</h1><h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><h4 id="static-关键字的作用"><a href="#static-关键字的作用" class="headerlink" title="static 关键字的作用?"></a>static 关键字的作用?</h4><p>static关键字可以让我们在不创建对象的情况下访问方法或变量。static除了可以修饰方法和变量外，还有static代码块，以及修饰内部类。被static修饰的数据，在内存中只会存在一份。合理利用static合理提升程序性能</p>
+<a id="more"></a>
+<p><strong>静态变量</strong></p>
+<p>static变量也称作静态变量，静态变量和非静态变量的区别是：静态变量被所有的对象所共享，在内存中只有一个副本，它当且仅当在类初次加载时会被初始化。而非静态变量是对象所拥有的，在创建对象的时候被初始化，存在多个副本，各个对象拥有的副本互不影响。</p>
+<p>static成员变量的初始化顺序按照定义的顺序进行初始化。</p>
+<p><strong>静态方法</strong></p>
+<p>static方法一般称作静态方法，由于静态方法不依赖于任何对象就可以进行访问，因此对于静态方法来说，是没有this的，因为它不依附于任何对象，既然都没有对象，就谈不上this了。并且由于这个特性，在静态方法中不能访问类的非静态成员变量和非静态成员方法，因为非静态成员方法/变量都是必须依赖具体的对象才能够被调用。</p>
+<p><strong>静态代码块</strong></p>
+<p>static代码块在类初次被加载的时候，会按照static块的顺序来执行每个static块，并且只会执行一次。</p>
+<h4 id="为什么不能通过this访问static变量或者方法？"><a href="#为什么不能通过this访问static变量或者方法？" class="headerlink" title="为什么不能通过this访问static变量或者方法？"></a>为什么不能通过this访问static变量或者方法？</h4><p>this代表的是当前对象，被static修饰的变量或者方法，在类被加载的时候就会初始化，这个时候还没有创建对象。</p>
+<h4 id="static笔试题"><a href="#static笔试题" class="headerlink" title="static笔试题"></a>static笔试题</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticDemo</span> <span class="keyword">extends</span> <span class="title">ParentStaticDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"static block run"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StaticDemo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"child constructor run"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> StaticDemo();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ParentStaticDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"parent static block run "</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ParentStaticDemo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"parent constructor run"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行StaticDemo类的main()方法，输出顺序是怎样的？</p>
+<p>答案：</p>
+<pre><code>parent static block run 
 static block run
 parent constructor run
 child constructor run
-</code></pre><p>在main()方法中，使用new StaticDemo()创建一个StaticDemo对象，但是在创建对象前需要先加载StaticDemo类，由于StaticDemo继承ParentStaticDemo，所以需要先加载ParentStaticDemo类，所以先执行的是”parent static block run “。加载完ParentStaticDemo后，开始加载StaticDemo，所以下一个输出的是static block run。StaticDemo加载完之后，开始创建StaticDemo，由于继承ParentStaticDemo，先执行父类的构造方法，所以先输出parent constructor run，最后是child constructor run。</p><h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><p>final 通常表示无法被改变，在java中，final可以修饰变量、方法和类。</p><p><strong>final变量</strong></p><p>对于基本类型，final使数值恒定不变，而对于对象引用，final使引用恒定不变，一旦引用被初始化指向一个对象，就无法在将它指向另外一个变量。然而，对象其自身是可以修改的。</p><p><strong>final方法</strong></p><p>使用final方法的原因有两个，一是将方法锁定，确保在继承中是方法行为保持不变，不会被覆盖。二是效率。</p><p>在Java早期实现中，将一个方法指明为final，就是同意编译器将针对该方法的所有调用都改为内嵌调用。当编译器发现一个final方法调用命令时，它会跳过插入程序代码这种正常方式而执行方法调用机制(将参数调入栈，跳至方法方法代码处并执行，然后跳回并清理栈中的参数，处理返回值)，并且以方法体中的实际代码的副本来代替方法调用。这可以消除方法调用的开销。当然，如果一个方法很大，你的程序代码就会膨胀，所带来的性能提高会因为花费与方法内的时间量而被缩减。</p><p>需要注意的，JDK5以后，已经不推荐因为效率而使用final修饰方法，因为早期的虚拟机能够自动优化这种情况，只有你想明确禁止方法被覆盖时，才需要考虑使用final修饰方法。</p><p><strong>final类</strong></p><p>当将某个类定义为final类时，表名该类不能被集成。</p><h3 id="transient"><a href="#transient" class="headerlink" title="transient"></a>transient</h3><p>在对象序列化的时候，有些变量不需要序列化，比如密码等，可以使用transient关键字来解决这个问题，transient修饰的变量不会被序列化。</p><h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><p><a href="http://kejishouxin.com/java%E5%9F%BA%E7%A1%80/volatile/volatile%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%9C%E7%94%A8%E4%BB%A5%E5%8F%8A%E5%8E%9F%E7%90%86/index.html" target="_blank" rel="noopener">volatile关键字的作用以及原理</a></p><h3 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h3><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="String-StringBuffer和StringBuilder的区别；"><a href="#String-StringBuffer和StringBuilder的区别；" class="headerlink" title="String,StringBuffer和StringBuilder的区别；"></a>String,StringBuffer和StringBuilder的区别；</h3><p>String不可变得，对String类型进行改变的时候其实都是生成了一个新的String对象，然后将引用指向新的string对象。</p><p>StringBuffer对象是线程安全的可变字符序列。常用的方法是append和insert，append是添加到末端，insert是在指定的点添加字符。StringBuffer的方法基本都是同步的。</p><p>StringBuilder是5.0新增的，和StringBufer差不多，但是是线程不安全的，大多数实现中，比StringBuffer要快。</p><h3 id="Object的方法有哪些"><a href="#Object的方法有哪些" class="headerlink" title="Object的方法有哪些"></a>Object的方法有哪些</h3><p>1、clone()<br>2、equals()<br>3、finalize()<br>4、getclass()<br>5、hashcode()<br>6、notify()<br>7、notifyAll()<br>8、toString()<br>9、wait()</p><h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><h3 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h3><h4 id="说一下ArrayList的源码"><a href="#说一下ArrayList的源码" class="headerlink" title="说一下ArrayList的源码"></a>说一下ArrayList的源码</h4><p><a href="http://kejishouxin.com/java%E5%9F%BA%E7%A1%80/%E9%9B%86%E5%90%88/ArrayList%20%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html" target="_blank" rel="noopener"></a></p><h4 id="Fail-fast行为是什么？"><a href="#Fail-fast行为是什么？" class="headerlink" title="Fail-fast行为是什么？"></a>Fail-fast行为是什么？</h4><p>ArrayList里面有一个modCount属性，并且在其内部有一个私有的Itr类，实现了Iterator接口。在对ArrayList遍历时，首先会将modCount变量保存一份，之后每次遍历都会checkmodCount是否被修改了，如果修改了，则立即抛出ConcurrentModificationException</p><h4 id="List和Set的区别"><a href="#List和Set的区别" class="headerlink" title="List和Set的区别"></a>List和Set的区别</h4><p>set接口规定其实现无序，不可重复。<br> HashSet（底层是HashMap） LinkedHashSet<br>list接口规定其实现有序，可重复。<br> 实现类有：LinkedList，ArrayList，Vector<br>map接口是散列集合的顶层接口，存储的key-value键值对<br> HashMap HashTable StoredMap</p><h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><h4 id="说一下HashMapde-源码"><a href="#说一下HashMapde-源码" class="headerlink" title="说一下HashMapde 源码"></a>说一下HashMapde 源码</h4><h4 id="如何实现HashMap顺序存储：可以参考LinkedHashMap的底层实现；"><a href="#如何实现HashMap顺序存储：可以参考LinkedHashMap的底层实现；" class="headerlink" title="如何实现HashMap顺序存储：可以参考LinkedHashMap的底层实现；"></a>如何实现HashMap顺序存储：可以参考LinkedHashMap的底层实现；</h4><h4 id="concurrentHashMap的源码解析"><a href="#concurrentHashMap的源码解析" class="headerlink" title="concurrentHashMap的源码解析"></a>concurrentHashMap的源码解析</h4><h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><h3 id="wait和sleep的区别，必须理解；"><a href="#wait和sleep的区别，必须理解；" class="headerlink" title="wait和sleep的区别，必须理解；"></a>wait和sleep的区别，必须理解；</h3><h3 id="说说阻塞队列的实现：可以参考ArrayBlockingQueue的底层实现（锁和同步都行）；"><a href="#说说阻塞队列的实现：可以参考ArrayBlockingQueue的底层实现（锁和同步都行）；" class="headerlink" title="说说阻塞队列的实现：可以参考ArrayBlockingQueue的底层实现（锁和同步都行）；"></a>说说阻塞队列的实现：可以参考ArrayBlockingQueue的底层实现（锁和同步都行）；</h3><h3 id="进程通讯的方式：消息队列，共享内存，信号量，socket通讯等；"><a href="#进程通讯的方式：消息队列，共享内存，信号量，socket通讯等；" class="headerlink" title="进程通讯的方式：消息队列，共享内存，信号量，socket通讯等；"></a>进程通讯的方式：消息队列，共享内存，信号量，socket通讯等；</h3><h3 id="用过并发包的哪些类；"><a href="#用过并发包的哪些类；" class="headerlink" title="用过并发包的哪些类；"></a>用过并发包的哪些类；</h3><h3 id="什么地方用了多线程；"><a href="#什么地方用了多线程；" class="headerlink" title="什么地方用了多线程；"></a>什么地方用了多线程；</h3><h3 id="Excutors可以产生哪些线程池；"><a href="#Excutors可以产生哪些线程池；" class="headerlink" title="Excutors可以产生哪些线程池；"></a>Excutors可以产生哪些线程池；</h3><h3 id="为什么要用线程池；"><a href="#为什么要用线程池；" class="headerlink" title="为什么要用线程池；"></a>为什么要用线程池；</h3><h3 id="volatile关键字的用法：使多线程中的变量可见；"><a href="#volatile关键字的用法：使多线程中的变量可见；" class="headerlink" title="volatile关键字的用法：使多线程中的变量可见；"></a>volatile关键字的用法：使多线程中的变量可见；</h3><h3 id="Java中的多线程了解么，线程池的增长策略和拒绝策略了解么，说一下。"><a href="#Java中的多线程了解么，线程池的增长策略和拒绝策略了解么，说一下。" class="headerlink" title="Java中的多线程了解么，线程池的增长策略和拒绝策略了解么，说一下。"></a>Java中的多线程了解么，线程池的增长策略和拒绝策略了解么，说一下。</h3><h3 id="讲一下线程增加的过程和拒绝策略的执行。"><a href="#讲一下线程增加的过程和拒绝策略的执行。" class="headerlink" title="讲一下线程增加的过程和拒绝策略的执行。"></a>讲一下线程增加的过程和拒绝策略的执行。</h3><h3 id="讲了一下fixthreadpool的增长策略，然后几种拒绝策略。"><a href="#讲了一下fixthreadpool的增长策略，然后几种拒绝策略。" class="headerlink" title="讲了一下fixthreadpool的增长策略，然后几种拒绝策略。"></a>讲了一下fixthreadpool的增长策略，然后几种拒绝策略。</h3><h3 id="高并发情况下，如何使用线程池，用哪个，问了一下线程结束要多久，是否在下一个线程结束前完成（我想的是cachethreadpool，其实思路错了）。"><a href="#高并发情况下，如何使用线程池，用哪个，问了一下线程结束要多久，是否在下一个线程结束前完成（我想的是cachethreadpool，其实思路错了）。" class="headerlink" title="高并发情况下，如何使用线程池，用哪个，问了一下线程结束要多久，是否在下一个线程结束前完成（我想的是cachethreadpool，其实思路错了）。"></a>高并发情况下，如何使用线程池，用哪个，问了一下线程结束要多久，是否在下一个线程结束前完成（我想的是cachethreadpool，其实思路错了）。</h3><h3 id="表示并发量比较大，所以我说可以考虑并发量是否大于队列长度加上最大线程数量和，如果不超过的话可以是用fixthreadpool。"><a href="#表示并发量比较大，所以我说可以考虑并发量是否大于队列长度加上最大线程数量和，如果不超过的话可以是用fixthreadpool。" class="headerlink" title="表示并发量比较大，所以我说可以考虑并发量是否大于队列长度加上最大线程数量和，如果不超过的话可以是用fixthreadpool。"></a>表示并发量比较大，所以我说可以考虑并发量是否大于队列长度加上最大线程数量和，如果不超过的话可以是用fixthreadpool。</h3><h3 id="你在项目中怎么用到并发的"><a href="#你在项目中怎么用到并发的" class="headerlink" title="你在项目中怎么用到并发的"></a>你在项目中怎么用到并发的</h3><h2 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h2><h3 id="bio，nio，aio的区别；"><a href="#bio，nio，aio的区别；" class="headerlink" title="bio，nio，aio的区别；"></a>bio，nio，aio的区别；</h3><h3 id="京东内部的jsf是使用的什么协议通讯：可参见dubbo的协议；"><a href="#京东内部的jsf是使用的什么协议通讯：可参见dubbo的协议；" class="headerlink" title="京东内部的jsf是使用的什么协议通讯：可参见dubbo的协议；"></a>京东内部的jsf是使用的什么协议通讯：可参见dubbo的协议；</h3><h2 id="反射和动态代理"><a href="#反射和动态代理" class="headerlink" title="反射和动态代理"></a>反射和动态代理</h2><h1 id="第二部分-常用框架"><a href="#第二部分-常用框架" class="headerlink" title="第二部分 常用框架"></a>第二部分 常用框架</h1><h2 id="spinrgmvc"><a href="#spinrgmvc" class="headerlink" title="spinrgmvc"></a>spinrgmvc</h2><h3 id="springmvc的核心是什么，请求的流程是怎么处理的，控制反转怎么实现的；"><a href="#springmvc的核心是什么，请求的流程是怎么处理的，控制反转怎么实现的；" class="headerlink" title="springmvc的核心是什么，请求的流程是怎么处理的，控制反转怎么实现的；"></a>springmvc的核心是什么，请求的流程是怎么处理的，控制反转怎么实现的；</h3><h3 id="spring里面的aop的原理是什么；"><a href="#spring里面的aop的原理是什么；" class="headerlink" title="spring里面的aop的原理是什么；"></a>spring里面的aop的原理是什么；</h3><h3 id="Springmvc的基本架构，请求流程。"><a href="#Springmvc的基本架构，请求流程。" class="headerlink" title="Springmvc的基本架构，请求流程。"></a>Springmvc的基本架构，请求流程。</h3><h2 id="spring"><a href="#spring" class="headerlink" title="spring"></a>spring</h2><h3 id="Spring-bean的生命周期"><a href="#Spring-bean的生命周期" class="headerlink" title="Spring bean的生命周期"></a>Spring bean的生命周期</h3><h3 id="说一下Spring源码把，它的架构，流程。"><a href="#说一下Spring源码把，它的架构，流程。" class="headerlink" title="说一下Spring源码把，它的架构，流程。"></a>说一下Spring源码把，它的架构，流程。</h3><h3 id="Spring的bean如果要在实例化过程中修改其某一个成员变量，应该怎么做呢。不通过构造方法，并且AOP也并不能实现。"><a href="#Spring的bean如果要在实例化过程中修改其某一个成员变量，应该怎么做呢。不通过构造方法，并且AOP也并不能实现。" class="headerlink" title="Spring的bean如果要在实例化过程中修改其某一个成员变量，应该怎么做呢。不通过构造方法，并且AOP也并不能实现。"></a>Spring的bean如果要在实例化过程中修改其某一个成员变量，应该怎么做呢。不通过构造方法，并且AOP也并不能实现。</h3><h2 id="mybatis"><a href="#mybatis" class="headerlink" title="mybatis"></a>mybatis</h2><h3 id="mybatis如何处理结果集：反射，建议看看源码；"><a href="#mybatis如何处理结果集：反射，建议看看源码；" class="headerlink" title="mybatis如何处理结果集：反射，建议看看源码；"></a>mybatis如何处理结果集：反射，建议看看源码；</h3><h2 id="springboot"><a href="#springboot" class="headerlink" title="springboot"></a>springboot</h2><h2 id="dubbo"><a href="#dubbo" class="headerlink" title="dubbo"></a>dubbo</h2><h3 id="nio框架：dubbo的实现原理；"><a href="#nio框架：dubbo的实现原理；" class="headerlink" title="nio框架：dubbo的实现原理；"></a>nio框架：dubbo的实现原理；</h3><h2 id="shiro"><a href="#shiro" class="headerlink" title="shiro"></a>shiro</h2><h2 id="solr和es"><a href="#solr和es" class="headerlink" title="solr和es"></a>solr和es</h2><h3 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h3><h2 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h2><h3 id="zookeeper是什么；"><a href="#zookeeper是什么；" class="headerlink" title="zookeeper是什么；"></a>zookeeper是什么；</h3><h3 id="zookeeper哪里用到；"><a href="#zookeeper哪里用到；" class="headerlink" title="zookeeper哪里用到；"></a>zookeeper哪里用到；</h3><h3 id="zookeeper的选主过程；"><a href="#zookeeper的选主过程；" class="headerlink" title="zookeeper的选主过程；"></a>zookeeper的选主过程；</h3><h3 id="zookeeper集群之间如何通讯；"><a href="#zookeeper集群之间如何通讯；" class="headerlink" title="zookeeper集群之间如何通讯；"></a>zookeeper集群之间如何通讯；</h3><h3 id="你们的zookeeper的节点加密是用的什么方式；"><a href="#你们的zookeeper的节点加密是用的什么方式；" class="headerlink" title="你们的zookeeper的节点加密是用的什么方式；"></a>你们的zookeeper的节点加密是用的什么方式；</h3><h3 id="分布式锁的实现过程；"><a href="#分布式锁的实现过程；" class="headerlink" title="分布式锁的实现过程；"></a>分布式锁的实现过程；</h3><h2 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h2><h2 id="MQ"><a href="#MQ" class="headerlink" title="MQ"></a>MQ</h2><h3 id="mq的原理是什么：有点大。。都可以说；"><a href="#mq的原理是什么：有点大。。都可以说；" class="headerlink" title="mq的原理是什么：有点大。。都可以说；"></a>mq的原理是什么：有点大。。都可以说；</h3><h3 id="mq如何保证实时性；"><a href="#mq如何保证实时性；" class="headerlink" title="mq如何保证实时性；"></a>mq如何保证实时性；</h3><h3 id="mq的持久化是怎么做的；"><a href="#mq的持久化是怎么做的；" class="headerlink" title="mq的持久化是怎么做的；"></a>mq的持久化是怎么做的；</h3><h1 id="第三部分-数据库"><a href="#第三部分-数据库" class="headerlink" title="第三部分 数据库"></a>第三部分 数据库</h1><h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><h3 id="msyql优化经验："><a href="#msyql优化经验：" class="headerlink" title="msyql优化经验："></a>msyql优化经验：</h3><h3 id="mysql的语句优化，使用什么工具；"><a href="#mysql的语句优化，使用什么工具；" class="headerlink" title="mysql的语句优化，使用什么工具；"></a>mysql的语句优化，使用什么工具；</h3><h3 id="mysql的索引分类：B-，hash；什么情况用什么索引；"><a href="#mysql的索引分类：B-，hash；什么情况用什么索引；" class="headerlink" title="mysql的索引分类：B+，hash；什么情况用什么索引；"></a>mysql的索引分类：B+，hash；什么情况用什么索引；</h3><h3 id="mysql的存储引擎有哪些，区别是什么；"><a href="#mysql的存储引擎有哪些，区别是什么；" class="headerlink" title="mysql的存储引擎有哪些，区别是什么；"></a>mysql的存储引擎有哪些，区别是什么；</h3><h3 id="说说事务的特性和隔离级别；"><a href="#说说事务的特性和隔离级别；" class="headerlink" title="说说事务的特性和隔离级别；"></a>说说事务的特性和隔离级别；</h3><h3 id="悲观锁和乐观锁的区别，怎么实现；"><a href="#悲观锁和乐观锁的区别，怎么实现；" class="headerlink" title="悲观锁和乐观锁的区别，怎么实现；"></a>悲观锁和乐观锁的区别，怎么实现；</h3><h3 id="索引什么时候会失效变成全表扫描"><a href="#索引什么时候会失效变成全表扫描" class="headerlink" title="索引什么时候会失效变成全表扫描"></a>索引什么时候会失效变成全表扫描</h3><h3 id="数据库的事务有什么用"><a href="#数据库的事务有什么用" class="headerlink" title="数据库的事务有什么用"></a>数据库的事务有什么用</h3><h3 id="数据的索引有什么用，怎么实现"><a href="#数据的索引有什么用，怎么实现" class="headerlink" title="数据的索引有什么用，怎么实现"></a>数据的索引有什么用，怎么实现</h3><h3 id="联合索引的匹配原则"><a href="#联合索引的匹配原则" class="headerlink" title="联合索引的匹配原则"></a>联合索引的匹配原则</h3><h3 id="数据库万级变成亿级，怎么处理。分库分表，分片规则hash和取余数。使用mycat中间件实现。"><a href="#数据库万级变成亿级，怎么处理。分库分表，分片规则hash和取余数。使用mycat中间件实现。" class="headerlink" title="数据库万级变成亿级，怎么处理。分库分表，分片规则hash和取余数。使用mycat中间件实现。"></a>数据库万级变成亿级，怎么处理。分库分表，分片规则hash和取余数。使用mycat中间件实现。</h3><h3 id="https-mp-weixin-qq-com-s-ZtuUg79OFLh20-HWs2Qs4A"><a href="#https-mp-weixin-qq-com-s-ZtuUg79OFLh20-HWs2Qs4A" class="headerlink" title="https://mp.weixin.qq.com/s/ZtuUg79OFLh20-HWs2Qs4A"></a><a href="https://mp.weixin.qq.com/s/ZtuUg79OFLh20-HWs2Qs4A" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/ZtuUg79OFLh20-HWs2Qs4A</a></h3><h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><h3 id="redis有哪些数据结构？"><a href="#redis有哪些数据结构？" class="headerlink" title="redis有哪些数据结构？"></a>redis有哪些数据结构？</h3><h3 id="介绍下zset，它底层原理是什么？"><a href="#介绍下zset，它底层原理是什么？" class="headerlink" title="介绍下zset，它底层原理是什么？"></a>介绍下zset，它底层原理是什么？</h3><h3 id="布隆过滤器和hyperloglog-ip地址过滤的布隆过滤器实现。"><a href="#布隆过滤器和hyperloglog-ip地址过滤的布隆过滤器实现。" class="headerlink" title="布隆过滤器和hyperloglog.ip地址过滤的布隆过滤器实现。"></a>布隆过滤器和hyperloglog.ip地址过滤的布隆过滤器实现。</h3><h4 id="亿级ip地址过滤"><a href="#亿级ip地址过滤" class="headerlink" title="亿级ip地址过滤"></a>亿级ip地址过滤</h4><h3 id="redis哨兵"><a href="#redis哨兵" class="headerlink" title="redis哨兵"></a>redis哨兵</h3><h3 id="redis是怎么保证高可用的？"><a href="#redis是怎么保证高可用的？" class="headerlink" title="redis是怎么保证高可用的？"></a>redis是怎么保证高可用的？</h3><h3 id="redis为什么是单线程？"><a href="#redis为什么是单线程？" class="headerlink" title="redis为什么是单线程？"></a>redis为什么是单线程？</h3><h3 id="redis的淘汰策略有哪些；"><a href="#redis的淘汰策略有哪些；" class="headerlink" title="redis的淘汰策略有哪些；"></a>redis的淘汰策略有哪些；</h3><h2 id="mongodb"><a href="#mongodb" class="headerlink" title="mongodb"></a>mongodb</h2><h2 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h2><h3 id="听说你项目用过docker，讲一下docker的实现原理，说了虚拟机一般要对内核进行虚拟化，docker则用cgroup和namespace分别进行硬件和命名空间的隔离。"><a href="#听说你项目用过docker，讲一下docker的实现原理，说了虚拟机一般要对内核进行虚拟化，docker则用cgroup和namespace分别进行硬件和命名空间的隔离。" class="headerlink" title="听说你项目用过docker，讲一下docker的实现原理，说了虚拟机一般要对内核进行虚拟化，docker则用cgroup和namespace分别进行硬件和命名空间的隔离。"></a>听说你项目用过docker，讲一下docker的实现原理，说了虚拟机一般要对内核进行虚拟化，docker则用cgroup和namespace分别进行硬件和命名空间的隔离。</h3><h1 id="第四部分-Java虚拟机"><a href="#第四部分-Java虚拟机" class="headerlink" title="第四部分 Java虚拟机"></a>第四部分 Java虚拟机</h1><h2 id="JVM的内存结构，JVM的算法；"><a href="#JVM的内存结构，JVM的算法；" class="headerlink" title="JVM的内存结构，JVM的算法；"></a>JVM的内存结构，JVM的算法；</h2><h2 id="强引用，软引用和弱引用的区别；"><a href="#强引用，软引用和弱引用的区别；" class="headerlink" title="强引用，软引用和弱引用的区别；"></a>强引用，软引用和弱引用的区别；</h2><h2 id="数组在内存中如何分配；"><a href="#数组在内存中如何分配；" class="headerlink" title="数组在内存中如何分配；"></a>数组在内存中如何分配；</h2><h2 id="请写一段栈溢出、堆溢出的代码；"><a href="#请写一段栈溢出、堆溢出的代码；" class="headerlink" title="请写一段栈溢出、堆溢出的代码；"></a>请写一段栈溢出、堆溢出的代码；</h2><h2 id="ThreadLocal可以用来共享数据吗；"><a href="#ThreadLocal可以用来共享数据吗；" class="headerlink" title="ThreadLocal可以用来共享数据吗；"></a>ThreadLocal可以用来共享数据吗；</h2><h1 id="第五部分-JavaWeb"><a href="#第五部分-JavaWeb" class="headerlink" title="第五部分 JavaWeb"></a>第五部分 JavaWeb</h1><h2 id="tomcat"><a href="#tomcat" class="headerlink" title="tomcat"></a>tomcat</h2><h3 id="你平时是如何进行Tomcat性能优化的"><a href="#你平时是如何进行Tomcat性能优化的" class="headerlink" title="你平时是如何进行Tomcat性能优化的?"></a>你平时是如何进行Tomcat性能优化的?</h3><h3 id="你说了解Tomcat的基本原理，了解的是哪一部分，基本架构，connector和container"><a href="#你说了解Tomcat的基本原理，了解的是哪一部分，基本架构，connector和container" class="headerlink" title="你说了解Tomcat的基本原理，了解的是哪一部分，基本架构，connector和container"></a>你说了解Tomcat的基本原理，了解的是哪一部分，基本架构，connector和container</h3><h3 id="Tomcat的类加载器了解么，回答不了解只了解Java的类加载器。"><a href="#Tomcat的类加载器了解么，回答不了解只了解Java的类加载器。" class="headerlink" title="Tomcat的类加载器了解么，回答不了解只了解Java的类加载器。"></a>Tomcat的类加载器了解么，回答不了解只了解Java的类加载器。</h3><h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><h3 id="说说http-https协议；"><a href="#说说http-https协议；" class="headerlink" title="说说http,https协议；"></a>说说http,https协议；</h3><h3 id="tcp-ip协议簇；"><a href="#tcp-ip协议簇；" class="headerlink" title="tcp/ip协议簇；"></a>tcp/ip协议簇；</h3><h3 id="osi五层网络协议；"><a href="#osi五层网络协议；" class="headerlink" title="osi五层网络协议；"></a>osi五层网络协议；</h3><h3 id="tcp，udp区别；"><a href="#tcp，udp区别；" class="headerlink" title="tcp，udp区别；"></a>tcp，udp区别；</h3><h3 id="用过哪些加密算法：对称加密，非对称加密算法；"><a href="#用过哪些加密算法：对称加密，非对称加密算法；" class="headerlink" title="用过哪些加密算法：对称加密，非对称加密算法；"></a>用过哪些加密算法：对称加密，非对称加密算法；</h3><h3 id="说说tcp三次握手，四次挥手；"><a href="#说说tcp三次握手，四次挥手；" class="headerlink" title="说说tcp三次握手，四次挥手；"></a>说说tcp三次握手，四次挥手；</h3><h3 id="cookie和session的区别，分布式环境怎么保存用户状态；"><a href="#cookie和session的区别，分布式环境怎么保存用户状态；" class="headerlink" title="cookie和session的区别，分布式环境怎么保存用户状态；"></a>cookie和session的区别，分布式环境怎么保存用户状态；</h3><h3 id="分布式session解决方案"><a href="#分布式session解决方案" class="headerlink" title="分布式session解决方案"></a>分布式session解决方案</h3><h3 id="HTTP协议了解么，和tcp有什么区别。"><a href="#HTTP协议了解么，和tcp有什么区别。" class="headerlink" title="HTTP协议了解么，和tcp有什么区别。"></a>HTTP协议了解么，和tcp有什么区别。</h3><h3 id="http1-0和2-0的区别。答了TCP连接复用，加入ssl，以及压缩请求头。"><a href="#http1-0和2-0的区别。答了TCP连接复用，加入ssl，以及压缩请求头。" class="headerlink" title="http1.0和2.0的区别。答了TCP连接复用，加入ssl，以及压缩请求头。"></a>http1.0和2.0的区别。答了TCP连接复用，加入ssl，以及压缩请求头。</h3><h3 id="web请求的过程，讲了浏览器到http服务器的过程，再讲了mvc的请求处理过程。"><a href="#web请求的过程，讲了浏览器到http服务器的过程，再讲了mvc的请求处理过程。" class="headerlink" title="web请求的过程，讲了浏览器到http服务器的过程，再讲了mvc的请求处理过程。"></a>web请求的过程，讲了浏览器到http服务器的过程，再讲了mvc的请求处理过程。</h3><p>其中哪个更新比较有意义，为什么。我说的是压缩请求头，这样可以优化HTTP服务的性能。</p><h1 id="第六部分-设计模式"><a href="#第六部分-设计模式" class="headerlink" title="第六部分 设计模式"></a>第六部分 设计模式</h1><h1 id="第七部分-项目相关"><a href="#第七部分-项目相关" class="headerlink" title="第七部分 项目相关"></a>第七部分 项目相关</h1><h1 id="第八部分-算法相关"><a href="#第八部分-算法相关" class="headerlink" title="第八部分 算法相关"></a>第八部分 算法相关</h1><h2 id="java中常说的堆和栈，分别是什么数据结构；另外，为什么要分为堆和栈来存储数据。"><a href="#java中常说的堆和栈，分别是什么数据结构；另外，为什么要分为堆和栈来存储数据。" class="headerlink" title="java中常说的堆和栈，分别是什么数据结构；另外，为什么要分为堆和栈来存储数据。"></a>java中常说的堆和栈，分别是什么数据结构；另外，为什么要分为堆和栈来存储数据。</h2><h2 id="TreeMap如何插入数据：二叉树的左旋，右旋，双旋；"><a href="#TreeMap如何插入数据：二叉树的左旋，右旋，双旋；" class="headerlink" title="TreeMap如何插入数据：二叉树的左旋，右旋，双旋；"></a>TreeMap如何插入数据：二叉树的左旋，右旋，双旋；</h2><h2 id="一个排序之后的数组，插入数据，可以使用什么方法？答：二分法；问：时间复杂度是多少？"><a href="#一个排序之后的数组，插入数据，可以使用什么方法？答：二分法；问：时间复杂度是多少？" class="headerlink" title="一个排序之后的数组，插入数据，可以使用什么方法？答：二分法；问：时间复杂度是多少？"></a>一个排序之后的数组，插入数据，可以使用什么方法？答：二分法；问：时间复杂度是多少？</h2><h2 id="平衡二叉树的时间复杂度；"><a href="#平衡二叉树的时间复杂度；" class="headerlink" title="平衡二叉树的时间复杂度；"></a>平衡二叉树的时间复杂度；</h2><h2 id="Hash算法和二叉树算法分别什么时候用；"><a href="#Hash算法和二叉树算法分别什么时候用；" class="headerlink" title="Hash算法和二叉树算法分别什么时候用；"></a>Hash算法和二叉树算法分别什么时候用；</h2><h2 id="图的广度优先算法和深度优先算法：详见jvm中垃圾回收实现；"><a href="#图的广度优先算法和深度优先算法：详见jvm中垃圾回收实现；" class="headerlink" title="图的广度优先算法和深度优先算法：详见jvm中垃圾回收实现；"></a>图的广度优先算法和深度优先算法：详见jvm中垃圾回收实现；</h2><h2 id="排序算法和适用场景"><a href="#排序算法和适用场景" class="headerlink" title="排序算法和适用场景"></a>排序算法和适用场景</h2><h1 id="第九部分-Linux"><a href="#第九部分-Linux" class="headerlink" title="第九部分 Linux"></a>第九部分 Linux</h1><h2 id="linux常用的命令有哪些；"><a href="#linux常用的命令有哪些；" class="headerlink" title="linux常用的命令有哪些；"></a>linux常用的命令有哪些；</h2><h2 id="如何获取java进程的pid；"><a href="#如何获取java进程的pid；" class="headerlink" title="如何获取java进程的pid；"></a>如何获取java进程的pid；</h2><h2 id="如何获取某个进程的网络端口号；"><a href="#如何获取某个进程的网络端口号；" class="headerlink" title="如何获取某个进程的网络端口号；"></a>如何获取某个进程的网络端口号；</h2><h2 id="如何实时打印日志；"><a href="#如何实时打印日志；" class="headerlink" title="如何实时打印日志；"></a>如何实时打印日志；</h2><h2 id="如何统计某个字符串行数；"><a href="#如何统计某个字符串行数；" class="headerlink" title="如何统计某个字符串行数；"></a>如何统计某个字符串行数；</h2><h1 id="第十部分-设计与思想"><a href="#第十部分-设计与思想" class="headerlink" title="第十部分 设计与思想"></a>第十部分 设计与思想</h1><h2 id="重构过代码没有？说说经验；"><a href="#重构过代码没有？说说经验；" class="headerlink" title="重构过代码没有？说说经验；"></a>重构过代码没有？说说经验；</h2><h2 id="一千万的用户实时排名如何实现；"><a href="#一千万的用户实时排名如何实现；" class="headerlink" title="一千万的用户实时排名如何实现；"></a>一千万的用户实时排名如何实现；</h2><h2 id="五万人并发抢票怎么实现；"><a href="#五万人并发抢票怎么实现；" class="headerlink" title="五万人并发抢票怎么实现；"></a>五万人并发抢票怎么实现；</h2><h2 id="项目中遇到的最大挑战。"><a href="#项目中遇到的最大挑战。" class="headerlink" title="项目中遇到的最大挑战。"></a>项目中遇到的最大挑战。</h2><h2 id="项目中学到最多的东西"><a href="#项目中学到最多的东西" class="headerlink" title="项目中学到最多的东西"></a>项目中学到最多的东西</h2><h2 id="你的职业规划"><a href="#你的职业规划" class="headerlink" title="你的职业规划"></a>你的职业规划</h2><h1 id="第十一部分-HR面试"><a href="#第十一部分-HR面试" class="headerlink" title="第十一部分 HR面试"></a>第十一部分 HR面试</h1><h2 id="兴趣爱好"><a href="#兴趣爱好" class="headerlink" title="兴趣爱好"></a>兴趣爱好</h2><h2 id="三年到五年的职业规划"><a href="#三年到五年的职业规划" class="headerlink" title="三年到五年的职业规划"></a>三年到五年的职业规划</h2><h2 id="意向公司和城市"><a href="#意向公司和城市" class="headerlink" title="意向公司和城市"></a>意向公司和城市</h2><h2 id="实习经历和收获"><a href="#实习经历和收获" class="headerlink" title="实习经历和收获"></a>实习经历和收获</h2><h2 id="实习中最大的困难"><a href="#实习中最大的困难" class="headerlink" title="实习中最大的困难"></a>实习中最大的困难</h2><h2 id="为什么换公司，为什么拒绝菜鸟实习offer"><a href="#为什么换公司，为什么拒绝菜鸟实习offer" class="headerlink" title="为什么换公司，为什么拒绝菜鸟实习offer"></a>为什么换公司，为什么拒绝菜鸟实习offer</h2><h2 id="你的缺点和优点"><a href="#你的缺点和优点" class="headerlink" title="你的缺点和优点"></a>你的缺点和优点</h2><h2 id="你觉得你比其他人优秀的地方说三个"><a href="#你觉得你比其他人优秀的地方说三个" class="headerlink" title="你觉得你比其他人优秀的地方说三个"></a>你觉得你比其他人优秀的地方说三个</h2><h2 id="为什么想来我们部门"><a href="#为什么想来我们部门" class="headerlink" title="为什么想来我们部门"></a>为什么想来我们部门</h2></div><div><div style="padding:10px 0;margin:20px auto;width:90%;text-align:center"><div></div> <button id="rewardButton" disable="enable" onclick='var qr=document.getElementById("QR");"none"===qr.style.display?qr.style.display="block":qr.style.display="none"'> <span>打赏</span></button><div id="QR" style="display:none"><div id="wechat" style="display:inline-block"> <img id="wechat_qr" src="/images/wchatpay.png" alt="克己 微信支付"><p>微信支付</p></div><div id="alipay" style="display:inline-block"> <img id="alipay_qr" src="/images/alipay.jpg" alt="克己 支付宝"><p>支付宝</p></div></div></div></div><footer class="post-footer"><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/集合/HashMap/HashMap源码解析/index.html" rel="next" title="HashMap源码解析"><i class="fa fa-chevron-left"></i> HashMap源码解析</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"></div></div></footer></div></article><div class="post-spread"></div></div></div><div id="gitalk-container"></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap"> 站点概览</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="/images/keji.jpg" alt="克己"><p class="site-author-name" itemprop="name">克己</p><p class="site-description motion-element" itemprop="description">有志，则不甘为下流；有识，则知学问无尽；有恒，则断无不成之事</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives/index.html"><span class="site-state-item-count">15</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/index.html"><span class="site-state-item-count">17</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <span class="site-state-item-count">5</span> <span class="site-state-item-name">标签</span></div></nav></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言-做好面试前的准备工作"><span class="nav-number">1.</span> <span class="nav-text">前言 做好面试前的准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第一部分-Java基础"><span class="nav-number">2.</span> <span class="nav-text">第一部分 Java基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关键字"><span class="nav-number">2.1.</span> <span class="nav-text">关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#static"><span class="nav-number">2.1.1.</span> <span class="nav-text">static</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#static-关键字的作用"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">static 关键字的作用?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么不能通过this访问static变量或者方法？"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">为什么不能通过this访问static变量或者方法？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#static笔试题"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">static笔试题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final"><span class="nav-number">2.1.2.</span> <span class="nav-text">final</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transient"><span class="nav-number">2.1.3.</span> <span class="nav-text">transient</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile"><span class="nav-number">2.1.4.</span> <span class="nav-text">volatile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized"><span class="nav-number">2.1.5.</span> <span class="nav-text">synchronized</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">2.2.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String-StringBuffer和StringBuilder的区别；"><span class="nav-number">2.2.1.</span> <span class="nav-text">String,StringBuffer和StringBuilder的区别；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object的方法有哪些"><span class="nav-number">2.2.2.</span> <span class="nav-text">Object的方法有哪些</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合"><span class="nav-number">2.3.</span> <span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList"><span class="nav-number">2.3.1.</span> <span class="nav-text">ArrayList</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#说一下ArrayList的源码"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">说一下ArrayList的源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fail-fast行为是什么？"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">Fail-fast行为是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#List和Set的区别"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">List和Set的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap"><span class="nav-number">2.3.2.</span> <span class="nav-text">HashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#说一下HashMapde-源码"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">说一下HashMapde 源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何实现HashMap顺序存储：可以参考LinkedHashMap的底层实现；"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">如何实现HashMap顺序存储：可以参考LinkedHashMap的底层实现；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#concurrentHashMap的源码解析"><span class="nav-number">2.3.2.3.</span> <span class="nav-text">concurrentHashMap的源码解析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">2.4.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#wait和sleep的区别，必须理解；"><span class="nav-number">2.4.1.</span> <span class="nav-text">wait和sleep的区别，必须理解；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说说阻塞队列的实现：可以参考ArrayBlockingQueue的底层实现（锁和同步都行）；"><span class="nav-number">2.4.2.</span> <span class="nav-text">说说阻塞队列的实现：可以参考ArrayBlockingQueue的底层实现（锁和同步都行）；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程通讯的方式：消息队列，共享内存，信号量，socket通讯等；"><span class="nav-number">2.4.3.</span> <span class="nav-text">进程通讯的方式：消息队列，共享内存，信号量，socket通讯等；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用过并发包的哪些类；"><span class="nav-number">2.4.4.</span> <span class="nav-text">用过并发包的哪些类；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么地方用了多线程；"><span class="nav-number">2.4.5.</span> <span class="nav-text">什么地方用了多线程；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Excutors可以产生哪些线程池；"><span class="nav-number">2.4.6.</span> <span class="nav-text">Excutors可以产生哪些线程池；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要用线程池；"><span class="nav-number">2.4.7.</span> <span class="nav-text">为什么要用线程池；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile关键字的用法：使多线程中的变量可见；"><span class="nav-number">2.4.8.</span> <span class="nav-text">volatile关键字的用法：使多线程中的变量可见；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java中的多线程了解么，线程池的增长策略和拒绝策略了解么，说一下。"><span class="nav-number">2.4.9.</span> <span class="nav-text">Java中的多线程了解么，线程池的增长策略和拒绝策略了解么，说一下。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讲一下线程增加的过程和拒绝策略的执行。"><span class="nav-number">2.4.10.</span> <span class="nav-text">讲一下线程增加的过程和拒绝策略的执行。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讲了一下fixthreadpool的增长策略，然后几种拒绝策略。"><span class="nav-number">2.4.11.</span> <span class="nav-text">讲了一下fixthreadpool的增长策略，然后几种拒绝策略。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高并发情况下，如何使用线程池，用哪个，问了一下线程结束要多久，是否在下一个线程结束前完成（我想的是cachethreadpool，其实思路错了）。"><span class="nav-number">2.4.12.</span> <span class="nav-text">高并发情况下，如何使用线程池，用哪个，问了一下线程结束要多久，是否在下一个线程结束前完成（我想的是cachethreadpool，其实思路错了）。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表示并发量比较大，所以我说可以考虑并发量是否大于队列长度加上最大线程数量和，如果不超过的话可以是用fixthreadpool。"><span class="nav-number">2.4.13.</span> <span class="nav-text">表示并发量比较大，所以我说可以考虑并发量是否大于队列长度加上最大线程数量和，如果不超过的话可以是用fixthreadpool。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你在项目中怎么用到并发的"><span class="nav-number">2.4.14.</span> <span class="nav-text">你在项目中怎么用到并发的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO"><span class="nav-number">2.5.</span> <span class="nav-text">IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bio，nio，aio的区别；"><span class="nav-number">2.5.1.</span> <span class="nav-text">bio，nio，aio的区别；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#京东内部的jsf是使用的什么协议通讯：可参见dubbo的协议；"><span class="nav-number">2.5.2.</span> <span class="nav-text">京东内部的jsf是使用的什么协议通讯：可参见dubbo的协议；</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射和动态代理"><span class="nav-number">2.6.</span> <span class="nav-text">反射和动态代理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二部分-常用框架"><span class="nav-number">3.</span> <span class="nav-text">第二部分 常用框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#spinrgmvc"><span class="nav-number">3.1.</span> <span class="nav-text">spinrgmvc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#springmvc的核心是什么，请求的流程是怎么处理的，控制反转怎么实现的；"><span class="nav-number">3.1.1.</span> <span class="nav-text">springmvc的核心是什么，请求的流程是怎么处理的，控制反转怎么实现的；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring里面的aop的原理是什么；"><span class="nav-number">3.1.2.</span> <span class="nav-text">spring里面的aop的原理是什么；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Springmvc的基本架构，请求流程。"><span class="nav-number">3.1.3.</span> <span class="nav-text">Springmvc的基本架构，请求流程。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring"><span class="nav-number">3.2.</span> <span class="nav-text">spring</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-bean的生命周期"><span class="nav-number">3.2.1.</span> <span class="nav-text">Spring bean的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说一下Spring源码把，它的架构，流程。"><span class="nav-number">3.2.2.</span> <span class="nav-text">说一下Spring源码把，它的架构，流程。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring的bean如果要在实例化过程中修改其某一个成员变量，应该怎么做呢。不通过构造方法，并且AOP也并不能实现。"><span class="nav-number">3.2.3.</span> <span class="nav-text">Spring的bean如果要在实例化过程中修改其某一个成员变量，应该怎么做呢。不通过构造方法，并且AOP也并不能实现。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mybatis"><span class="nav-number">3.3.</span> <span class="nav-text">mybatis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mybatis如何处理结果集：反射，建议看看源码；"><span class="nav-number">3.3.1.</span> <span class="nav-text">mybatis如何处理结果集：反射，建议看看源码；</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#springboot"><span class="nav-number">3.4.</span> <span class="nav-text">springboot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dubbo"><span class="nav-number">3.5.</span> <span class="nav-text">dubbo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nio框架：dubbo的实现原理；"><span class="nav-number">3.5.1.</span> <span class="nav-text">nio框架：dubbo的实现原理；</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shiro"><span class="nav-number">3.6.</span> <span class="nav-text">shiro</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solr和es"><span class="nav-number">3.7.</span> <span class="nav-text">solr和es</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#倒排索引"><span class="nav-number">3.7.1.</span> <span class="nav-text">倒排索引</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zookeeper"><span class="nav-number">3.8.</span> <span class="nav-text">zookeeper</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#zookeeper是什么；"><span class="nav-number">3.8.1.</span> <span class="nav-text">zookeeper是什么；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zookeeper哪里用到；"><span class="nav-number">3.8.2.</span> <span class="nav-text">zookeeper哪里用到；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zookeeper的选主过程；"><span class="nav-number">3.8.3.</span> <span class="nav-text">zookeeper的选主过程；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zookeeper集群之间如何通讯；"><span class="nav-number">3.8.4.</span> <span class="nav-text">zookeeper集群之间如何通讯；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你们的zookeeper的节点加密是用的什么方式；"><span class="nav-number">3.8.5.</span> <span class="nav-text">你们的zookeeper的节点加密是用的什么方式；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式锁的实现过程；"><span class="nav-number">3.8.6.</span> <span class="nav-text">分布式锁的实现过程；</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maven"><span class="nav-number">3.9.</span> <span class="nav-text">maven</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MQ"><span class="nav-number">3.10.</span> <span class="nav-text">MQ</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mq的原理是什么：有点大。。都可以说；"><span class="nav-number">3.10.1.</span> <span class="nav-text">mq的原理是什么：有点大。。都可以说；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mq如何保证实时性；"><span class="nav-number">3.10.2.</span> <span class="nav-text">mq如何保证实时性；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mq的持久化是怎么做的；"><span class="nav-number">3.10.3.</span> <span class="nav-text">mq的持久化是怎么做的；</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三部分-数据库"><span class="nav-number">4.</span> <span class="nav-text">第三部分 数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">4.1.</span> <span class="nav-text">mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#msyql优化经验："><span class="nav-number">4.1.1.</span> <span class="nav-text">msyql优化经验：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql的语句优化，使用什么工具；"><span class="nav-number">4.1.2.</span> <span class="nav-text">mysql的语句优化，使用什么工具；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql的索引分类：B-，hash；什么情况用什么索引；"><span class="nav-number">4.1.3.</span> <span class="nav-text">mysql的索引分类：B+，hash；什么情况用什么索引；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql的存储引擎有哪些，区别是什么；"><span class="nav-number">4.1.4.</span> <span class="nav-text">mysql的存储引擎有哪些，区别是什么；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说说事务的特性和隔离级别；"><span class="nav-number">4.1.5.</span> <span class="nav-text">说说事务的特性和隔离级别；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#悲观锁和乐观锁的区别，怎么实现；"><span class="nav-number">4.1.6.</span> <span class="nav-text">悲观锁和乐观锁的区别，怎么实现；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引什么时候会失效变成全表扫描"><span class="nav-number">4.1.7.</span> <span class="nav-text">索引什么时候会失效变成全表扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库的事务有什么用"><span class="nav-number">4.1.8.</span> <span class="nav-text">数据库的事务有什么用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据的索引有什么用，怎么实现"><span class="nav-number">4.1.9.</span> <span class="nav-text">数据的索引有什么用，怎么实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联合索引的匹配原则"><span class="nav-number">4.1.10.</span> <span class="nav-text">联合索引的匹配原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库万级变成亿级，怎么处理。分库分表，分片规则hash和取余数。使用mycat中间件实现。"><span class="nav-number">4.1.11.</span> <span class="nav-text">数据库万级变成亿级，怎么处理。分库分表，分片规则hash和取余数。使用mycat中间件实现。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#https-mp-weixin-qq-com-s-ZtuUg79OFLh20-HWs2Qs4A"><span class="nav-number">4.1.12.</span> <span class="nav-text">https://mp.weixin.qq.com/s/ZtuUg79OFLh20-HWs2Qs4A</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis"><span class="nav-number">4.2.</span> <span class="nav-text">redis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#redis有哪些数据结构？"><span class="nav-number">4.2.1.</span> <span class="nav-text">redis有哪些数据结构？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍下zset，它底层原理是什么？"><span class="nav-number">4.2.2.</span> <span class="nav-text">介绍下zset，它底层原理是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#布隆过滤器和hyperloglog-ip地址过滤的布隆过滤器实现。"><span class="nav-number">4.2.3.</span> <span class="nav-text">布隆过滤器和hyperloglog.ip地址过滤的布隆过滤器实现。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#亿级ip地址过滤"><span class="nav-number">4.2.3.1.</span> <span class="nav-text">亿级ip地址过滤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis哨兵"><span class="nav-number">4.2.4.</span> <span class="nav-text">redis哨兵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis是怎么保证高可用的？"><span class="nav-number">4.2.5.</span> <span class="nav-text">redis是怎么保证高可用的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis为什么是单线程？"><span class="nav-number">4.2.6.</span> <span class="nav-text">redis为什么是单线程？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis的淘汰策略有哪些；"><span class="nav-number">4.2.7.</span> <span class="nav-text">redis的淘汰策略有哪些；</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodb"><span class="nav-number">4.3.</span> <span class="nav-text">mongodb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker"><span class="nav-number">4.4.</span> <span class="nav-text">docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#听说你项目用过docker，讲一下docker的实现原理，说了虚拟机一般要对内核进行虚拟化，docker则用cgroup和namespace分别进行硬件和命名空间的隔离。"><span class="nav-number">4.4.1.</span> <span class="nav-text">听说你项目用过docker，讲一下docker的实现原理，说了虚拟机一般要对内核进行虚拟化，docker则用cgroup和namespace分别进行硬件和命名空间的隔离。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第四部分-Java虚拟机"><span class="nav-number">5.</span> <span class="nav-text">第四部分 Java虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM的内存结构，JVM的算法；"><span class="nav-number">5.1.</span> <span class="nav-text">JVM的内存结构，JVM的算法；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强引用，软引用和弱引用的区别；"><span class="nav-number">5.2.</span> <span class="nav-text">强引用，软引用和弱引用的区别；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组在内存中如何分配；"><span class="nav-number">5.3.</span> <span class="nav-text">数组在内存中如何分配；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请写一段栈溢出、堆溢出的代码；"><span class="nav-number">5.4.</span> <span class="nav-text">请写一段栈溢出、堆溢出的代码；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal可以用来共享数据吗；"><span class="nav-number">5.5.</span> <span class="nav-text">ThreadLocal可以用来共享数据吗；</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第五部分-JavaWeb"><span class="nav-number">6.</span> <span class="nav-text">第五部分 JavaWeb</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tomcat"><span class="nav-number">6.1.</span> <span class="nav-text">tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#你平时是如何进行Tomcat性能优化的"><span class="nav-number">6.1.1.</span> <span class="nav-text">你平时是如何进行Tomcat性能优化的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你说了解Tomcat的基本原理，了解的是哪一部分，基本架构，connector和container"><span class="nav-number">6.1.2.</span> <span class="nav-text">你说了解Tomcat的基本原理，了解的是哪一部分，基本架构，connector和container</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat的类加载器了解么，回答不了解只了解Java的类加载器。"><span class="nav-number">6.1.3.</span> <span class="nav-text">Tomcat的类加载器了解么，回答不了解只了解Java的类加载器。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web"><span class="nav-number">6.2.</span> <span class="nav-text">web</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#说说http-https协议；"><span class="nav-number">6.2.1.</span> <span class="nav-text">说说http,https协议；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcp-ip协议簇；"><span class="nav-number">6.2.2.</span> <span class="nav-text">tcp/ip协议簇；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#osi五层网络协议；"><span class="nav-number">6.2.3.</span> <span class="nav-text">osi五层网络协议；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcp，udp区别；"><span class="nav-number">6.2.4.</span> <span class="nav-text">tcp，udp区别；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用过哪些加密算法：对称加密，非对称加密算法；"><span class="nav-number">6.2.5.</span> <span class="nav-text">用过哪些加密算法：对称加密，非对称加密算法；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说说tcp三次握手，四次挥手；"><span class="nav-number">6.2.6.</span> <span class="nav-text">说说tcp三次握手，四次挥手；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie和session的区别，分布式环境怎么保存用户状态；"><span class="nav-number">6.2.7.</span> <span class="nav-text">cookie和session的区别，分布式环境怎么保存用户状态；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式session解决方案"><span class="nav-number">6.2.8.</span> <span class="nav-text">分布式session解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP协议了解么，和tcp有什么区别。"><span class="nav-number">6.2.9.</span> <span class="nav-text">HTTP协议了解么，和tcp有什么区别。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http1-0和2-0的区别。答了TCP连接复用，加入ssl，以及压缩请求头。"><span class="nav-number">6.2.10.</span> <span class="nav-text">http1.0和2.0的区别。答了TCP连接复用，加入ssl，以及压缩请求头。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web请求的过程，讲了浏览器到http服务器的过程，再讲了mvc的请求处理过程。"><span class="nav-number">6.2.11.</span> <span class="nav-text">web请求的过程，讲了浏览器到http服务器的过程，再讲了mvc的请求处理过程。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第六部分-设计模式"><span class="nav-number">7.</span> <span class="nav-text">第六部分 设计模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第七部分-项目相关"><span class="nav-number">8.</span> <span class="nav-text">第七部分 项目相关</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第八部分-算法相关"><span class="nav-number">9.</span> <span class="nav-text">第八部分 算法相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java中常说的堆和栈，分别是什么数据结构；另外，为什么要分为堆和栈来存储数据。"><span class="nav-number">9.1.</span> <span class="nav-text">java中常说的堆和栈，分别是什么数据结构；另外，为什么要分为堆和栈来存储数据。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TreeMap如何插入数据：二叉树的左旋，右旋，双旋；"><span class="nav-number">9.2.</span> <span class="nav-text">TreeMap如何插入数据：二叉树的左旋，右旋，双旋；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个排序之后的数组，插入数据，可以使用什么方法？答：二分法；问：时间复杂度是多少？"><span class="nav-number">9.3.</span> <span class="nav-text">一个排序之后的数组，插入数据，可以使用什么方法？答：二分法；问：时间复杂度是多少？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#平衡二叉树的时间复杂度；"><span class="nav-number">9.4.</span> <span class="nav-text">平衡二叉树的时间复杂度；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hash算法和二叉树算法分别什么时候用；"><span class="nav-number">9.5.</span> <span class="nav-text">Hash算法和二叉树算法分别什么时候用；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图的广度优先算法和深度优先算法：详见jvm中垃圾回收实现；"><span class="nav-number">9.6.</span> <span class="nav-text">图的广度优先算法和深度优先算法：详见jvm中垃圾回收实现；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序算法和适用场景"><span class="nav-number">9.7.</span> <span class="nav-text">排序算法和适用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第九部分-Linux"><span class="nav-number">10.</span> <span class="nav-text">第九部分 Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux常用的命令有哪些；"><span class="nav-number">10.1.</span> <span class="nav-text">linux常用的命令有哪些；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何获取java进程的pid；"><span class="nav-number">10.2.</span> <span class="nav-text">如何获取java进程的pid；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何获取某个进程的网络端口号；"><span class="nav-number">10.3.</span> <span class="nav-text">如何获取某个进程的网络端口号；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何实时打印日志；"><span class="nav-number">10.4.</span> <span class="nav-text">如何实时打印日志；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何统计某个字符串行数；"><span class="nav-number">10.5.</span> <span class="nav-text">如何统计某个字符串行数；</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第十部分-设计与思想"><span class="nav-number">11.</span> <span class="nav-text">第十部分 设计与思想</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重构过代码没有？说说经验；"><span class="nav-number">11.1.</span> <span class="nav-text">重构过代码没有？说说经验；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一千万的用户实时排名如何实现；"><span class="nav-number">11.2.</span> <span class="nav-text">一千万的用户实时排名如何实现；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五万人并发抢票怎么实现；"><span class="nav-number">11.3.</span> <span class="nav-text">五万人并发抢票怎么实现；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目中遇到的最大挑战。"><span class="nav-number">11.4.</span> <span class="nav-text">项目中遇到的最大挑战。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目中学到最多的东西"><span class="nav-number">11.5.</span> <span class="nav-text">项目中学到最多的东西</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你的职业规划"><span class="nav-number">11.6.</span> <span class="nav-text">你的职业规划</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第十一部分-HR面试"><span class="nav-number">12.</span> <span class="nav-text">第十一部分 HR面试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#兴趣爱好"><span class="nav-number">12.1.</span> <span class="nav-text">兴趣爱好</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三年到五年的职业规划"><span class="nav-number">12.2.</span> <span class="nav-text">三年到五年的职业规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#意向公司和城市"><span class="nav-number">12.3.</span> <span class="nav-text">意向公司和城市</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实习经历和收获"><span class="nav-number">12.4.</span> <span class="nav-text">实习经历和收获</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实习中最大的困难"><span class="nav-number">12.5.</span> <span class="nav-text">实习中最大的困难</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么换公司，为什么拒绝菜鸟实习offer"><span class="nav-number">12.6.</span> <span class="nav-text">为什么换公司，为什么拒绝菜鸟实习offer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你的缺点和优点"><span class="nav-number">12.7.</span> <span class="nav-text">你的缺点和优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你觉得你比其他人优秀的地方说三个"><span class="nav-number">12.8.</span> <span class="nav-text">你觉得你比其他人优秀的地方说三个</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么想来我们部门"><span class="nav-number">12.9.</span> <span class="nav-text">为什么想来我们部门</span></a></li></ol></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2019</span><span class="with-love"><i class="fa fa-user"></i></span> <span class="author" itemprop="copyrightHolder">克己</span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><link rel="stylesheet" href="https://cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css"><script src="https://cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script><script src="/js/src/md5.min.js"></script><script type="text/javascript">var gitalk=new Gitalk({clientID:"feb8237600f9f0c823d6",clientSecret:"a6946bf9fc8d4793a60df4fedc526595b2f04cb3",repo:"keji94.github.io",owner:"keji94",admin:["keji94"],id:md5(location.pathname),distractionFreeMode:"false"});gitalk.render("gitalk-container")</script><script type="text/javascript">
+</code></pre><p>在main()方法中，使用new StaticDemo()创建一个StaticDemo对象，但是在创建对象前需要先加载StaticDemo类，由于StaticDemo继承ParentStaticDemo，所以需要先加载ParentStaticDemo类，所以先执行的是”parent static block run “。加载完ParentStaticDemo后，开始加载StaticDemo，所以下一个输出的是static block run。StaticDemo加载完之后，开始创建StaticDemo，由于继承ParentStaticDemo，先执行父类的构造方法，所以先输出parent constructor run，最后是child constructor run。</p>
+<h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><p>final 通常表示无法被改变，在java中，final可以修饰变量、方法和类。</p>
+<p><strong>final变量</strong></p>
+<p>对于基本类型，final使数值恒定不变，而对于对象引用，final使引用恒定不变，一旦引用被初始化指向一个对象，就无法在将它指向另外一个变量。然而，对象其自身是可以修改的。</p>
+<p><strong>final方法</strong></p>
+<p>使用final方法的原因有两个，一是将方法锁定，确保在继承中是方法行为保持不变，不会被覆盖。二是效率。</p>
+<p>在Java早期实现中，将一个方法指明为final，就是同意编译器将针对该方法的所有调用都改为内嵌调用。当编译器发现一个final方法调用命令时，它会跳过插入程序代码这种正常方式而执行方法调用机制(将参数调入栈，跳至方法方法代码处并执行，然后跳回并清理栈中的参数，处理返回值)，并且以方法体中的实际代码的副本来代替方法调用。这可以消除方法调用的开销。当然，如果一个方法很大，你的程序代码就会膨胀，所带来的性能提高会因为花费与方法内的时间量而被缩减。</p>
+<p>需要注意的，JDK5以后，已经不推荐因为效率而使用final修饰方法，因为早期的虚拟机能够自动优化这种情况，只有你想明确禁止方法被覆盖时，才需要考虑使用final修饰方法。</p>
+<p><strong>final类</strong></p>
+<p>当将某个类定义为final类时，表名该类不能被集成。</p>
+<h3 id="transient"><a href="#transient" class="headerlink" title="transient"></a>transient</h3><p>在对象序列化的时候，有些变量不需要序列化，比如密码等，可以使用transient关键字来解决这个问题，transient修饰的变量不会被序列化。</p>
+<h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><p><a href="http://kejishouxin.com/java%E5%9F%BA%E7%A1%80/volatile/volatile%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%9C%E7%94%A8%E4%BB%A5%E5%8F%8A%E5%8E%9F%E7%90%86/index.html" target="_blank" rel="noopener">volatile关键字的作用以及原理</a></p>
+<h3 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h3><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="String-StringBuffer和StringBuilder的区别；"><a href="#String-StringBuffer和StringBuilder的区别；" class="headerlink" title="String,StringBuffer和StringBuilder的区别；"></a>String,StringBuffer和StringBuilder的区别；</h3><p>String不可变得，对String类型进行改变的时候其实都是生成了一个新的String对象，然后将引用指向新的string对象。</p>
+<p>StringBuffer对象是线程安全的可变字符序列。常用的方法是append和insert，append是添加到末端，insert是在指定的点添加字符。StringBuffer的方法基本都是同步的。</p>
+<p>StringBuilder是5.0新增的，和StringBufer差不多，但是是线程不安全的，大多数实现中，比StringBuffer要快。</p>
+<h3 id="Object的方法有哪些"><a href="#Object的方法有哪些" class="headerlink" title="Object的方法有哪些"></a>Object的方法有哪些</h3><p>1、clone()<br>2、equals()<br>3、finalize()<br>4、getclass()<br>5、hashcode()<br>6、notify()<br>7、notifyAll()<br>8、toString()<br>9、wait()</p>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><h3 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h3><h4 id="说一下ArrayList的源码"><a href="#说一下ArrayList的源码" class="headerlink" title="说一下ArrayList的源码"></a>说一下ArrayList的源码</h4><p><a href="http://kejishouxin.com/java%E5%9F%BA%E7%A1%80/%E9%9B%86%E5%90%88/ArrayList%20%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html" target="_blank" rel="noopener"></a></p>
+<h4 id="Fail-fast行为是什么？"><a href="#Fail-fast行为是什么？" class="headerlink" title="Fail-fast行为是什么？"></a>Fail-fast行为是什么？</h4><p>ArrayList里面有一个modCount属性，并且在其内部有一个私有的Itr类，实现了Iterator接口。在对ArrayList遍历时，首先会将modCount变量保存一份，之后每次遍历都会checkmodCount是否被修改了，如果修改了，则立即抛出ConcurrentModificationException</p>
+<h4 id="List和Set的区别"><a href="#List和Set的区别" class="headerlink" title="List和Set的区别"></a>List和Set的区别</h4><p>set接口规定其实现无序，不可重复。<br>     HashSet（底层是HashMap） LinkedHashSet<br>list接口规定其实现有序，可重复。<br>     实现类有：LinkedList，ArrayList，Vector<br>map接口是散列集合的顶层接口，存储的key-value键值对<br>     HashMap HashTable StoredMap</p>
+<h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><h4 id="说一下HashMapde-源码"><a href="#说一下HashMapde-源码" class="headerlink" title="说一下HashMapde 源码"></a>说一下HashMapde 源码</h4><h4 id="如何实现HashMap顺序存储：可以参考LinkedHashMap的底层实现；"><a href="#如何实现HashMap顺序存储：可以参考LinkedHashMap的底层实现；" class="headerlink" title="如何实现HashMap顺序存储：可以参考LinkedHashMap的底层实现；"></a>如何实现HashMap顺序存储：可以参考LinkedHashMap的底层实现；</h4><h4 id="concurrentHashMap的源码解析"><a href="#concurrentHashMap的源码解析" class="headerlink" title="concurrentHashMap的源码解析"></a>concurrentHashMap的源码解析</h4><h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><h3 id="wait和sleep的区别，必须理解；"><a href="#wait和sleep的区别，必须理解；" class="headerlink" title="wait和sleep的区别，必须理解；"></a>wait和sleep的区别，必须理解；</h3><h3 id="说说阻塞队列的实现：可以参考ArrayBlockingQueue的底层实现（锁和同步都行）；"><a href="#说说阻塞队列的实现：可以参考ArrayBlockingQueue的底层实现（锁和同步都行）；" class="headerlink" title="说说阻塞队列的实现：可以参考ArrayBlockingQueue的底层实现（锁和同步都行）；"></a>说说阻塞队列的实现：可以参考ArrayBlockingQueue的底层实现（锁和同步都行）；</h3><h3 id="进程通讯的方式：消息队列，共享内存，信号量，socket通讯等；"><a href="#进程通讯的方式：消息队列，共享内存，信号量，socket通讯等；" class="headerlink" title="进程通讯的方式：消息队列，共享内存，信号量，socket通讯等；"></a>进程通讯的方式：消息队列，共享内存，信号量，socket通讯等；</h3><h3 id="用过并发包的哪些类；"><a href="#用过并发包的哪些类；" class="headerlink" title="用过并发包的哪些类；"></a>用过并发包的哪些类；</h3><h3 id="什么地方用了多线程；"><a href="#什么地方用了多线程；" class="headerlink" title="什么地方用了多线程；"></a>什么地方用了多线程；</h3><h3 id="Excutors可以产生哪些线程池；"><a href="#Excutors可以产生哪些线程池；" class="headerlink" title="Excutors可以产生哪些线程池；"></a>Excutors可以产生哪些线程池；</h3><h3 id="为什么要用线程池；"><a href="#为什么要用线程池；" class="headerlink" title="为什么要用线程池；"></a>为什么要用线程池；</h3><h3 id="volatile关键字的用法：使多线程中的变量可见；"><a href="#volatile关键字的用法：使多线程中的变量可见；" class="headerlink" title="volatile关键字的用法：使多线程中的变量可见；"></a>volatile关键字的用法：使多线程中的变量可见；</h3><h3 id="Java中的多线程了解么，线程池的增长策略和拒绝策略了解么，说一下。"><a href="#Java中的多线程了解么，线程池的增长策略和拒绝策略了解么，说一下。" class="headerlink" title="Java中的多线程了解么，线程池的增长策略和拒绝策略了解么，说一下。"></a>Java中的多线程了解么，线程池的增长策略和拒绝策略了解么，说一下。</h3><h3 id="讲一下线程增加的过程和拒绝策略的执行。"><a href="#讲一下线程增加的过程和拒绝策略的执行。" class="headerlink" title="讲一下线程增加的过程和拒绝策略的执行。"></a>讲一下线程增加的过程和拒绝策略的执行。</h3><h3 id="讲了一下fixthreadpool的增长策略，然后几种拒绝策略。"><a href="#讲了一下fixthreadpool的增长策略，然后几种拒绝策略。" class="headerlink" title="讲了一下fixthreadpool的增长策略，然后几种拒绝策略。"></a>讲了一下fixthreadpool的增长策略，然后几种拒绝策略。</h3><h3 id="高并发情况下，如何使用线程池，用哪个，问了一下线程结束要多久，是否在下一个线程结束前完成（我想的是cachethreadpool，其实思路错了）。"><a href="#高并发情况下，如何使用线程池，用哪个，问了一下线程结束要多久，是否在下一个线程结束前完成（我想的是cachethreadpool，其实思路错了）。" class="headerlink" title="高并发情况下，如何使用线程池，用哪个，问了一下线程结束要多久，是否在下一个线程结束前完成（我想的是cachethreadpool，其实思路错了）。"></a>高并发情况下，如何使用线程池，用哪个，问了一下线程结束要多久，是否在下一个线程结束前完成（我想的是cachethreadpool，其实思路错了）。</h3><h3 id="表示并发量比较大，所以我说可以考虑并发量是否大于队列长度加上最大线程数量和，如果不超过的话可以是用fixthreadpool。"><a href="#表示并发量比较大，所以我说可以考虑并发量是否大于队列长度加上最大线程数量和，如果不超过的话可以是用fixthreadpool。" class="headerlink" title="表示并发量比较大，所以我说可以考虑并发量是否大于队列长度加上最大线程数量和，如果不超过的话可以是用fixthreadpool。"></a>表示并发量比较大，所以我说可以考虑并发量是否大于队列长度加上最大线程数量和，如果不超过的话可以是用fixthreadpool。</h3><h3 id="你在项目中怎么用到并发的"><a href="#你在项目中怎么用到并发的" class="headerlink" title="你在项目中怎么用到并发的"></a>你在项目中怎么用到并发的</h3><h2 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h2><h3 id="bio，nio，aio的区别；"><a href="#bio，nio，aio的区别；" class="headerlink" title="bio，nio，aio的区别；"></a>bio，nio，aio的区别；</h3><h3 id="京东内部的jsf是使用的什么协议通讯：可参见dubbo的协议；"><a href="#京东内部的jsf是使用的什么协议通讯：可参见dubbo的协议；" class="headerlink" title="京东内部的jsf是使用的什么协议通讯：可参见dubbo的协议；"></a>京东内部的jsf是使用的什么协议通讯：可参见dubbo的协议；</h3><h2 id="反射和动态代理"><a href="#反射和动态代理" class="headerlink" title="反射和动态代理"></a>反射和动态代理</h2><h1 id="第二部分-常用框架"><a href="#第二部分-常用框架" class="headerlink" title="第二部分 常用框架"></a>第二部分 常用框架</h1><h2 id="spinrgmvc"><a href="#spinrgmvc" class="headerlink" title="spinrgmvc"></a>spinrgmvc</h2><h3 id="springmvc的核心是什么，请求的流程是怎么处理的，控制反转怎么实现的；"><a href="#springmvc的核心是什么，请求的流程是怎么处理的，控制反转怎么实现的；" class="headerlink" title="springmvc的核心是什么，请求的流程是怎么处理的，控制反转怎么实现的；"></a>springmvc的核心是什么，请求的流程是怎么处理的，控制反转怎么实现的；</h3><h3 id="spring里面的aop的原理是什么；"><a href="#spring里面的aop的原理是什么；" class="headerlink" title="spring里面的aop的原理是什么；"></a>spring里面的aop的原理是什么；</h3><h3 id="Springmvc的基本架构，请求流程。"><a href="#Springmvc的基本架构，请求流程。" class="headerlink" title="Springmvc的基本架构，请求流程。"></a>Springmvc的基本架构，请求流程。</h3><h2 id="spring"><a href="#spring" class="headerlink" title="spring"></a>spring</h2><h3 id="Spring-bean的生命周期"><a href="#Spring-bean的生命周期" class="headerlink" title="Spring bean的生命周期"></a>Spring bean的生命周期</h3><h3 id="说一下Spring源码把，它的架构，流程。"><a href="#说一下Spring源码把，它的架构，流程。" class="headerlink" title="说一下Spring源码把，它的架构，流程。"></a>说一下Spring源码把，它的架构，流程。</h3><h3 id="Spring的bean如果要在实例化过程中修改其某一个成员变量，应该怎么做呢。不通过构造方法，并且AOP也并不能实现。"><a href="#Spring的bean如果要在实例化过程中修改其某一个成员变量，应该怎么做呢。不通过构造方法，并且AOP也并不能实现。" class="headerlink" title="Spring的bean如果要在实例化过程中修改其某一个成员变量，应该怎么做呢。不通过构造方法，并且AOP也并不能实现。"></a>Spring的bean如果要在实例化过程中修改其某一个成员变量，应该怎么做呢。不通过构造方法，并且AOP也并不能实现。</h3><h2 id="mybatis"><a href="#mybatis" class="headerlink" title="mybatis"></a>mybatis</h2><h3 id="mybatis如何处理结果集：反射，建议看看源码；"><a href="#mybatis如何处理结果集：反射，建议看看源码；" class="headerlink" title="mybatis如何处理结果集：反射，建议看看源码；"></a>mybatis如何处理结果集：反射，建议看看源码；</h3><h2 id="springboot"><a href="#springboot" class="headerlink" title="springboot"></a>springboot</h2><h2 id="dubbo"><a href="#dubbo" class="headerlink" title="dubbo"></a>dubbo</h2><h3 id="nio框架：dubbo的实现原理；"><a href="#nio框架：dubbo的实现原理；" class="headerlink" title="nio框架：dubbo的实现原理；"></a>nio框架：dubbo的实现原理；</h3><h2 id="shiro"><a href="#shiro" class="headerlink" title="shiro"></a>shiro</h2><h2 id="solr和es"><a href="#solr和es" class="headerlink" title="solr和es"></a>solr和es</h2><h3 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h3><h2 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h2><h3 id="zookeeper是什么；"><a href="#zookeeper是什么；" class="headerlink" title="zookeeper是什么；"></a>zookeeper是什么；</h3><h3 id="zookeeper哪里用到；"><a href="#zookeeper哪里用到；" class="headerlink" title="zookeeper哪里用到；"></a>zookeeper哪里用到；</h3><h3 id="zookeeper的选主过程；"><a href="#zookeeper的选主过程；" class="headerlink" title="zookeeper的选主过程；"></a>zookeeper的选主过程；</h3><h3 id="zookeeper集群之间如何通讯；"><a href="#zookeeper集群之间如何通讯；" class="headerlink" title="zookeeper集群之间如何通讯；"></a>zookeeper集群之间如何通讯；</h3><h3 id="你们的zookeeper的节点加密是用的什么方式；"><a href="#你们的zookeeper的节点加密是用的什么方式；" class="headerlink" title="你们的zookeeper的节点加密是用的什么方式；"></a>你们的zookeeper的节点加密是用的什么方式；</h3><h3 id="分布式锁的实现过程；"><a href="#分布式锁的实现过程；" class="headerlink" title="分布式锁的实现过程；"></a>分布式锁的实现过程；</h3><h2 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h2><h2 id="MQ"><a href="#MQ" class="headerlink" title="MQ"></a>MQ</h2><h3 id="mq的原理是什么：有点大。。都可以说；"><a href="#mq的原理是什么：有点大。。都可以说；" class="headerlink" title="mq的原理是什么：有点大。。都可以说；"></a>mq的原理是什么：有点大。。都可以说；</h3><h3 id="mq如何保证实时性；"><a href="#mq如何保证实时性；" class="headerlink" title="mq如何保证实时性；"></a>mq如何保证实时性；</h3><h3 id="mq的持久化是怎么做的；"><a href="#mq的持久化是怎么做的；" class="headerlink" title="mq的持久化是怎么做的；"></a>mq的持久化是怎么做的；</h3><h1 id="第三部分-数据库"><a href="#第三部分-数据库" class="headerlink" title="第三部分 数据库"></a>第三部分 数据库</h1><h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><h3 id="msyql优化经验："><a href="#msyql优化经验：" class="headerlink" title="msyql优化经验："></a>msyql优化经验：</h3><h3 id="mysql的语句优化，使用什么工具；"><a href="#mysql的语句优化，使用什么工具；" class="headerlink" title="mysql的语句优化，使用什么工具；"></a>mysql的语句优化，使用什么工具；</h3><h3 id="mysql的索引分类：B-，hash；什么情况用什么索引；"><a href="#mysql的索引分类：B-，hash；什么情况用什么索引；" class="headerlink" title="mysql的索引分类：B+，hash；什么情况用什么索引；"></a>mysql的索引分类：B+，hash；什么情况用什么索引；</h3><h3 id="mysql的存储引擎有哪些，区别是什么；"><a href="#mysql的存储引擎有哪些，区别是什么；" class="headerlink" title="mysql的存储引擎有哪些，区别是什么；"></a>mysql的存储引擎有哪些，区别是什么；</h3><h3 id="说说事务的特性和隔离级别；"><a href="#说说事务的特性和隔离级别；" class="headerlink" title="说说事务的特性和隔离级别；"></a>说说事务的特性和隔离级别；</h3><h3 id="悲观锁和乐观锁的区别，怎么实现；"><a href="#悲观锁和乐观锁的区别，怎么实现；" class="headerlink" title="悲观锁和乐观锁的区别，怎么实现；"></a>悲观锁和乐观锁的区别，怎么实现；</h3><h3 id="索引什么时候会失效变成全表扫描"><a href="#索引什么时候会失效变成全表扫描" class="headerlink" title="索引什么时候会失效变成全表扫描"></a>索引什么时候会失效变成全表扫描</h3><h3 id="数据库的事务有什么用"><a href="#数据库的事务有什么用" class="headerlink" title="数据库的事务有什么用"></a>数据库的事务有什么用</h3><h3 id="数据的索引有什么用，怎么实现"><a href="#数据的索引有什么用，怎么实现" class="headerlink" title="数据的索引有什么用，怎么实现"></a>数据的索引有什么用，怎么实现</h3><h3 id="联合索引的匹配原则"><a href="#联合索引的匹配原则" class="headerlink" title="联合索引的匹配原则"></a>联合索引的匹配原则</h3><h3 id="数据库万级变成亿级，怎么处理。分库分表，分片规则hash和取余数。使用mycat中间件实现。"><a href="#数据库万级变成亿级，怎么处理。分库分表，分片规则hash和取余数。使用mycat中间件实现。" class="headerlink" title="数据库万级变成亿级，怎么处理。分库分表，分片规则hash和取余数。使用mycat中间件实现。"></a>数据库万级变成亿级，怎么处理。分库分表，分片规则hash和取余数。使用mycat中间件实现。</h3><h3 id="https-mp-weixin-qq-com-s-ZtuUg79OFLh20-HWs2Qs4A"><a href="#https-mp-weixin-qq-com-s-ZtuUg79OFLh20-HWs2Qs4A" class="headerlink" title="https://mp.weixin.qq.com/s/ZtuUg79OFLh20-HWs2Qs4A"></a><a href="https://mp.weixin.qq.com/s/ZtuUg79OFLh20-HWs2Qs4A" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/ZtuUg79OFLh20-HWs2Qs4A</a></h3><h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><h3 id="redis有哪些数据结构？"><a href="#redis有哪些数据结构？" class="headerlink" title="redis有哪些数据结构？"></a>redis有哪些数据结构？</h3><h3 id="介绍下zset，它底层原理是什么？"><a href="#介绍下zset，它底层原理是什么？" class="headerlink" title="介绍下zset，它底层原理是什么？"></a>介绍下zset，它底层原理是什么？</h3><h3 id="布隆过滤器和hyperloglog-ip地址过滤的布隆过滤器实现。"><a href="#布隆过滤器和hyperloglog-ip地址过滤的布隆过滤器实现。" class="headerlink" title="布隆过滤器和hyperloglog.ip地址过滤的布隆过滤器实现。"></a>布隆过滤器和hyperloglog.ip地址过滤的布隆过滤器实现。</h3><h4 id="亿级ip地址过滤"><a href="#亿级ip地址过滤" class="headerlink" title="亿级ip地址过滤"></a>亿级ip地址过滤</h4><h3 id="redis哨兵"><a href="#redis哨兵" class="headerlink" title="redis哨兵"></a>redis哨兵</h3><h3 id="redis是怎么保证高可用的？"><a href="#redis是怎么保证高可用的？" class="headerlink" title="redis是怎么保证高可用的？"></a>redis是怎么保证高可用的？</h3><h3 id="redis为什么是单线程？"><a href="#redis为什么是单线程？" class="headerlink" title="redis为什么是单线程？"></a>redis为什么是单线程？</h3><h3 id="redis的淘汰策略有哪些；"><a href="#redis的淘汰策略有哪些；" class="headerlink" title="redis的淘汰策略有哪些；"></a>redis的淘汰策略有哪些；</h3><h2 id="mongodb"><a href="#mongodb" class="headerlink" title="mongodb"></a>mongodb</h2><h2 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h2><h3 id="听说你项目用过docker，讲一下docker的实现原理，说了虚拟机一般要对内核进行虚拟化，docker则用cgroup和namespace分别进行硬件和命名空间的隔离。"><a href="#听说你项目用过docker，讲一下docker的实现原理，说了虚拟机一般要对内核进行虚拟化，docker则用cgroup和namespace分别进行硬件和命名空间的隔离。" class="headerlink" title="听说你项目用过docker，讲一下docker的实现原理，说了虚拟机一般要对内核进行虚拟化，docker则用cgroup和namespace分别进行硬件和命名空间的隔离。"></a>听说你项目用过docker，讲一下docker的实现原理，说了虚拟机一般要对内核进行虚拟化，docker则用cgroup和namespace分别进行硬件和命名空间的隔离。</h3><h1 id="第四部分-Java虚拟机"><a href="#第四部分-Java虚拟机" class="headerlink" title="第四部分 Java虚拟机"></a>第四部分 Java虚拟机</h1><h2 id="JVM的内存结构，JVM的算法；"><a href="#JVM的内存结构，JVM的算法；" class="headerlink" title="JVM的内存结构，JVM的算法；"></a>JVM的内存结构，JVM的算法；</h2><h2 id="强引用，软引用和弱引用的区别；"><a href="#强引用，软引用和弱引用的区别；" class="headerlink" title="强引用，软引用和弱引用的区别；"></a>强引用，软引用和弱引用的区别；</h2><h2 id="数组在内存中如何分配；"><a href="#数组在内存中如何分配；" class="headerlink" title="数组在内存中如何分配；"></a>数组在内存中如何分配；</h2><h2 id="请写一段栈溢出、堆溢出的代码；"><a href="#请写一段栈溢出、堆溢出的代码；" class="headerlink" title="请写一段栈溢出、堆溢出的代码；"></a>请写一段栈溢出、堆溢出的代码；</h2><h2 id="ThreadLocal可以用来共享数据吗；"><a href="#ThreadLocal可以用来共享数据吗；" class="headerlink" title="ThreadLocal可以用来共享数据吗；"></a>ThreadLocal可以用来共享数据吗；</h2><h1 id="第五部分-JavaWeb"><a href="#第五部分-JavaWeb" class="headerlink" title="第五部分 JavaWeb"></a>第五部分 JavaWeb</h1><h2 id="tomcat"><a href="#tomcat" class="headerlink" title="tomcat"></a>tomcat</h2><h3 id="你平时是如何进行Tomcat性能优化的"><a href="#你平时是如何进行Tomcat性能优化的" class="headerlink" title="你平时是如何进行Tomcat性能优化的?"></a>你平时是如何进行Tomcat性能优化的?</h3><h3 id="你说了解Tomcat的基本原理，了解的是哪一部分，基本架构，connector和container"><a href="#你说了解Tomcat的基本原理，了解的是哪一部分，基本架构，connector和container" class="headerlink" title="你说了解Tomcat的基本原理，了解的是哪一部分，基本架构，connector和container"></a>你说了解Tomcat的基本原理，了解的是哪一部分，基本架构，connector和container</h3><h3 id="Tomcat的类加载器了解么，回答不了解只了解Java的类加载器。"><a href="#Tomcat的类加载器了解么，回答不了解只了解Java的类加载器。" class="headerlink" title="Tomcat的类加载器了解么，回答不了解只了解Java的类加载器。"></a>Tomcat的类加载器了解么，回答不了解只了解Java的类加载器。</h3><h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><h3 id="说说http-https协议；"><a href="#说说http-https协议；" class="headerlink" title="说说http,https协议；"></a>说说http,https协议；</h3><h3 id="tcp-ip协议簇；"><a href="#tcp-ip协议簇；" class="headerlink" title="tcp/ip协议簇；"></a>tcp/ip协议簇；</h3><h3 id="osi五层网络协议；"><a href="#osi五层网络协议；" class="headerlink" title="osi五层网络协议；"></a>osi五层网络协议；</h3><h3 id="tcp，udp区别；"><a href="#tcp，udp区别；" class="headerlink" title="tcp，udp区别；"></a>tcp，udp区别；</h3><h3 id="用过哪些加密算法：对称加密，非对称加密算法；"><a href="#用过哪些加密算法：对称加密，非对称加密算法；" class="headerlink" title="用过哪些加密算法：对称加密，非对称加密算法；"></a>用过哪些加密算法：对称加密，非对称加密算法；</h3><h3 id="说说tcp三次握手，四次挥手；"><a href="#说说tcp三次握手，四次挥手；" class="headerlink" title="说说tcp三次握手，四次挥手；"></a>说说tcp三次握手，四次挥手；</h3><h3 id="cookie和session的区别，分布式环境怎么保存用户状态；"><a href="#cookie和session的区别，分布式环境怎么保存用户状态；" class="headerlink" title="cookie和session的区别，分布式环境怎么保存用户状态；"></a>cookie和session的区别，分布式环境怎么保存用户状态；</h3><h3 id="分布式session解决方案"><a href="#分布式session解决方案" class="headerlink" title="分布式session解决方案"></a>分布式session解决方案</h3><h3 id="HTTP协议了解么，和tcp有什么区别。"><a href="#HTTP协议了解么，和tcp有什么区别。" class="headerlink" title="HTTP协议了解么，和tcp有什么区别。"></a>HTTP协议了解么，和tcp有什么区别。</h3><h3 id="http1-0和2-0的区别。答了TCP连接复用，加入ssl，以及压缩请求头。"><a href="#http1-0和2-0的区别。答了TCP连接复用，加入ssl，以及压缩请求头。" class="headerlink" title="http1.0和2.0的区别。答了TCP连接复用，加入ssl，以及压缩请求头。"></a>http1.0和2.0的区别。答了TCP连接复用，加入ssl，以及压缩请求头。</h3><h3 id="web请求的过程，讲了浏览器到http服务器的过程，再讲了mvc的请求处理过程。"><a href="#web请求的过程，讲了浏览器到http服务器的过程，再讲了mvc的请求处理过程。" class="headerlink" title="web请求的过程，讲了浏览器到http服务器的过程，再讲了mvc的请求处理过程。"></a>web请求的过程，讲了浏览器到http服务器的过程，再讲了mvc的请求处理过程。</h3><p>其中哪个更新比较有意义，为什么。我说的是压缩请求头，这样可以优化HTTP服务的性能。</p>
+<h1 id="第六部分-设计模式"><a href="#第六部分-设计模式" class="headerlink" title="第六部分 设计模式"></a>第六部分 设计模式</h1><h1 id="第七部分-项目相关"><a href="#第七部分-项目相关" class="headerlink" title="第七部分 项目相关"></a>第七部分 项目相关</h1><h1 id="第八部分-算法相关"><a href="#第八部分-算法相关" class="headerlink" title="第八部分 算法相关"></a>第八部分 算法相关</h1><h2 id="java中常说的堆和栈，分别是什么数据结构；另外，为什么要分为堆和栈来存储数据。"><a href="#java中常说的堆和栈，分别是什么数据结构；另外，为什么要分为堆和栈来存储数据。" class="headerlink" title="java中常说的堆和栈，分别是什么数据结构；另外，为什么要分为堆和栈来存储数据。"></a>java中常说的堆和栈，分别是什么数据结构；另外，为什么要分为堆和栈来存储数据。</h2><h2 id="TreeMap如何插入数据：二叉树的左旋，右旋，双旋；"><a href="#TreeMap如何插入数据：二叉树的左旋，右旋，双旋；" class="headerlink" title="TreeMap如何插入数据：二叉树的左旋，右旋，双旋；"></a>TreeMap如何插入数据：二叉树的左旋，右旋，双旋；</h2><h2 id="一个排序之后的数组，插入数据，可以使用什么方法？答：二分法；问：时间复杂度是多少？"><a href="#一个排序之后的数组，插入数据，可以使用什么方法？答：二分法；问：时间复杂度是多少？" class="headerlink" title="一个排序之后的数组，插入数据，可以使用什么方法？答：二分法；问：时间复杂度是多少？"></a>一个排序之后的数组，插入数据，可以使用什么方法？答：二分法；问：时间复杂度是多少？</h2><h2 id="平衡二叉树的时间复杂度；"><a href="#平衡二叉树的时间复杂度；" class="headerlink" title="平衡二叉树的时间复杂度；"></a>平衡二叉树的时间复杂度；</h2><h2 id="Hash算法和二叉树算法分别什么时候用；"><a href="#Hash算法和二叉树算法分别什么时候用；" class="headerlink" title="Hash算法和二叉树算法分别什么时候用；"></a>Hash算法和二叉树算法分别什么时候用；</h2><h2 id="图的广度优先算法和深度优先算法：详见jvm中垃圾回收实现；"><a href="#图的广度优先算法和深度优先算法：详见jvm中垃圾回收实现；" class="headerlink" title="图的广度优先算法和深度优先算法：详见jvm中垃圾回收实现；"></a>图的广度优先算法和深度优先算法：详见jvm中垃圾回收实现；</h2><h2 id="排序算法和适用场景"><a href="#排序算法和适用场景" class="headerlink" title="排序算法和适用场景"></a>排序算法和适用场景</h2><h1 id="第九部分-Linux"><a href="#第九部分-Linux" class="headerlink" title="第九部分 Linux"></a>第九部分 Linux</h1><h2 id="linux常用的命令有哪些；"><a href="#linux常用的命令有哪些；" class="headerlink" title="linux常用的命令有哪些；"></a>linux常用的命令有哪些；</h2><h2 id="如何获取java进程的pid；"><a href="#如何获取java进程的pid；" class="headerlink" title="如何获取java进程的pid；"></a>如何获取java进程的pid；</h2><h2 id="如何获取某个进程的网络端口号；"><a href="#如何获取某个进程的网络端口号；" class="headerlink" title="如何获取某个进程的网络端口号；"></a>如何获取某个进程的网络端口号；</h2><h2 id="如何实时打印日志；"><a href="#如何实时打印日志；" class="headerlink" title="如何实时打印日志；"></a>如何实时打印日志；</h2><h2 id="如何统计某个字符串行数；"><a href="#如何统计某个字符串行数；" class="headerlink" title="如何统计某个字符串行数；"></a>如何统计某个字符串行数；</h2><h1 id="第十部分-设计与思想"><a href="#第十部分-设计与思想" class="headerlink" title="第十部分 设计与思想"></a>第十部分 设计与思想</h1><h2 id="重构过代码没有？说说经验；"><a href="#重构过代码没有？说说经验；" class="headerlink" title="重构过代码没有？说说经验；"></a>重构过代码没有？说说经验；</h2><h2 id="一千万的用户实时排名如何实现；"><a href="#一千万的用户实时排名如何实现；" class="headerlink" title="一千万的用户实时排名如何实现；"></a>一千万的用户实时排名如何实现；</h2><h2 id="五万人并发抢票怎么实现；"><a href="#五万人并发抢票怎么实现；" class="headerlink" title="五万人并发抢票怎么实现；"></a>五万人并发抢票怎么实现；</h2><h2 id="项目中遇到的最大挑战。"><a href="#项目中遇到的最大挑战。" class="headerlink" title="项目中遇到的最大挑战。"></a>项目中遇到的最大挑战。</h2><h2 id="项目中学到最多的东西"><a href="#项目中学到最多的东西" class="headerlink" title="项目中学到最多的东西"></a>项目中学到最多的东西</h2><h2 id="你的职业规划"><a href="#你的职业规划" class="headerlink" title="你的职业规划"></a>你的职业规划</h2><h1 id="第十一部分-HR面试"><a href="#第十一部分-HR面试" class="headerlink" title="第十一部分 HR面试"></a>第十一部分 HR面试</h1><h2 id="兴趣爱好"><a href="#兴趣爱好" class="headerlink" title="兴趣爱好"></a>兴趣爱好</h2><h2 id="三年到五年的职业规划"><a href="#三年到五年的职业规划" class="headerlink" title="三年到五年的职业规划"></a>三年到五年的职业规划</h2><h2 id="意向公司和城市"><a href="#意向公司和城市" class="headerlink" title="意向公司和城市"></a>意向公司和城市</h2><h2 id="实习经历和收获"><a href="#实习经历和收获" class="headerlink" title="实习经历和收获"></a>实习经历和收获</h2><h2 id="实习中最大的困难"><a href="#实习中最大的困难" class="headerlink" title="实习中最大的困难"></a>实习中最大的困难</h2><h2 id="为什么换公司，为什么拒绝菜鸟实习offer"><a href="#为什么换公司，为什么拒绝菜鸟实习offer" class="headerlink" title="为什么换公司，为什么拒绝菜鸟实习offer"></a>为什么换公司，为什么拒绝菜鸟实习offer</h2><h2 id="你的缺点和优点"><a href="#你的缺点和优点" class="headerlink" title="你的缺点和优点"></a>你的缺点和优点</h2><h2 id="你觉得你比其他人优秀的地方说三个"><a href="#你觉得你比其他人优秀的地方说三个" class="headerlink" title="你觉得你比其他人优秀的地方说三个"></a>你觉得你比其他人优秀的地方说三个</h2><h2 id="为什么想来我们部门"><a href="#为什么想来我们部门" class="headerlink" title="为什么想来我们部门"></a>为什么想来我们部门</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wchatpay.png" alt="克己 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="克己 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/集合/HashMap/HashMap源码解析/index.html" rel="next" title="HashMap源码解析">
+                <i class="fa fa-chevron-left"></i> HashMap源码解析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container"></div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/keji.jpg" alt="克己">
+            
+              <p class="site-author-name" itemprop="name">克己</p>
+              <p class="site-description motion-element" itemprop="description">有志，则不甘为下流；有识，则知学问无尽；有恒，则断无不成之事</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/index.html">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言-做好面试前的准备工作"><span class="nav-number">1.</span> <span class="nav-text">前言 做好面试前的准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第一部分-Java基础"><span class="nav-number">2.</span> <span class="nav-text">第一部分 Java基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关键字"><span class="nav-number">2.1.</span> <span class="nav-text">关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#static"><span class="nav-number">2.1.1.</span> <span class="nav-text">static</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#static-关键字的作用"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">static 关键字的作用?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么不能通过this访问static变量或者方法？"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">为什么不能通过this访问static变量或者方法？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#static笔试题"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">static笔试题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final"><span class="nav-number">2.1.2.</span> <span class="nav-text">final</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transient"><span class="nav-number">2.1.3.</span> <span class="nav-text">transient</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile"><span class="nav-number">2.1.4.</span> <span class="nav-text">volatile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized"><span class="nav-number">2.1.5.</span> <span class="nav-text">synchronized</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">2.2.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String-StringBuffer和StringBuilder的区别；"><span class="nav-number">2.2.1.</span> <span class="nav-text">String,StringBuffer和StringBuilder的区别；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object的方法有哪些"><span class="nav-number">2.2.2.</span> <span class="nav-text">Object的方法有哪些</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合"><span class="nav-number">2.3.</span> <span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList"><span class="nav-number">2.3.1.</span> <span class="nav-text">ArrayList</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#说一下ArrayList的源码"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">说一下ArrayList的源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fail-fast行为是什么？"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">Fail-fast行为是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#List和Set的区别"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">List和Set的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap"><span class="nav-number">2.3.2.</span> <span class="nav-text">HashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#说一下HashMapde-源码"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">说一下HashMapde 源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何实现HashMap顺序存储：可以参考LinkedHashMap的底层实现；"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">如何实现HashMap顺序存储：可以参考LinkedHashMap的底层实现；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#concurrentHashMap的源码解析"><span class="nav-number">2.3.2.3.</span> <span class="nav-text">concurrentHashMap的源码解析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">2.4.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#wait和sleep的区别，必须理解；"><span class="nav-number">2.4.1.</span> <span class="nav-text">wait和sleep的区别，必须理解；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说说阻塞队列的实现：可以参考ArrayBlockingQueue的底层实现（锁和同步都行）；"><span class="nav-number">2.4.2.</span> <span class="nav-text">说说阻塞队列的实现：可以参考ArrayBlockingQueue的底层实现（锁和同步都行）；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程通讯的方式：消息队列，共享内存，信号量，socket通讯等；"><span class="nav-number">2.4.3.</span> <span class="nav-text">进程通讯的方式：消息队列，共享内存，信号量，socket通讯等；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用过并发包的哪些类；"><span class="nav-number">2.4.4.</span> <span class="nav-text">用过并发包的哪些类；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么地方用了多线程；"><span class="nav-number">2.4.5.</span> <span class="nav-text">什么地方用了多线程；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Excutors可以产生哪些线程池；"><span class="nav-number">2.4.6.</span> <span class="nav-text">Excutors可以产生哪些线程池；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要用线程池；"><span class="nav-number">2.4.7.</span> <span class="nav-text">为什么要用线程池；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile关键字的用法：使多线程中的变量可见；"><span class="nav-number">2.4.8.</span> <span class="nav-text">volatile关键字的用法：使多线程中的变量可见；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java中的多线程了解么，线程池的增长策略和拒绝策略了解么，说一下。"><span class="nav-number">2.4.9.</span> <span class="nav-text">Java中的多线程了解么，线程池的增长策略和拒绝策略了解么，说一下。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讲一下线程增加的过程和拒绝策略的执行。"><span class="nav-number">2.4.10.</span> <span class="nav-text">讲一下线程增加的过程和拒绝策略的执行。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讲了一下fixthreadpool的增长策略，然后几种拒绝策略。"><span class="nav-number">2.4.11.</span> <span class="nav-text">讲了一下fixthreadpool的增长策略，然后几种拒绝策略。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高并发情况下，如何使用线程池，用哪个，问了一下线程结束要多久，是否在下一个线程结束前完成（我想的是cachethreadpool，其实思路错了）。"><span class="nav-number">2.4.12.</span> <span class="nav-text">高并发情况下，如何使用线程池，用哪个，问了一下线程结束要多久，是否在下一个线程结束前完成（我想的是cachethreadpool，其实思路错了）。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表示并发量比较大，所以我说可以考虑并发量是否大于队列长度加上最大线程数量和，如果不超过的话可以是用fixthreadpool。"><span class="nav-number">2.4.13.</span> <span class="nav-text">表示并发量比较大，所以我说可以考虑并发量是否大于队列长度加上最大线程数量和，如果不超过的话可以是用fixthreadpool。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你在项目中怎么用到并发的"><span class="nav-number">2.4.14.</span> <span class="nav-text">你在项目中怎么用到并发的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO"><span class="nav-number">2.5.</span> <span class="nav-text">IO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bio，nio，aio的区别；"><span class="nav-number">2.5.1.</span> <span class="nav-text">bio，nio，aio的区别；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#京东内部的jsf是使用的什么协议通讯：可参见dubbo的协议；"><span class="nav-number">2.5.2.</span> <span class="nav-text">京东内部的jsf是使用的什么协议通讯：可参见dubbo的协议；</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射和动态代理"><span class="nav-number">2.6.</span> <span class="nav-text">反射和动态代理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二部分-常用框架"><span class="nav-number">3.</span> <span class="nav-text">第二部分 常用框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#spinrgmvc"><span class="nav-number">3.1.</span> <span class="nav-text">spinrgmvc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#springmvc的核心是什么，请求的流程是怎么处理的，控制反转怎么实现的；"><span class="nav-number">3.1.1.</span> <span class="nav-text">springmvc的核心是什么，请求的流程是怎么处理的，控制反转怎么实现的；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring里面的aop的原理是什么；"><span class="nav-number">3.1.2.</span> <span class="nav-text">spring里面的aop的原理是什么；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Springmvc的基本架构，请求流程。"><span class="nav-number">3.1.3.</span> <span class="nav-text">Springmvc的基本架构，请求流程。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring"><span class="nav-number">3.2.</span> <span class="nav-text">spring</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-bean的生命周期"><span class="nav-number">3.2.1.</span> <span class="nav-text">Spring bean的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说一下Spring源码把，它的架构，流程。"><span class="nav-number">3.2.2.</span> <span class="nav-text">说一下Spring源码把，它的架构，流程。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring的bean如果要在实例化过程中修改其某一个成员变量，应该怎么做呢。不通过构造方法，并且AOP也并不能实现。"><span class="nav-number">3.2.3.</span> <span class="nav-text">Spring的bean如果要在实例化过程中修改其某一个成员变量，应该怎么做呢。不通过构造方法，并且AOP也并不能实现。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mybatis"><span class="nav-number">3.3.</span> <span class="nav-text">mybatis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mybatis如何处理结果集：反射，建议看看源码；"><span class="nav-number">3.3.1.</span> <span class="nav-text">mybatis如何处理结果集：反射，建议看看源码；</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#springboot"><span class="nav-number">3.4.</span> <span class="nav-text">springboot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dubbo"><span class="nav-number">3.5.</span> <span class="nav-text">dubbo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nio框架：dubbo的实现原理；"><span class="nav-number">3.5.1.</span> <span class="nav-text">nio框架：dubbo的实现原理；</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shiro"><span class="nav-number">3.6.</span> <span class="nav-text">shiro</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solr和es"><span class="nav-number">3.7.</span> <span class="nav-text">solr和es</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#倒排索引"><span class="nav-number">3.7.1.</span> <span class="nav-text">倒排索引</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zookeeper"><span class="nav-number">3.8.</span> <span class="nav-text">zookeeper</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#zookeeper是什么；"><span class="nav-number">3.8.1.</span> <span class="nav-text">zookeeper是什么；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zookeeper哪里用到；"><span class="nav-number">3.8.2.</span> <span class="nav-text">zookeeper哪里用到；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zookeeper的选主过程；"><span class="nav-number">3.8.3.</span> <span class="nav-text">zookeeper的选主过程；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zookeeper集群之间如何通讯；"><span class="nav-number">3.8.4.</span> <span class="nav-text">zookeeper集群之间如何通讯；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你们的zookeeper的节点加密是用的什么方式；"><span class="nav-number">3.8.5.</span> <span class="nav-text">你们的zookeeper的节点加密是用的什么方式；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式锁的实现过程；"><span class="nav-number">3.8.6.</span> <span class="nav-text">分布式锁的实现过程；</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maven"><span class="nav-number">3.9.</span> <span class="nav-text">maven</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MQ"><span class="nav-number">3.10.</span> <span class="nav-text">MQ</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mq的原理是什么：有点大。。都可以说；"><span class="nav-number">3.10.1.</span> <span class="nav-text">mq的原理是什么：有点大。。都可以说；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mq如何保证实时性；"><span class="nav-number">3.10.2.</span> <span class="nav-text">mq如何保证实时性；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mq的持久化是怎么做的；"><span class="nav-number">3.10.3.</span> <span class="nav-text">mq的持久化是怎么做的；</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三部分-数据库"><span class="nav-number">4.</span> <span class="nav-text">第三部分 数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">4.1.</span> <span class="nav-text">mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#msyql优化经验："><span class="nav-number">4.1.1.</span> <span class="nav-text">msyql优化经验：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql的语句优化，使用什么工具；"><span class="nav-number">4.1.2.</span> <span class="nav-text">mysql的语句优化，使用什么工具；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql的索引分类：B-，hash；什么情况用什么索引；"><span class="nav-number">4.1.3.</span> <span class="nav-text">mysql的索引分类：B+，hash；什么情况用什么索引；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql的存储引擎有哪些，区别是什么；"><span class="nav-number">4.1.4.</span> <span class="nav-text">mysql的存储引擎有哪些，区别是什么；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说说事务的特性和隔离级别；"><span class="nav-number">4.1.5.</span> <span class="nav-text">说说事务的特性和隔离级别；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#悲观锁和乐观锁的区别，怎么实现；"><span class="nav-number">4.1.6.</span> <span class="nav-text">悲观锁和乐观锁的区别，怎么实现；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引什么时候会失效变成全表扫描"><span class="nav-number">4.1.7.</span> <span class="nav-text">索引什么时候会失效变成全表扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库的事务有什么用"><span class="nav-number">4.1.8.</span> <span class="nav-text">数据库的事务有什么用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据的索引有什么用，怎么实现"><span class="nav-number">4.1.9.</span> <span class="nav-text">数据的索引有什么用，怎么实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联合索引的匹配原则"><span class="nav-number">4.1.10.</span> <span class="nav-text">联合索引的匹配原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库万级变成亿级，怎么处理。分库分表，分片规则hash和取余数。使用mycat中间件实现。"><span class="nav-number">4.1.11.</span> <span class="nav-text">数据库万级变成亿级，怎么处理。分库分表，分片规则hash和取余数。使用mycat中间件实现。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#https-mp-weixin-qq-com-s-ZtuUg79OFLh20-HWs2Qs4A"><span class="nav-number">4.1.12.</span> <span class="nav-text">https://mp.weixin.qq.com/s/ZtuUg79OFLh20-HWs2Qs4A</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis"><span class="nav-number">4.2.</span> <span class="nav-text">redis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#redis有哪些数据结构？"><span class="nav-number">4.2.1.</span> <span class="nav-text">redis有哪些数据结构？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍下zset，它底层原理是什么？"><span class="nav-number">4.2.2.</span> <span class="nav-text">介绍下zset，它底层原理是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#布隆过滤器和hyperloglog-ip地址过滤的布隆过滤器实现。"><span class="nav-number">4.2.3.</span> <span class="nav-text">布隆过滤器和hyperloglog.ip地址过滤的布隆过滤器实现。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#亿级ip地址过滤"><span class="nav-number">4.2.3.1.</span> <span class="nav-text">亿级ip地址过滤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis哨兵"><span class="nav-number">4.2.4.</span> <span class="nav-text">redis哨兵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis是怎么保证高可用的？"><span class="nav-number">4.2.5.</span> <span class="nav-text">redis是怎么保证高可用的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis为什么是单线程？"><span class="nav-number">4.2.6.</span> <span class="nav-text">redis为什么是单线程？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis的淘汰策略有哪些；"><span class="nav-number">4.2.7.</span> <span class="nav-text">redis的淘汰策略有哪些；</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodb"><span class="nav-number">4.3.</span> <span class="nav-text">mongodb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker"><span class="nav-number">4.4.</span> <span class="nav-text">docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#听说你项目用过docker，讲一下docker的实现原理，说了虚拟机一般要对内核进行虚拟化，docker则用cgroup和namespace分别进行硬件和命名空间的隔离。"><span class="nav-number">4.4.1.</span> <span class="nav-text">听说你项目用过docker，讲一下docker的实现原理，说了虚拟机一般要对内核进行虚拟化，docker则用cgroup和namespace分别进行硬件和命名空间的隔离。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第四部分-Java虚拟机"><span class="nav-number">5.</span> <span class="nav-text">第四部分 Java虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM的内存结构，JVM的算法；"><span class="nav-number">5.1.</span> <span class="nav-text">JVM的内存结构，JVM的算法；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强引用，软引用和弱引用的区别；"><span class="nav-number">5.2.</span> <span class="nav-text">强引用，软引用和弱引用的区别；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组在内存中如何分配；"><span class="nav-number">5.3.</span> <span class="nav-text">数组在内存中如何分配；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请写一段栈溢出、堆溢出的代码；"><span class="nav-number">5.4.</span> <span class="nav-text">请写一段栈溢出、堆溢出的代码；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal可以用来共享数据吗；"><span class="nav-number">5.5.</span> <span class="nav-text">ThreadLocal可以用来共享数据吗；</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第五部分-JavaWeb"><span class="nav-number">6.</span> <span class="nav-text">第五部分 JavaWeb</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tomcat"><span class="nav-number">6.1.</span> <span class="nav-text">tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#你平时是如何进行Tomcat性能优化的"><span class="nav-number">6.1.1.</span> <span class="nav-text">你平时是如何进行Tomcat性能优化的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你说了解Tomcat的基本原理，了解的是哪一部分，基本架构，connector和container"><span class="nav-number">6.1.2.</span> <span class="nav-text">你说了解Tomcat的基本原理，了解的是哪一部分，基本架构，connector和container</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat的类加载器了解么，回答不了解只了解Java的类加载器。"><span class="nav-number">6.1.3.</span> <span class="nav-text">Tomcat的类加载器了解么，回答不了解只了解Java的类加载器。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web"><span class="nav-number">6.2.</span> <span class="nav-text">web</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#说说http-https协议；"><span class="nav-number">6.2.1.</span> <span class="nav-text">说说http,https协议；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcp-ip协议簇；"><span class="nav-number">6.2.2.</span> <span class="nav-text">tcp/ip协议簇；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#osi五层网络协议；"><span class="nav-number">6.2.3.</span> <span class="nav-text">osi五层网络协议；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcp，udp区别；"><span class="nav-number">6.2.4.</span> <span class="nav-text">tcp，udp区别；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用过哪些加密算法：对称加密，非对称加密算法；"><span class="nav-number">6.2.5.</span> <span class="nav-text">用过哪些加密算法：对称加密，非对称加密算法；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说说tcp三次握手，四次挥手；"><span class="nav-number">6.2.6.</span> <span class="nav-text">说说tcp三次握手，四次挥手；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie和session的区别，分布式环境怎么保存用户状态；"><span class="nav-number">6.2.7.</span> <span class="nav-text">cookie和session的区别，分布式环境怎么保存用户状态；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式session解决方案"><span class="nav-number">6.2.8.</span> <span class="nav-text">分布式session解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP协议了解么，和tcp有什么区别。"><span class="nav-number">6.2.9.</span> <span class="nav-text">HTTP协议了解么，和tcp有什么区别。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http1-0和2-0的区别。答了TCP连接复用，加入ssl，以及压缩请求头。"><span class="nav-number">6.2.10.</span> <span class="nav-text">http1.0和2.0的区别。答了TCP连接复用，加入ssl，以及压缩请求头。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web请求的过程，讲了浏览器到http服务器的过程，再讲了mvc的请求处理过程。"><span class="nav-number">6.2.11.</span> <span class="nav-text">web请求的过程，讲了浏览器到http服务器的过程，再讲了mvc的请求处理过程。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第六部分-设计模式"><span class="nav-number">7.</span> <span class="nav-text">第六部分 设计模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第七部分-项目相关"><span class="nav-number">8.</span> <span class="nav-text">第七部分 项目相关</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第八部分-算法相关"><span class="nav-number">9.</span> <span class="nav-text">第八部分 算法相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java中常说的堆和栈，分别是什么数据结构；另外，为什么要分为堆和栈来存储数据。"><span class="nav-number">9.1.</span> <span class="nav-text">java中常说的堆和栈，分别是什么数据结构；另外，为什么要分为堆和栈来存储数据。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TreeMap如何插入数据：二叉树的左旋，右旋，双旋；"><span class="nav-number">9.2.</span> <span class="nav-text">TreeMap如何插入数据：二叉树的左旋，右旋，双旋；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个排序之后的数组，插入数据，可以使用什么方法？答：二分法；问：时间复杂度是多少？"><span class="nav-number">9.3.</span> <span class="nav-text">一个排序之后的数组，插入数据，可以使用什么方法？答：二分法；问：时间复杂度是多少？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#平衡二叉树的时间复杂度；"><span class="nav-number">9.4.</span> <span class="nav-text">平衡二叉树的时间复杂度；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hash算法和二叉树算法分别什么时候用；"><span class="nav-number">9.5.</span> <span class="nav-text">Hash算法和二叉树算法分别什么时候用；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图的广度优先算法和深度优先算法：详见jvm中垃圾回收实现；"><span class="nav-number">9.6.</span> <span class="nav-text">图的广度优先算法和深度优先算法：详见jvm中垃圾回收实现；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序算法和适用场景"><span class="nav-number">9.7.</span> <span class="nav-text">排序算法和适用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第九部分-Linux"><span class="nav-number">10.</span> <span class="nav-text">第九部分 Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux常用的命令有哪些；"><span class="nav-number">10.1.</span> <span class="nav-text">linux常用的命令有哪些；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何获取java进程的pid；"><span class="nav-number">10.2.</span> <span class="nav-text">如何获取java进程的pid；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何获取某个进程的网络端口号；"><span class="nav-number">10.3.</span> <span class="nav-text">如何获取某个进程的网络端口号；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何实时打印日志；"><span class="nav-number">10.4.</span> <span class="nav-text">如何实时打印日志；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何统计某个字符串行数；"><span class="nav-number">10.5.</span> <span class="nav-text">如何统计某个字符串行数；</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第十部分-设计与思想"><span class="nav-number">11.</span> <span class="nav-text">第十部分 设计与思想</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重构过代码没有？说说经验；"><span class="nav-number">11.1.</span> <span class="nav-text">重构过代码没有？说说经验；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一千万的用户实时排名如何实现；"><span class="nav-number">11.2.</span> <span class="nav-text">一千万的用户实时排名如何实现；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五万人并发抢票怎么实现；"><span class="nav-number">11.3.</span> <span class="nav-text">五万人并发抢票怎么实现；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目中遇到的最大挑战。"><span class="nav-number">11.4.</span> <span class="nav-text">项目中遇到的最大挑战。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目中学到最多的东西"><span class="nav-number">11.5.</span> <span class="nav-text">项目中学到最多的东西</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你的职业规划"><span class="nav-number">11.6.</span> <span class="nav-text">你的职业规划</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第十一部分-HR面试"><span class="nav-number">12.</span> <span class="nav-text">第十一部分 HR面试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#兴趣爱好"><span class="nav-number">12.1.</span> <span class="nav-text">兴趣爱好</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三年到五年的职业规划"><span class="nav-number">12.2.</span> <span class="nav-text">三年到五年的职业规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#意向公司和城市"><span class="nav-number">12.3.</span> <span class="nav-text">意向公司和城市</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实习经历和收获"><span class="nav-number">12.4.</span> <span class="nav-text">实习经历和收获</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实习中最大的困难"><span class="nav-number">12.5.</span> <span class="nav-text">实习中最大的困难</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么换公司，为什么拒绝菜鸟实习offer"><span class="nav-number">12.6.</span> <span class="nav-text">为什么换公司，为什么拒绝菜鸟实习offer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你的缺点和优点"><span class="nav-number">12.7.</span> <span class="nav-text">你的缺点和优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你觉得你比其他人优秀的地方说三个"><span class="nav-number">12.8.</span> <span class="nav-text">你觉得你比其他人优秀的地方说三个</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么想来我们部门"><span class="nav-number">12.9.</span> <span class="nav-text">为什么想来我们部门</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">克己</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+  <script src="https://cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'feb8237600f9f0c823d6',
+          clientSecret: 'a6946bf9fc8d4793a60df4fedc526595b2f04cb3',
+          repo: 'keji94.github.io',
+          owner: 'keji94',
+          admin: ['keji94'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'false'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+
+  
+
+  <script type="text/javascript">
     // Popup Window;
     var isfetched = false;
     var isXml = true;
@@ -317,4 +1148,132 @@ child constructor run
         onPopupClose();
       }
     });
-  </script><script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script><script>AV.initialize("FvalnKzIszMJbOKGGiVSI295-gzGzoHsz","zNxPvDhWLB6hUySme9HepOIi")</script><script>function showTime(e){var t=new AV.Query(e),c=[],u=$(".leancloud_visitors");u.each(function(){c.push($(this).attr("id").trim())}),t.containedIn("url",c),t.find().done(function(e){var t=".leancloud-visitors-count";if(0!==e.length){for(var n=0;n<e.length;n++){var o=e[n],i=o.get("url"),s=o.get("time"),r=document.getElementById(i);$(r).find(t).text(s)}for(n=0;n<c.length;n++){i=c[n],r=document.getElementById(i);var l=$(r).find(t);""==l.text()&&l.text(0)}}else u.find(t).text(0)}).fail(function(e,t){console.log("Error: "+t.code+" "+t.message)})}function addCount(i){var e=$(".leancloud_visitors"),s=e.attr("id").trim(),r=e.attr("data-flag-title").trim(),t=new AV.Query(i);t.equalTo("url",s),t.find({success:function(e){if(0<e.length){var t=e[0];t.fetchWhenSave(!0),t.increment("time"),t.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to save Visitor num, with error message: "+t.message)}})}else{var n=new i,o=new AV.ACL;o.setPublicReadAccess(!0),o.setPublicWriteAccess(!0),n.setACL(o),n.set("title",r),n.set("url",s),n.set("time",1),n.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to create")}})}},error:function(e){console.log("Error:"+e.code+" "+e.message)}})}$(function(){var e=AV.Object.extend("Counter");1==$(".leancloud_visitors").length?addCount(e):1<$(".post-title-link").length&&showTime(e)})</script></body></html>
+  </script>
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FvalnKzIszMJbOKGGiVSI295-gzGzoHsz", "zNxPvDhWLB6hUySme9HepOIi");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
