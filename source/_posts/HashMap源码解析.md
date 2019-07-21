@@ -423,6 +423,136 @@ final Node<K,V> getNode(int hash, Object key) {
 }
 ```
 
+## Node数据节点解析
+
+我们知道HashMap底层维护了一个Node数组，它是最基础的数据节点，接下来便揭开Node数组的神秘面纱。
+
+```java
+    static class Node<K,V> implements Map.Entry<K,V> {
+        final int hash;
+        final K key;
+        V value;
+        Node<K,V> next;
+
+        Node(int hash, K key, V value, Node<K,V> next) {
+            this.hash = hash;
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+
+        public final K getKey()        { return key; }
+        public final V getValue()      { return value; }
+        public final String toString() { return key + "=" + value; }
+
+        public final int hashCode() {
+            return Objects.hashCode(key) ^ Objects.hashCode(value);
+        }
+
+        public final V setValue(V newValue) {
+            V oldValue = value;
+            value = newValue;
+            return oldValue;
+        }
+
+        public final boolean equals(Object o) {
+            if (o == this)
+                return true;
+            if (o instanceof Map.Entry) {
+                Map.Entry<?,?> e = (Map.Entry<?,?>)o;
+                if (Objects.equals(key, e.getKey()) &&
+                    Objects.equals(value, e.getValue()))
+                    return true;
+            }
+            return false;
+        }
+    }
+
+```
+
+首先看它的类声明，实现了Map.Entry接口。Entry接口定义了一些Map实现类公用的方法
+![](https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/Map.Entry.png)
+
+可以看到Node类其实非常简单，维护了四个属性 key、value、key的Hash值和下一个节点。我们看下是怎么用的。
+
+上面的在put()方法中已经提到过，当我们put一个key-value时，如果key不存在，或者说没有发生哈希冲突时，就会new一个新的节点。
+
+```java
+...
+tab[i] = newNode(hash, key, value, null);
+...
+```
+
+看下newNode方法,非常简单就是调用了Node的构造函数
+
+```java
+    Node<K,V> newNode(int hash, K key, V value, Node<K,V> next) {
+        return new Node<>(hash, key, value, next);
+    }
+
+```
+
+当发生hash碰撞的时候，首先是已链表的形式存放。实际上就是创建一个新的Node节点，然后复制给之前的Node元素的next属性。
+
+```java
+...
+p.next = newNode(hash, key, value, null);
+```
+
+
+当链表的长度大于8的时候，转化为红黑树,这个时候其实是把Node链表转变为另外一个数组结构ZreeNode。
+
+```java
+...
+if (binCount >= TREEIFY_THRESHOLD - 1) 
+    // 将链表转换为红黑树
+    treeifyBin(tab, hash);
+```
+
+```java
+    /**
+     * Replaces all linked nodes in bin at index for given hash unless
+     * table is too small, in which case resizes instead.
+     */
+    final void treeifyBin(Node<K,V>[] tab, int hash) {
+        int n, index; Node<K,V> e;
+        if (tab == null || (n = tab.length) < MIN_TREEIFY_CAPACITY)
+            resize();
+        else if ((e = tab[index = (n - 1) & hash]) != null) {
+            TreeNode<K,V> hd = null, tl = null;
+            do {
+                TreeNode<K,V> p = replacementTreeNode(e, null);
+                if (tl == null)
+                    hd = p;
+                else {
+                    p.prev = tl;
+                    tl.next = p;
+                }
+                tl = p;
+            } while ((e = e.next) != null);
+            if ((tab[index] = hd) != null)
+                hd.treeify(tab);
+        }
+    }
+
+```
+
+限于篇幅，此处不深入讲解红黑树这种数据结构以及其实现，后面会单独开一篇讲。
+
+
+# HashMap的初始容量应该如何指定
+
+同ArrayList一样，我们在new Hashmap()的也最好能够指定它的初始容量大小，目的就是为了提升效率，也能在一定程度上节约内存，那么这个初始容量应该如何指定？看过源码后，相信应该已经知道答案。
+
+在HashMap中有一个成员变量threshold,它的计算方式是初始容量*加载因子。当填充度大于threshold，则会进行扩容。所以如果我们在知道或者大致估计HashMap的存放数量之后，除以0.75，在选择大于此结果的最近的2的幂次方即可（这一步可忽略，因为HashMap会自动帮你完成）。
+
+有的同学可能会有HashMap最小容量是16的错觉，其实并不是，16只是我们在没有指定初始容量后，第一次put元素时初始化的容量。我们完全可以将容量指定为2。
+
+# 总结
+1. JDK1.8之后HashMap底层是数组+链表+红黑树 
+2. HashMap线程不安全，我们可以使用Collections.synchronizedMap包装为线程安全HashMap或者使用HashTable，CurrentHashMap
+3. HashMap的默认初始容量为16，加载因子是0.75，填充度达到75%后，会扩容至原来的2倍
+ 
 
 # 参考:
 ![https://www.cnblogs.com/chengxiao/p/6059914.html](https://www.cnblogs.com/chengxiao/p/6059914.html)
