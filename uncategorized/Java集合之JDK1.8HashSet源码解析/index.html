@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="== 和equals== 比较的是对象在内存的地址。equals()定义在Object中。123public boolean equals(Object obj) &amp;#123;　　return (this == obj);&amp;#125; 这意味着所有对象都有equals()方法,并且默认情况下equals()方法和==一样比较的是对象在内存的地址值。一般引用数据类型之间的比较，需要重写equals，">
+<meta name="description" content="前面分析了ArrayList和HashMap的源码，今天分析下HashSet的源码。HashSet作为Java集合框架的一员，也是非常重要的，虽然平时用的没有前面两个多，但是在一些特定的场景可以帮助我们快速解决问题，所以掌握其特性也是非常重要的。 类注释首先还是先看下官方的类注释，快速了解HashSet的特性。 此类实现Set接口，由哈希表（实际上是HashMap实例）支持。它不能保证集合的迭代顺">
 <meta property="og:type" content="article">
-<meta property="og:title" content="==，equals，hashCode的区别和联系">
-<meta property="og:url" content="/java基础/equals/==，equals，hashCode的区别和联系/index.html">
+<meta property="og:title" content="克己的博客">
+<meta property="og:url" content="/uncategorized/Java集合之JDK1.8HashSet源码解析/index.html">
 <meta property="og:site_name" content="克己的博客">
-<meta property="og:description" content="== 和equals== 比较的是对象在内存的地址。equals()定义在Object中。123public boolean equals(Object obj) &amp;#123;　　return (this == obj);&amp;#125; 这意味着所有对象都有equals()方法,并且默认情况下equals()方法和==一样比较的是对象在内存的地址值。一般引用数据类型之间的比较，需要重写equals，">
+<meta property="og:description" content="前面分析了ArrayList和HashMap的源码，今天分析下HashSet的源码。HashSet作为Java集合框架的一员，也是非常重要的，虽然平时用的没有前面两个多，但是在一些特定的场景可以帮助我们快速解决问题，所以掌握其特性也是非常重要的。 类注释首先还是先看下官方的类注释，快速了解HashSet的特性。 此类实现Set接口，由哈希表（实际上是HashMap实例）支持。它不能保证集合的迭代顺">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-07-21T09:21:37.112Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="==，equals，hashCode的区别和联系">
-<meta name="twitter:description" content="== 和equals== 比较的是对象在内存的地址。equals()定义在Object中。123public boolean equals(Object obj) &amp;#123;　　return (this == obj);&amp;#125; 这意味着所有对象都有equals()方法,并且默认情况下equals()方法和==一样比较的是对象在内存的地址值。一般引用数据类型之间的比较，需要重写equals，">
+<meta name="twitter:title" content="克己的博客">
+<meta name="twitter:description" content="前面分析了ArrayList和HashMap的源码，今天分析下HashSet的源码。HashSet作为Java集合框架的一员，也是非常重要的，虽然平时用的没有前面两个多，但是在一些特定的场景可以帮助我们快速解决问题，所以掌握其特性也是非常重要的。 类注释首先还是先看下官方的类注释，快速了解HashSet的特性。 此类实现Set接口，由哈希表（实际上是HashMap实例）支持。它不能保证集合的迭代顺">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="/java基础/equals/==，equals，hashCode的区别和联系/">
+  <link rel="canonical" href="/uncategorized/Java集合之JDK1.8HashSet源码解析/">
 
 
 
 
 
-  <title>==，equals，hashCode的区别和联系 | 克己的博客</title>
+  <title> | 克己的博客</title>
   
 
 
@@ -294,7 +294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="/java基础/equals/==，equals，hashCode的区别和联系/index.html">
+    <link itemprop="mainEntityOfPage" href="/uncategorized/Java集合之JDK1.8HashSet源码解析/index.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="克己">
@@ -311,7 +311,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">==，equals，hashCode的区别和联系</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -323,8 +323,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-16T19:40:36+08:00">
-                2019-03-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-21T17:21:37+08:00">
+                2019-07-21
               </time>
             
 
@@ -334,39 +334,6 @@
           </span>
 
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java基础/index.html" itemprop="url" rel="index">
-                    <span itemprop="name">java基础</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java基础/equals/index.html" itemprop="url" rel="index">
-                    <span itemprop="name">equals</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -374,7 +341,7 @@
 
           
           
-             <span id="/java基础/equals/==，equals，hashCode的区别和联系/index.html" class="leancloud_visitors" data-flag-title="==，equals，hashCode的区别和联系">
+             <span id="/uncategorized/Java集合之JDK1.8HashSet源码解析/index.html" class="leancloud_visitors" data-flag-title>
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -405,32 +372,42 @@
       
 
       
-        <h2 id="和equals"><a href="#和equals" class="headerlink" title="== 和equals"></a>== 和equals</h2><p>== 比较的是对象在内存的地址。equals()定义在Object中。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">　　<span class="keyword">return</span> (<span class="keyword">this</span> == obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这意味着所有对象都有equals()方法,并且默认情况下equals()方法和==一样比较的是对象在内存的地址值。<br>一般引用数据类型之间的比较，需要重写equals，让其比较对象的字段值。</p>
-<a id="more"></a>
-<h2 id="hashCode-方法的作用"><a href="#hashCode-方法的作用" class="headerlink" title="hashCode()方法的作用"></a>hashCode()方法的作用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public native int hashCode();</span><br></pre></td></tr></table></figure>
-<p>hashCode()方法注释翻译:</p>
-<p>返回该对象的哈希码值。支持此方法是为了提高哈希表（例如 java.util.Hashtable 提供的哈希表）的性能。</p>
-<p>hashCode的的常规协定是:</p>
-<ul>
-<li>在 Java 应用程序执行期间，在对同一对象多次调用 hashCode 方法时，必须一致地返回相同的整数，前提是将对象进行 equals 比较时所用的信息没有被修改。从某一应用程序的一次执行到同一应用程序的另一次执行，该整数无需保持一致。</li>
-<li>如果根据equals(Object)方法两个对象相等，那么对两个对象调用hashCode方法必须产生相同的整数结果。</li>
-<li>如果两个对象根据equals(java.lang.Object)方法是不相等的，那么调用这两个对象上的hashCode方法必须产生不同的整数结果。但是，程序员应该意识到，为不相等的对象生成不同的整数结果可能会提高哈希表的性能。</li>
-</ul>
-<p>实际上，由 Object 类定义的 hashCode 方法确实会针对不同的对象返回不同的整数。（这一般是通过将该对象的内部地址转换成一个整数来实现的，但是 JavaTM 编程语言不需要这种实现技巧。）</p>
-<p>注意这一句话：<br>    “支持此方法是为了提高哈希表（例如 java.util.Hashtable 提供的哈希表）的性能。”</p>
-<p>也就是说，虽然每个Java类都包含hashCode() 函数。但是，仅仅当创建并某个“类的散列表”时(比如HashMap<user>)，该类的hashCode() 才有用(作用是：确定该类的每一个对象在散列表中的位置)；其它情况下(例如，创建类的单个对象，或者创建类的对象数组等等)，类的hashCode() 没有作用。</user></p>
-<p>上面的散列表，指的是：Java集合中底层是散列表的类，如HashMap，Hashtable，HashSet。</p>
-<p>关于散列表更过详细的介绍，可以参考<a href="https://blog.csdn.net/u010297957/article/details/51974340" target="_blank" rel="noopener">哈希表、Java中HashMap</a></p>
-<h2 id="equals-和hashCode-的区别和联系"><a href="#equals-和hashCode-的区别和联系" class="headerlink" title="equals()和hashCode()的区别和联系"></a>equals()和hashCode()的区别和联系</h2><p>面试的时候，经常会被问到，为什么重写equals方法的时候需要重写hashCode()？我们来看一个只重写equals的demo<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashSet;</span><br><span class="line"><span class="keyword">import</span> java.util.Objects;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.lang3.builder.ToStringBuilder;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.lang3.builder.ToStringStyle;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> keji</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> $Id: HashCodeAndEquals.java, v 0.1 2018/12/12 6:40 PM keji Exp $</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashCodeAndEquals</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        User p1 = <span class="keyword">new</span> User(<span class="number">100</span>,<span class="string">"eee"</span>);</span><br><span class="line">        User p2 = <span class="keyword">new</span> User(<span class="number">100</span>,<span class="string">"eee"</span>);</span><br><span class="line">        User p3 = <span class="keyword">new</span> User(<span class="number">200</span>,<span class="string">"aaa"</span>);</span><br><span class="line"></span><br><span class="line">        HashSet&lt;User&gt; hashSet = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        hashSet.add(p1);</span><br><span class="line">        hashSet.add(p2);</span><br><span class="line">        hashSet.add(p3);</span><br><span class="line"></span><br><span class="line">        System.out.printf(<span class="string">"p1.equals(p2) : %s; p1(%d) p2(%d)\n"</span>, p1.equals(p2), p1.hashCode(), p2.hashCode());</span><br><span class="line">        System.out.printf(<span class="string">"set:%s\n"</span>, hashSet);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">(<span class="keyword">int</span> age, String name)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.age = age;</span><br><span class="line">            <span class="keyword">this</span>.name = name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> age;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.age = age;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.name = name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span> == o) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            User user = (User)o;</span><br><span class="line">            <span class="keyword">return</span> age == user.age &amp;&amp; Objects.equals(name, user.name);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> ToStringBuilder.reflectionToString(<span class="keyword">this</span>, ToStringStyle.SHORT_PREFIX_STYLE);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果:</span><br><span class="line">p1.equals(p2) : <span class="keyword">true</span>; p1(<span class="number">189568618</span>) p2(<span class="number">793589513</span>)</span><br><span class="line">set:[HashCodeAndEquals.User[age=<span class="number">100</span>,name=eee], HashCodeAndEquals.User[age=<span class="number">100</span>,name=eee], HashCodeAndEquals.User[age=<span class="number">200</span>,name=aaa]]</span><br></pre></td></tr></table></figure></p>
-<p>可以看到，在只重写equals，没有重写hashcode的情况下。equals相等，但是hashcode不相等，导致HashSet中仍然有重复元素：p1和p2。</p>
-<p>当在原来的基础上，重写HashCode，再次执行main()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public int hashCode() &#123;</span><br><span class="line">　　return Objects.hash(age, name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果如下：</span><br><span class="line">p1.equals(p2) : true; p1(104354) p2(104354)</span><br><span class="line">set:[HashCodeAndEquals.User[age=100,name=eee], HashCodeAndEquals.User[age=200,name=aaa]]</span><br></pre></td></tr></table></figure></p>
-<p>所有，当我们在HashMap,HashTable,HashSet等这些底层使用散列表的数据结构时，如果我们只重写equals()而不重写hashCode()，并不能很好的利用他们的特性。</p>
-<p>但是，当我们明确对象不会再HashMap,HashTable,HashSet等这些数据结构中使用时，我们不重写hashCode()写是可以的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">User p1 = <span class="keyword">new</span> User(<span class="number">100</span>,<span class="string">"eee"</span>);</span><br><span class="line">User p2 = <span class="keyword">new</span> User(<span class="number">100</span>,<span class="string">"eee"</span>);</span><br><span class="line">User p3 = <span class="keyword">new</span> User(<span class="number">200</span>,<span class="string">"aaa"</span>);</span><br><span class="line"></span><br><span class="line">ArrayList&lt;User&gt; list1 = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">list1.add(p1);</span><br><span class="line">list1.add(p2);</span><br><span class="line">list1.add(p3);</span><br><span class="line">ArrayList&lt;User&gt; list2 = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">list2.add(p1);</span><br><span class="line">list2.add(p2);</span><br><span class="line">list2.add(p3);</span><br><span class="line">System.out.printf(<span class="string">"p1.equals(p2) : %s; p1(%d) p2(%d)\n"</span>, p1.equals(p2), p1.hashCode(), p2.hashCode());</span><br><span class="line">System.out.printf(<span class="string">"p1.equals(p3) : %s; p1(%d) p3(%d)\n"</span>, p1.equals(p3), p1.hashCode(), p3.hashCode());</span><br><span class="line">System.out.printf(<span class="string">"list1.equals(list2) :%s\n"</span>,list1.equals(list2));</span><br><span class="line"></span><br><span class="line">输出结果：</span><br><span class="line">p1.equals(p2) : <span class="keyword">true</span>; p1(<span class="number">104354</span>) p2(<span class="number">104354</span>)</span><br><span class="line">p1.equals(p3) : <span class="keyword">false</span>; p1(<span class="number">104354</span>) p3(<span class="number">103482</span>)</span><br><span class="line">list1.equals(list2) :<span class="keyword">true</span></span><br></pre></td></tr></table></figure></p>
-<p>关于HashCode和equals的区别和联系，网络上有这样一个结论:<br>当equals相等时,HashCode一定相等。<br>当HashCode相等时，equals不一定相等。</p>
-<p>这个结论不能说它是错的，但是它有一个<strong>前提是对equals和hashCode()进行了重写</strong>。</p>
-<p>重写equals的同时重写hashCode(反之亦然)，这是一种规范。虽然前面说过如果对象不存储在HashMap、HashSet、HashTab等这些对象中时，hashCode是无用的，但是谁敢在设计这个对象的时候保证该对象以后不会再这些数据结构中使用？</p>
-<p>综上所述，重写equals的时候，要重写hashCode方法。</p>
+        <p>前面分析了ArrayList和HashMap的源码，今天分析下HashSet的源码。HashSet作为Java集合框架的一员，也是非常重要的，虽然平时用的没有前面两个多，但是在一些特定的场景可以帮助我们快速解决问题，所以掌握其特性也是非常重要的。</p>
+<h1 id="类注释"><a href="#类注释" class="headerlink" title="类注释"></a>类注释</h1><p>首先还是先看下官方的类注释，快速了解HashSet的特性。</p>
+<p>此类实现Set接口，由哈希表（实际上是HashMap实例）支持。它不能保证集合的迭代顺序;特别是，它不保证顺序一直保持不变。该类允许null元素。如果Hash函数能够很完美的分散各个元素到桶上，该类的基本操作（add, remove, contains and size）提供恒定的时间性能。</p>
+<p>迭代此集合需要的时间与HashSet实例的大小（元素数量）以及HashMap实例的“容量”（桶数）之和成比例。因此，如果迭代性能很重要，则不要将初始容量设置得太高（或负载因子太低）。请注意，此实现不同步。如果多个线程同时访问哈希集合，并且至少有一个线程修改了该即可，则必须在外部进行同步。这通常通过在自然封装集合的某个对象上进行同步来实现。如果不存在此类对象，则应使用Collections.synchronizedSet方法“包装”该集合。这最好在创建时完成，以防止对集合的意外不同步访问：Set s = Collections.synchronizedSet（new HashSet（…））;</p>
+<p>这个类的迭代器方法返回的迭代器是快速失败的：如果在创建迭代器之后的任何时候修改了set，​​除了通过迭代器自己的remove方法之外，Iterator都将抛出ConcurrentModificationException。因此，在并发修改的情况下，迭代器快速而干净地失败，而不是在未来的未确定时间冒着任意的，非确定性行为的风险。</p>
+<p>请注意，迭代器的快速失败行为无法阿紫存在不同步的并发修改时做出任何硬性保证。快速失败迭代器会尽最大努力抛出ConcurrentModificationException。因此，不要编写这个异常的程序：迭代器的快速失败行为应仅用于检测错误。</p>
+<p>由于HashSet的底层是HashMap,它的类注释和HashMap差不多，其特性也和HashMap差不多。</p>
+<h1 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h1><p>同HashMap一样，HashSet也有4个构造方法</p>
+<p><strong>HashSet()</strong><br>构建一个空的set集合，其底层的HashMap实例使用默认的初始容量(16)和加载因子(0.75)。</p>
+<p><strong>HashSet(Collection&lt;? extends E&gt; c)</strong><br>使用其他集合创建一个新得HashSet</p>
+<p><strong>HashSet(int initialCapacity)</strong><br>构建一个空的set集合，其底层的HashMap实例使用传入的初始容量和默认加载因子(0.75)。</p>
+<p><strong>HashSet(int initialCapacity, float loadFactor)</strong><br>构建一个空的set集合，其底层的HashMap实例使用传入的初始容量和加载因子。</p>
+<p>我们看一下第一个和第四个构造方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 构建一个空的set集合，其底层的HashMap实例使用默认的初始容量(16)和加载因子(0.75)。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 构建一个空的set集合，其底层的HashMap实例使用传入的初始容量和加载因子。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>      initialCapacity   初始容量</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>      loadFactor        加载因子</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span>     IllegalArgumentException if the initial capacity is less</span></span><br><span class="line"><span class="comment"> *             than zero, or if the load factor is nonpositive</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span> </span>&#123;</span><br><span class="line">    map = <span class="keyword">new</span> HashMap&lt;&gt;(initialCapacity, loadFactor);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 存放元素的map</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">transient</span> HashMap&lt;E,Object&gt; map;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * HashMap的value值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object PRESENT = <span class="keyword">new</span> Object();</span><br></pre></td></tr></table></figure>
+<h1 id="成员方法"><a href="#成员方法" class="headerlink" title="成员方法"></a>成员方法</h1><h2 id="add"><a href="#add" class="headerlink" title="add"></a>add</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 将元素放到map中，key是要添加的元素e，value是final修饰的object对象。</span><br><span class="line"> */</span><br><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    return map.put(e, PRESENT)==null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="remove"><a href="#remove" class="headerlink" title="remove"></a>remove</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 从HashMap中移除元素o，如果元素存在返回true，否则返回false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> map.remove(o)==PRESENT;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="size"><a href="#size" class="headerlink" title="size"></a>size</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 返回HashMap中元素的个数</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the number of elements in this set (its cardinality)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> map.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="contains"><a href="#contains" class="headerlink" title="contains"></a>contains</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 判断HashMap中是否包含某个元素</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> o element whose presence in this set is to be tested</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &lt;tt&gt;true&lt;/tt&gt; if this set contains the specified element</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> map.containsKey(o);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="isEmpty"><a href="#isEmpty" class="headerlink" title="isEmpty"></a>isEmpty</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 判断HashSet是否是空的</span><br><span class="line"> *</span><br><span class="line"> * @return &lt;tt&gt;true&lt;/tt&gt; if this set contains no elements</span><br><span class="line"> */</span><br><span class="line">public boolean isEmpty() &#123;</span><br><span class="line">    return map.isEmpty();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>底层调用的是HashMap的isEmpty方法，实现如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> size == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="ArrayList和HashSet的区别"><a href="#ArrayList和HashSet的区别" class="headerlink" title="ArrayList和HashSet的区别"></a>ArrayList和HashSet的区别</h1><p>比较ArrayList和HashSet的区别，其实也是比较ArrayList和HashMap的区别</p>
+<ol>
+<li>ArraysList是有序的，元素可以重复。HashSet无序，元素不可重复。</li>
+<li>ArrayList底层是一个数组，HashSet底层是一个HashMap，HashMap的底层又是数组+链表+红黑树</li>
+<li>ArrList在数组被填充满之后才会扩容，扩容到原来的1.5倍+1.HashSet和HashMap一样，扩容的实际和加载因子有关，扩容到原来的2倍</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ol>
+<li>HashSet的底层其实是一个HashMap，key是我们存放的元素，其value是一个final修饰的object对象</li>
+<li>HashSet是无序的，和HashMap一样。</li>
+<li>HashSet也是线程不安全的，我们可以使用Set s = Collections.synchronizedSet（new HashSet（…））包装一个线程安全的Set</li>
+<li>HashSet中的元素不可重复，因为HashMap中的key不可重复，重复的key会覆盖其value。</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://docs.oracle.com/javase/8/docs/api/" target="_blank" rel="noopener">https://docs.oracle.com/javase/8/docs/api/</a></p>
 
       
     </div>
@@ -484,8 +461,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/java基础/集合/ArrayList 源码解析/index.html" rel="next" title="Java集合之ArrayList 源码解析">
-                <i class="fa fa-chevron-left"></i> Java集合之ArrayList 源码解析
+              <a href="/consectetur/malesuada/Java集合之JDK1.8LinkedHashMap源码解析/index.html" rel="next" title="Java集合之JDK1.8LinkedHashMap源码解析">
+                <i class="fa fa-chevron-left"></i> Java集合之JDK1.8LinkedHashMap源码解析
               </a>
             
           </div>
@@ -494,8 +471,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/uncategorized/Java-IO模型/index.html" rel="prev" title="Java IO模型">
-                Java IO模型 <i class="fa fa-chevron-right"></i>
+              <a href="/uncategorized/Java数据结构：数组/index.html" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -633,7 +610,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#和equals"><span class="nav-number">1.</span> <span class="nav-text">== 和equals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hashCode-方法的作用"><span class="nav-number">2.</span> <span class="nav-text">hashCode()方法的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equals-和hashCode-的区别和联系"><span class="nav-number">3.</span> <span class="nav-text">equals()和hashCode()的区别和联系</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#类注释"><span class="nav-number">1.</span> <span class="nav-text">类注释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构造方法"><span class="nav-number">2.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#成员变量"><span class="nav-number">3.</span> <span class="nav-text">成员变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#成员方法"><span class="nav-number">4.</span> <span class="nav-text">成员方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#add"><span class="nav-number">4.1.</span> <span class="nav-text">add</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove"><span class="nav-number">4.2.</span> <span class="nav-text">remove</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#size"><span class="nav-number">4.3.</span> <span class="nav-text">size</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#contains"><span class="nav-number">4.4.</span> <span class="nav-text">contains</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isEmpty"><span class="nav-number">4.5.</span> <span class="nav-text">isEmpty</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ArrayList和HashSet的区别"><span class="nav-number">5.</span> <span class="nav-text">ArrayList和HashSet的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
