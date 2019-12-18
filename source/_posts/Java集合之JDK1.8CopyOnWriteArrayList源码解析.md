@@ -1,4 +1,12 @@
-java集合系列之JDK8CopyOnWriteArrayList源码解析
+---
+layout: post
+title: java集合系列之JDK8CopyOnWriteArrayList源码解析
+date: 2019-06-01 15:01:18
+categories: 
+  - 容器
+tags:
+  - 容器
+---
 
 # 概述
 
