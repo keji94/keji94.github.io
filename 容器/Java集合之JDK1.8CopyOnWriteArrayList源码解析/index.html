@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="克己的博客">
 <meta property="og:description" content="概述CopyOnWriteArrayList是java.util.concurrent包中的一员，是ArrayList的线程安全版本。其实现原理正如它的类名描述的一样，在进行修改的时候，复制一份数据为新数组，并在新数组上面修改，最后将原来的数组引用指向新数组。 构造方法CopyOnWriteArrayList拥有三个构造函数，分别是空参构造、传递一个集合的构造、传递一个数组的构造,下面对这三个构造">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-18T12:09:02.192Z">
+<meta property="og:updated_time" content="2019-12-18T12:20:50.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java集合系列之JDK8CopyOnWriteArrayList源码解析">
 <meta name="twitter:description" content="概述CopyOnWriteArrayList是java.util.concurrent包中的一员，是ArrayList的线程安全版本。其实现原理正如它的类名描述的一样，在进行修改的时候，复制一份数据为新数组，并在新数组上面修改，最后将原来的数组引用指向新数组。 构造方法CopyOnWriteArrayList拥有三个构造函数，分别是空参构造、传递一个集合的构造、传递一个数组的构造,下面对这三个构造">
@@ -398,6 +398,7 @@
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>CopyOnWriteArrayList是java.util.concurrent包中的一员，是ArrayList的线程安全版本。其实现原理正如它的类名描述的一样，在进行修改的时候，复制一份数据为新数组，并在新数组上面修改，最后将原来的数组引用指向新数组。</p>
 <h1 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h1><p>CopyOnWriteArrayList拥有三个构造函数，分别是空参构造、传递一个集合的构造、传递一个数组的构造,下面对这三个构造函数一一讲解</p>
 <h2 id="public-CopyOnWriteArrayList"><a href="#public-CopyOnWriteArrayList" class="headerlink" title="public CopyOnWriteArrayList()"></a>public CopyOnWriteArrayList()</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">　* 构造一个空的list</span></span><br><span class="line"><span class="comment">　*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">CopyOnWriteArrayList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">　　setArray(<span class="keyword">new</span> Object[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">　* Sets the array.</span></span><br><span class="line"><span class="comment">　*/</span></span><br><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setArray</span><span class="params">(Object[] a)</span> </span>&#123;</span><br><span class="line">　　array = a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>空参构造就是创建了一个新的长度为0的Object数组，并且将该数组赋值给使用volatile修饰的成员变量<strong>array</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">transient</span> <span class="keyword">volatile</span> Object[] array;</span><br></pre></td></tr></table></figure>
 <h2 id="public-CopyOnWriteArrayList-Collection-lt-extends-E-gt-c"><a href="#public-CopyOnWriteArrayList-Collection-lt-extends-E-gt-c" class="headerlink" title="public CopyOnWriteArrayList(Collection&lt;? extends E&gt; c)"></a>public CopyOnWriteArrayList(Collection&lt;? extends E&gt; c)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">　* 使用特定的集合元素创建</span></span><br><span class="line"><span class="comment">　*</span></span><br><span class="line"><span class="comment">　* <span class="doctag">@param</span> c 集合元素</span></span><br><span class="line"><span class="comment">　* <span class="doctag">@throws</span> NullPointerException 如果元素为空，抛出NPE</span></span><br><span class="line"><span class="comment">　*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">CopyOnWriteArrayList</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</span><br><span class="line">　　Object[] elements;</span><br><span class="line">　　<span class="keyword">if</span> (c.getClass() == CopyOnWriteArrayList.class)</span><br><span class="line">　　<span class="comment">//如果传递的集合是CopyOnWriteArrayList类，直接调用getArray()返回成员变量array的值</span></span><br><span class="line">　　　　elements = ((CopyOnWriteArrayList&lt;?&gt;)c).getArray();</span><br><span class="line">　　<span class="keyword">else</span> &#123;</span><br><span class="line">　　<span class="comment">//如果不是，调用toArray()方法转换为数组</span></span><br><span class="line">　　　　elements = c.toArray();</span><br><span class="line">　　　　<span class="keyword">if</span> (elements.getClass() != Object[].class)</span><br><span class="line">　　　<span class="comment">// c.toArray 返回的可能不是Object[]数组,如果不是，将数组拷贝到Object数组</span></span><br><span class="line">　　　　　　elements = Arrays.copyOf(elements, elements.length, Object[].class);</span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="comment">//设置成员变量的值</span></span><br><span class="line">　　setArray(elements);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -473,8 +474,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/容器/Java集合之JDK1.8HashSet源码解析/index.html" rel="next" title="Java集合之JDK1.8HashSet源码解析">
-                <i class="fa fa-chevron-left"></i> Java集合之JDK1.8HashSet源码解析
+              <a href="/数据结构/Java数据结构:Tree/index.html" rel="next" title="Java数据结构:树（Tree）">
+                <i class="fa fa-chevron-left"></i> Java数据结构:树（Tree）
               </a>
             
           </div>
@@ -578,7 +579,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -589,7 +590,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="数据结构,">
+  <meta name="keywords" content="分库分表,">
 
 
 
@@ -79,18 +79,23 @@
 
 
 
-<meta name="description" content="Java数据结构：数组数组是什么在计算机科学中，数组数据结构（英语：array data structure），简称数组（英语：Array），是由相同类型的元素（element）的集合所组成的数据结构，分配一块连续的内存来存储。利用元素的索引（index）可以计算出该元素对应的存储地址。 Java中的数组在Java中，数组是一种效率最高的存储和随机访问对象引用序列的方式。数组就是一个简单的线性序列">
-<meta name="keywords" content="数据结构">
+<meta name="description" content="最近在工作中使用Sharding-JDBC做了分库分表，目前项目已经上线并稳定运行，闲暇时于记录下使用过程以及踩过的坑，希望对准备使用Sharding-JDBC做分库分表的同学有些帮助。 业务背景随着业务的发展，数据量也是爆炸式的增长，有的表结构数据量已经过亿，并且以每月几百万的量持续增长。已经到了必须分库分表的地步。正好我们的系统也要进行服务拆分，一个服务拆分为四个服务，于是一起将分库分表也做掉">
+<meta name="keywords" content="分库分表">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java数据结构：数组">
-<meta property="og:url" content="/数据结构/Java数据结构：数组/index.html">
+<meta property="og:title" content="Sharding-JDBC系列之Springboot2中使用Shariding-JDBC分库分表">
+<meta property="og:url" content="/分库分表/Sharding-JDBC系列之Springboot2中使用Shariding-JDBC分库分表/index.html">
 <meta property="og:site_name" content="克己的博客">
-<meta property="og:description" content="Java数据结构：数组数组是什么在计算机科学中，数组数据结构（英语：array data structure），简称数组（英语：Array），是由相同类型的元素（element）的集合所组成的数据结构，分配一块连续的内存来存储。利用元素的索引（index）可以计算出该元素对应的存储地址。 Java中的数组在Java中，数组是一种效率最高的存储和随机访问对象引用序列的方式。数组就是一个简单的线性序列">
+<meta property="og:description" content="最近在工作中使用Sharding-JDBC做了分库分表，目前项目已经上线并稳定运行，闲暇时于记录下使用过程以及踩过的坑，希望对准备使用Sharding-JDBC做分库分表的同学有些帮助。 业务背景随着业务的发展，数据量也是爆炸式的增长，有的表结构数据量已经过亿，并且以每月几百万的量持续增长。已经到了必须分库分表的地步。正好我们的系统也要进行服务拆分，一个服务拆分为四个服务，于是一起将分库分表也做掉">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/382306343-5c07cde261b29_articlex.png">
+<meta property="og:image" content="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/Driver%E5%92%8CProxy.png">
+<meta property="og:image" content="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/Sharding-JDBC.png">
 <meta property="og:updated_time" content="2019-12-18T12:20:50.098Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java数据结构：数组">
-<meta name="twitter:description" content="Java数据结构：数组数组是什么在计算机科学中，数组数据结构（英语：array data structure），简称数组（英语：Array），是由相同类型的元素（element）的集合所组成的数据结构，分配一块连续的内存来存储。利用元素的索引（index）可以计算出该元素对应的存储地址。 Java中的数组在Java中，数组是一种效率最高的存储和随机访问对象引用序列的方式。数组就是一个简单的线性序列">
+<meta name="twitter:title" content="Sharding-JDBC系列之Springboot2中使用Shariding-JDBC分库分表">
+<meta name="twitter:description" content="最近在工作中使用Sharding-JDBC做了分库分表，目前项目已经上线并稳定运行，闲暇时于记录下使用过程以及踩过的坑，希望对准备使用Sharding-JDBC做分库分表的同学有些帮助。 业务背景随着业务的发展，数据量也是爆炸式的增长，有的表结构数据量已经过亿，并且以每月几百万的量持续增长。已经到了必须分库分表的地步。正好我们的系统也要进行服务拆分，一个服务拆分为四个服务，于是一起将分库分表也做掉">
+<meta name="twitter:image" content="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/382306343-5c07cde261b29_articlex.png">
 
 
 
@@ -120,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="/数据结构/Java数据结构：数组/">
+  <link rel="canonical" href="/分库分表/Sharding-JDBC系列之Springboot2中使用Shariding-JDBC分库分表/">
 
 
 
 
 
-  <title>Java数据结构：数组 | 克己的博客</title>
+  <title>Sharding-JDBC系列之Springboot2中使用Shariding-JDBC分库分表 | 克己的博客</title>
   
 
 
@@ -295,7 +300,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="/数据结构/Java数据结构：数组/index.html">
+    <link itemprop="mainEntityOfPage" href="/分库分表/Sharding-JDBC系列之Springboot2中使用Shariding-JDBC分库分表/index.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="克己">
@@ -312,7 +317,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java数据结构：数组</h1>
+          <h1 class="post-title" itemprop="name headline">Sharding-JDBC系列之Springboot2中使用Shariding-JDBC分库分表</h1>
         
 
         <div class="post-meta">
@@ -324,8 +329,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-01T15:01:18+08:00">
-                2019-06-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-06T19:40:36+08:00">
+                2019-05-06
               </time>
             
 
@@ -347,8 +352,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构/index.html" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
+                  <a href="/categories/分库分表/index.html" itemprop="url" rel="index">
+                    <span itemprop="name">分库分表</span>
                   </a>
                 </span>
 
@@ -364,7 +369,7 @@
 
           
           
-             <span id="/数据结构/Java数据结构：数组/index.html" class="leancloud_visitors" data-flag-title="Java数据结构：数组">
+             <span id="/分库分表/Sharding-JDBC系列之Springboot2中使用Shariding-JDBC分库分表/index.html" class="leancloud_visitors" data-flag-title="Sharding-JDBC系列之Springboot2中使用Shariding-JDBC分库分表">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -395,32 +400,41 @@
       
 
       
-        <h1 id="Java数据结构：数组"><a href="#Java数据结构：数组" class="headerlink" title="Java数据结构：数组"></a>Java数据结构：数组</h1><h1 id="数组是什么"><a href="#数组是什么" class="headerlink" title="数组是什么"></a>数组是什么</h1><p>在计算机科学中，数组数据结构（英语：array data structure），简称数组（英语：Array），是由相同类型的元素（element）的集合所组成的数据结构，分配一块连续的内存来存储。利用元素的索引（index）可以计算出该元素对应的存储地址。</p>
-<h1 id="Java中的数组"><a href="#Java中的数组" class="headerlink" title="Java中的数组"></a>Java中的数组</h1><p>在Java中，数组是一种效率最高的存储和随机访问对象引用序列的方式。数组就是一个简单的线性序列，这使得元素访问非常快速。但是为这种速度所付出代价是数组对象大小被固定，并且在其声明周期中不可改变。</p>
-<p>数组内的元素既可以是基本数据类型，也可以是引用数据类型。区别在于对象数据保存的是引用，基本类型数组直接保存基本类型的值。</p>
-<a id="more"></a>
-<h1 id="数组的创建"><a href="#数组的创建" class="headerlink" title="数组的创建"></a>数组的创建</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明一个长度为2的int数组</span></span><br><span class="line"><span class="keyword">int</span>[] ints = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</span><br><span class="line"><span class="comment">//初始化一个保存1,2元素的数组</span></span><br><span class="line"><span class="keyword">int</span>[] intArr = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>, <span class="number">2</span>&#125;;</span><br><span class="line"><span class="comment">//初始化一个保存1,2,3,4的数组</span></span><br><span class="line"><span class="keyword">int</span>[] arr = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//声明一个为初始化的数组，我们没办法做任何事情</span></span><br><span class="line">User[] userArr;</span><br><span class="line"><span class="comment">//声明一个长度为2的User类数组</span></span><br><span class="line">User[] user = <span class="keyword">new</span> User[<span class="number">2</span>];</span><br><span class="line"><span class="comment">//初始化一个User数组，里面有两个User对象的引用</span></span><br><span class="line">userArr = <span class="keyword">new</span> User[] &#123;<span class="keyword">new</span> User(), <span class="keyword">new</span> User()&#125;;</span><br><span class="line"><span class="comment">//初始化一个User数组，里面有两个User对象的引用</span></span><br><span class="line">User[] userArr2 = &#123;<span class="keyword">new</span> User(), <span class="keyword">new</span> User()&#125;;</span><br></pre></td></tr></table></figure>
-<h1 id="数组是对象吗？"><a href="#数组是对象吗？" class="headerlink" title="数组是对象吗？"></a>数组是对象吗？</h1><p>Java里面的数组到底是什么？</p>
-<p>答案是对象。</p>
-<p>证据：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] arr = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</span><br><span class="line">String name = arr.getClass().getSuperclass().getName();</span><br><span class="line">System.out.println(name);</span><br></pre></td></tr></table></figure></p>
-<p>输出:java.lang.Object</p>
-<p>数组的父类是Object。</p>
-<p>Java数组这个对象太特俗了，以至于我们没办法把它当做对象处理，甚至我们都找不到类文件与之对应，但是找不到不代表没有。数组对象并不是从某个类实例化来的，而是由JVM直接创建的，因此查看类名的时候会发现是很奇怪的类似于”[I”这样的样子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int[] arr = &#123;1, 2, 3, 4&#125;;</span><br><span class="line">String name = arr.getClass().getName();</span><br><span class="line">System.out.println(name);//</span><br><span class="line">输出：[I</span><br><span class="line"></span><br><span class="line">User[] userArr2 = &#123;new User(), new User()&#125;;</span><br><span class="line">String userArrClassName = userArr2.getClass().getName();</span><br><span class="line">System.out.println(userArrClassName);</span><br><span class="line">输出:[Lcom.weimai.medical.admin.controller.User;</span><br></pre></td></tr></table></figure>
-<h1 id="length返回的是什么？"><a href="#length返回的是什么？" class="headerlink" title="length返回的是什么？"></a>length返回的是什么？</h1><p>length只表示数组能够容纳多少元素，也就是说，length是数组的大小，而不是实际存放的元素个数。</p>
-<h1 id="Array类是做什么的？"><a href="#Array类是做什么的？" class="headerlink" title="Array类是做什么的？"></a>Array类是做什么的？</h1><p>我们点开Array类看一下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * The &#123;@code Array&#125; class provides static methods to dynamically create and</span><br><span class="line"> * access Java arrays.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;&#123;@code Array&#125; permits widening conversions to occur during a get or set</span><br><span class="line"> * operation, but throws an &#123;@code IllegalArgumentException&#125; if a narrowing</span><br><span class="line"> * conversion would occur.</span><br><span class="line"> *</span><br><span class="line"> * @author Nakul Saraiya</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
-<p>首先看到这样一段注释，它的第一句就说明了Array类的作用：Array类提供静态方法来创建和访问Java数组。</p>
-<p>再看下它的类声明：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public final</span><br><span class="line">class Array &#123;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>final类，不可修改。看到这里基本可以断定Array类和我们创建数组这个动作毫无关系，并且也不是真正的数组类。</p>
-<p>正如类注释说明的那样，Array类可以帮助我们快速操作数组，它更像一个工具类，底层基本都是native方法。</p>
-<p>比如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] arr = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</span><br><span class="line"><span class="comment">//取数组索引为1的元素</span></span><br><span class="line">System.out.println(Array.get(arr, <span class="number">1</span>)); <span class="comment">//2</span></span><br><span class="line"><span class="comment">//取数组索引为3的元素</span></span><br><span class="line">System.out.println(Array.get(arr, <span class="number">3</span>)); <span class="comment">//4</span></span><br></pre></td></tr></table></figure>
-<p>下面正式回答你的问题:<br>问题一：<br>　答案是没有关系，因为Array类是final的，Array类提供了一些静态方法帮助我们创建和访问数组。</p>
-<p>问题二：<br>　在Java中，没有类文件与数组对应，数组是在JVM中动态生成的。</p>
-<p>问题三：<br>　数组的长度，在动态生成的数组对象的对象头里有一个 _length 字段，记录数组长度。获取数组长度是由一条特定的指令arraylength实现。<br>　<br>　Array.getLength()和arr.length是一样的效果，代码验证如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//声明一个容量为2的数组</span><br><span class="line">int[] ints = new int[2];</span><br><span class="line">//指定索引0的值为1</span><br><span class="line">ints[0] = 1;</span><br><span class="line">System.out.println(ints.length); //2</span><br><span class="line">System.out.println(Array.getLength(ints); //2</span><br></pre></td></tr></table></figure></p>
-<p>问题四：<br>　不知道你是指底层JVM的判断还是我们程序员自己判断。感觉应该是指底层JVM，很抱歉，水平有限，我也不清楚，但是感觉和底层的压栈出栈什么的有关系，不知道有没有使用length判断。</p>
-<p>希望以上回答能帮到你，关注我的专栏<a href="https://zhuanlan.zhihu.com/stackjava" target="_blank" rel="noopener">Java技术栈</a>，让我们一起成长</p>
+        <p>最近在工作中使用Sharding-JDBC做了分库分表，目前项目已经上线并稳定运行，闲暇时于记录下使用过程以及踩过的坑，希望对准备使用Sharding-JDBC做分库分表的同学有些帮助。</p>
+<h1 id="业务背景"><a href="#业务背景" class="headerlink" title="业务背景"></a>业务背景</h1><p>随着业务的发展，数据量也是爆炸式的增长，有的表结构数据量已经过亿，并且以每月几百万的量持续增长。已经到了必须分库分表的地步。正好我们的系统也要进行服务拆分，一个服务拆分为四个服务，于是一起将分库分表也做掉了。</p>
+<h1 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h1><p>在决定分库分表之后，首先要做的便是技术选型，目前市面上用来分库分表的中间件有很多，比如Mycat、Sharding-JDBC、淘宝的TDDL（未开源）、平明软件的OneProxy（收费）、360的Atlas、Youtube的Vitess，还有最近比较流行的TiDB等等。</p>
+<p>在选择中间件之前，首先得了解分库分表中间件的切入时机</p>
+<p><img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/382306343-5c07cde261b29_articlex.png" alt><br>1.编码层</p>
+<p> 在同一个项目中创建多个数据源，采用if else的方式，直接根据条件在代码中路由。</p>
+<p>  缺点：</p>
+<p> 1.编写大量代码</p>
+<p> 2.代码无法公用</p>
+<p>2.框架层</p>
+<p> 适合公司ORM框架统一的情况，通过修改或增强现有ORM框架的功能来实现</p>
+<p>3.驱动层</p>
+<p> 重新编写了一个JDBC的驱动，在内存中维护一个路由列表，然后将请求转发到真正的数据库连接中。例如：Sharding-JDBC、TDDL等</p>
+<p>4.代理层</p>
+<p> 伪装成一个数据库，接受业务端的链接。然后负载业务端的请求，解析或者转发到真正的数据库中。例如MyCat、MySQL Router、Sharding-Proxy</p>
+<p>5.实现层<br>更换底层的数据存储，比如Mysql替换为TiDB。</p>
+<p>传统的分库分表，通常是在驱动层和代理层做切入，这两个各有优劣，不过在将驱动层和代理层的区别前，先说一下TiDB。</p>
+<h2 id="TiDB"><a href="#TiDB" class="headerlink" title="TiDB"></a>TiDB</h2><p>TiDB是公司一位大佬推荐的，了解一番后发现这个数据库很方便快捷的帮我们解决海量数据存储这件事情，如果能用TiDB代替传统的分库分表方案也是很好的，可以节省很多时间。不过由于这个数据库只在公司大数据部门的OLAP系统有应用，而实时性要求较高的OLTP系统目前还没有应用，所以决定对TiDB系统进行一次压测，看看其能否满足线上的要求。</p>
+<p>压测的过程不多赘述，最终的结果页不是很理想，因为有这么一个怪现象：在持续高并发的情况下，会出现莫名其妙的连接超时失败。</p>
+<p><img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/%E5%9B%BE%E7%89%871.png" alt></p>
+<p>对于这一结果，我们百思不得其解，对结果的准确性也保持的怀疑的态度。但是由于时间有限，不允许我们继续测试，只得将目光投向了其他中间件，同时也和官方联系，询问原因。</p>
+<p>后面官方给出的说法是这样的：由于我们的内存配置的太小(8g)，导致持续 高并发的时候会进行内存回收，这个时候会强制断开连接。并且给我们介绍说目前实现上OLTP系统中应用TiDB内存都是258g，集群3台机器以上。好吧，都是土豪，惹不起。</p>
+<h2 id="Sharding-JDBC和Mycat"><a href="#Sharding-JDBC和Mycat" class="headerlink" title="Sharding-JDBC和Mycat"></a>Sharding-JDBC和Mycat</h2><p>排序TiDB后，便只能使用传统的分库分表方案，国内比较火的便是Sharding-JDBC和Mycat，这两个正是驱动层和代理层的代表。</p>
+<p><img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/Driver%E5%92%8CProxy.png" alt></p>
+<p>相对于Mycat，仅仅是一个Jar包的Sharding-JDBC赢了我的青睐。</p>
+<p><img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/Sharding-JDBC.png" alt></p>
+<h1 id="Sharding-JDBC在SpringBoot2中的应用。"><a href="#Sharding-JDBC在SpringBoot2中的应用。" class="headerlink" title="Sharding-JDBC在SpringBoot2中的应用。"></a>Sharding-JDBC在SpringBoot2中的应用。</h1><p>Sharidng-JDBC最早起源于当当，后来进入了Apache孵化器，变为了Sharding-Sphere，目前最新的版本是<a href="https://github.com/apache/incubator-shardingsphere/releases/tag/4.0.0-RC1" target="_blank" rel="noopener">4.0.0-RC1</a>。</p>
+<h2 id="依赖引入"><a href="#依赖引入" class="headerlink" title="依赖引入"></a>依赖引入</h2><p>官方的文档并没有写明白Springboot项目应该如何引入依赖，好在机智的我在官方案例中找到了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.shardingsphere&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;sharding-jdbc-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.0.0-RC1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="配置数据源以及分库分表规则"><a href="#配置数据源以及分库分表规则" class="headerlink" title="配置数据源以及分库分表规则"></a>配置数据源以及分库分表规则</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  shardingsphere:</span></span><br><span class="line"><span class="attr">    datasource:</span></span><br><span class="line"><span class="attr">      master0:</span> <span class="comment"># 主库连接信息</span></span><br><span class="line"><span class="attr">        driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line"><span class="attr">        jdbc-url:</span> <span class="attr">jdbc:mysql://$&#123;your</span> <span class="string">database</span> <span class="string">ip&#125;:3306/$&#123;your</span> <span class="string">database</span> <span class="string">name&#125;?Unicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true</span></span><br><span class="line"><span class="attr">        password:</span> <span class="string">your</span> <span class="string">password</span></span><br><span class="line"><span class="attr">        type:</span> <span class="string">com.zaxxer.hikari.HikariDataSource</span></span><br><span class="line"><span class="attr">        username:</span> <span class="string">your</span> <span class="string">username</span></span><br><span class="line"><span class="attr">      master0slave0:</span> <span class="comment"># 从库连接信息</span></span><br><span class="line"><span class="attr">        driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line"><span class="attr">        jdbc-url:</span> <span class="attr">jdbc:mysql://$&#123;your</span> <span class="string">database</span> <span class="string">ip&#125;:3306/$&#123;your</span> <span class="string">database</span> <span class="string">name&#125;?Unicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true</span></span><br><span class="line"><span class="attr">        password:</span> <span class="string">your</span> <span class="string">password</span></span><br><span class="line"><span class="attr">        type:</span> <span class="string">com.zaxxer.hikari.HikariDataSource</span></span><br><span class="line"><span class="attr">        username:</span> <span class="string">your</span> <span class="string">username</span></span><br><span class="line"><span class="attr">      names:</span> <span class="string">master0,master0slave0</span> <span class="comment"># 连接名称，和上面对应。如果有多个主库则配置master1,master1slave1，名字可以随便起，对应起来就好</span></span><br><span class="line"><span class="attr">    sharding:</span></span><br><span class="line"><span class="attr">      broadcast-tables:</span> <span class="comment"># 配置广播表，适合数据量不大，但是每个数据源都存在的表</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">xtgy_chaxunympz</span></span><br><span class="line"><span class="attr">      default-data-source-name:</span> <span class="string">master0</span> <span class="comment">#默认数据源，没有配置分库分表规则的表，会使用默认数据源</span></span><br><span class="line"><span class="attr">      master-slave-rules:</span> <span class="comment">#配置主从规则</span></span><br><span class="line"><span class="attr">        master0:</span></span><br><span class="line"><span class="attr">          master-data-source-name:</span> <span class="string">master0</span></span><br><span class="line"><span class="attr">          slave-data-source-names:</span> <span class="string">master0slave0</span></span><br><span class="line"><span class="attr">      tables:</span> <span class="comment">#配置各表的路由规则</span></span><br><span class="line"><span class="attr">        table_name:</span> <span class="comment">#表名</span></span><br><span class="line"><span class="attr">          actual-data-nodes:</span> <span class="string">master0.table_name_$-&gt;&#123;0..127&#125;</span> <span class="comment">#实际表名 table_name_0 至 table_name_127</span></span><br><span class="line"><span class="attr">          key-generator:</span> <span class="comment">#主键生成策略</span></span><br><span class="line"><span class="attr">            column:</span> <span class="string">id</span></span><br><span class="line"><span class="attr">            type:</span> <span class="string">UUID</span></span><br><span class="line"><span class="attr">          table-strategy:</span> <span class="comment">#分表规则</span></span><br><span class="line"><span class="attr">            inline:</span></span><br><span class="line"><span class="attr">              algorithm-expression:</span> <span class="string">table_name_$-&gt;&#123;customer_id</span> <span class="string">%</span> <span class="number">128</span><span class="string">&#125;</span> <span class="comment">#customer_id %128</span></span><br><span class="line"><span class="attr">              sharding-column:</span> <span class="string">customer_id</span> <span class="comment">#用于分表的键</span></span><br></pre></td></tr></table></figure>
+<h2 id="允许Bean覆盖"><a href="#允许Bean覆盖" class="headerlink" title="允许Bean覆盖"></a>允许Bean覆盖</h2><p>SpringBoot2默认不允许Bean覆盖，我们需要改成允许，不然<strong>可能</strong>会报错</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  main:</span></span><br><span class="line"><span class="attr">    allow-bean-definition-overriding:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>到这里，配置便完成了，是不是很简单？如果你的数据库和表结构都已经创建，就可以开始体验了。后面会介绍Sharding-JDBC的一些特性，已经源码解析。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://shardingsphere.apache.org/document/current/cn/overview/" target="_blank" rel="noopener">https://shardingsphere.apache.org/document/current/cn/overview/</a></p>
+<p><a href="https://segmentfault.com/a/1190000017272697" target="_blank" rel="noopener">https://segmentfault.com/a/1190000017272697</a></p>
 
       
     </div>
@@ -467,7 +481,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+            <a href="/tags/分库分表/" rel="tag"># 分库分表</a>
           
         </div>
       
@@ -480,8 +494,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/容器/Java集合之JDK1.8CopyOnWriteArrayList源码解析/index.html" rel="next" title="java集合系列之JDK8CopyOnWriteArrayList源码解析">
-                <i class="fa fa-chevron-left"></i> java集合系列之JDK8CopyOnWriteArrayList源码解析
+              <a href="/redis/redis zset数据结构使用案例以及原理解析/index.html" rel="next" title="redis zset数据结构使用案例以及原理解析">
+                <i class="fa fa-chevron-left"></i> redis zset数据结构使用案例以及原理解析
               </a>
             
           </div>
@@ -490,8 +504,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/集合/HashMap/HashMap源码解析/index.html" rel="prev" title="HashMap源码解析">
-                HashMap源码解析 <i class="fa fa-chevron-right"></i>
+              <a href="/java基础/volatile/volatile关键字的作用以及原理/index.html" rel="prev" title="volatile关键字的作用以及原理">
+                volatile关键字的作用以及原理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -629,7 +643,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java数据结构：数组"><span class="nav-number">1.</span> <span class="nav-text">Java数据结构：数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组是什么"><span class="nav-number">2.</span> <span class="nav-text">数组是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java中的数组"><span class="nav-number">3.</span> <span class="nav-text">Java中的数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组的创建"><span class="nav-number">4.</span> <span class="nav-text">数组的创建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组是对象吗？"><span class="nav-number">5.</span> <span class="nav-text">数组是对象吗？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#length返回的是什么？"><span class="nav-number">6.</span> <span class="nav-text">length返回的是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Array类是做什么的？"><span class="nav-number">7.</span> <span class="nav-text">Array类是做什么的？</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#业务背景"><span class="nav-number">1.</span> <span class="nav-text">业务背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#技术选型"><span class="nav-number">2.</span> <span class="nav-text">技术选型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TiDB"><span class="nav-number">2.1.</span> <span class="nav-text">TiDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sharding-JDBC和Mycat"><span class="nav-number">2.2.</span> <span class="nav-text">Sharding-JDBC和Mycat</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sharding-JDBC在SpringBoot2中的应用。"><span class="nav-number">3.</span> <span class="nav-text">Sharding-JDBC在SpringBoot2中的应用。</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖引入"><span class="nav-number">3.1.</span> <span class="nav-text">依赖引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置数据源以及分库分表规则"><span class="nav-number">3.2.</span> <span class="nav-text">配置数据源以及分库分表规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#允许Bean覆盖"><span class="nav-number">3.3.</span> <span class="nav-text">允许Bean覆盖</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

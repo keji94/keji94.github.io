@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="事务特性事务是数据库区别于文件系统的重要特征之一。事务用来保证数据库的完整性–要么都做修改，要么都不做。同时，事务有严格的定义，它必须同时满足四个特性。 原子性 原子性是指整个数据库事务是不可分割的工作单位。只有使事务中所有的数据库操作执行都成功，才算整个事务成功。如果事务中任何一个SQL语句执行失败，那么已经执行 成功的SQL语句也必须撒销，数据库状态应该退回到执行事务前的状态。  一致性(co">
+<meta name="description" content="事务特性事务是数据库区别于文件系统的重要特征之一。事务用来保证数据库的完整性–要么都做修改，要么都不做。同时，事务有严格的定义，它必须同时满足四个特性。 原子性 原子性是指整个数据库事务是不可分割的工作单位。只有使事务中所有的数据库操作执行都成功，才算整个事务成功。如果事务中任何一个SQL语句执行失败，那么已经执行 成功的SQL语句也必须撒销，数据库状态应该退回到执行事务前的状态。 一致性(con">
 <meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="事务特性以及Mysql事务的实现">
 <meta property="og:url" content="/mysql/TODO：事务特性以及Mysql事务的实现/index.html">
 <meta property="og:site_name" content="克己的博客">
-<meta property="og:description" content="事务特性事务是数据库区别于文件系统的重要特征之一。事务用来保证数据库的完整性–要么都做修改，要么都不做。同时，事务有严格的定义，它必须同时满足四个特性。 原子性 原子性是指整个数据库事务是不可分割的工作单位。只有使事务中所有的数据库操作执行都成功，才算整个事务成功。如果事务中任何一个SQL语句执行失败，那么已经执行 成功的SQL语句也必须撒销，数据库状态应该退回到执行事务前的状态。  一致性(co">
+<meta property="og:description" content="事务特性事务是数据库区别于文件系统的重要特征之一。事务用来保证数据库的完整性–要么都做修改，要么都不做。同时，事务有严格的定义，它必须同时满足四个特性。 原子性 原子性是指整个数据库事务是不可分割的工作单位。只有使事务中所有的数据库操作执行都成功，才算整个事务成功。如果事务中任何一个SQL语句执行失败，那么已经执行 成功的SQL语句也必须撒销，数据库状态应该退回到执行事务前的状态。 一致性(con">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-18T12:09:02.192Z">
+<meta property="og:updated_time" content="2019-12-18T12:20:50.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="事务特性以及Mysql事务的实现">
-<meta name="twitter:description" content="事务特性事务是数据库区别于文件系统的重要特征之一。事务用来保证数据库的完整性–要么都做修改，要么都不做。同时，事务有严格的定义，它必须同时满足四个特性。 原子性 原子性是指整个数据库事务是不可分割的工作单位。只有使事务中所有的数据库操作执行都成功，才算整个事务成功。如果事务中任何一个SQL语句执行失败，那么已经执行 成功的SQL语句也必须撒销，数据库状态应该退回到执行事务前的状态。  一致性(co">
+<meta name="twitter:description" content="事务特性事务是数据库区别于文件系统的重要特征之一。事务用来保证数据库的完整性–要么都做修改，要么都不做。同时，事务有严格的定义，它必须同时满足四个特性。 原子性 原子性是指整个数据库事务是不可分割的工作单位。只有使事务中所有的数据库操作执行都成功，才算整个事务成功。如果事务中任何一个SQL语句执行失败，那么已经执行 成功的SQL语句也必须撒销，数据库状态应该退回到执行事务前的状态。 一致性(con">
 
 
 
@@ -397,13 +397,14 @@
       
         <h1 id="事务特性"><a href="#事务特性" class="headerlink" title="事务特性"></a>事务特性</h1><p>事务是数据库区别于文件系统的重要特征之一。事务用来保证数据库的完整性–要么都做修改，要么都不做。同时，事务有严格的定义，它必须同时满足四个特性。</p>
 <p><strong>原子性</strong></p>
-<p>原子性是指整个数据库事务是不可分割的工作单位。只有使事务中所有的数据库操作执行都成功，才算整个事务成功。如果事务中任何一个SQL语句执行失败，那么已经执行 成功的SQL语句也必须撒销，数据库状态应该退回到执行事务前的状态。 </p>
-<p><strong>一致性(consistency)</strong> </p>
+<p>原子性是指整个数据库事务是不可分割的工作单位。只有使事务中所有的数据库操作执行都成功，才算整个事务成功。如果事务中任何一个SQL语句执行失败，那么已经执行 成功的SQL语句也必须撒销，数据库状态应该退回到执行事务前的状态。</p>
+<p><strong>一致性(consistency)</strong></p>
 <p>一致性指事务将数据库从一种状态转变为下一种一致的状态。在事务开始之前和事务 结束以后，数据库的完整性约束没有被破坏。</p>
-<p><strong>隔离性(isolation)</strong> </p>
+<p><strong>隔离性(isolation)</strong></p>
 <p>一个事务的影响在该事务提交前对其他事务都不可见——这通过锁来实现</p>
-<p><strong>持久性(durability)</strong> </p>
-<p>事务一旦提交，其结果就是永久性的。即使发生宕机等故障，数据库也能将数据恢复。 </p>
+<p><strong>持久性(durability)</strong></p>
+<p>事务一旦提交，其结果就是永久性的。即使发生宕机等故障，数据库也能将数据恢复。</p>
+<a id="more"></a>
 <h1 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h1><p>了解事务隔离级别前，先介绍下数据库在并发读取数据产生的问题。</p>
 <p><strong>脏读</strong></p>
 <p>一个事务可以读到了另外一个还没有提交（commit）事务的数据。</p>
@@ -415,12 +416,12 @@
 <p>事务A需要修改表中的所有数据行，与此同时，事务B需要往表中插入新的数据。事务A在修改完毕后发现还有数据没有被修改，就好象发生了幻觉一样。</p>
 <p>ISO和ANIS SQL标准制定了四种事务隔离级别。</p>
 <p><strong>READ UNCOMMITTED</strong><br>在这一隔离级别，一个事务可以读到另外一个还没有提交（commit）的事务。脏读，不可重复度，幻读都有可能发生。</p>
-<p><strong>READ COMMITTED</strong> </p>
+<p><strong>READ COMMITTED</strong></p>
 <p>该级别比READ UNCOMMITTED高一级，只能读取到事务已经提交的数据，它解决了脏读的问题，但是不能解决不可重复度，幻读。它是Oracle数据库的默认隔离级别。</p>
-<p><strong>REPEATABLE READ</strong> </p>
+<p><strong>REPEATABLE READ</strong></p>
 <p><strong>SERIALIZABLE</strong></p>
-<p>READ UNCOMMITTED称为浏览访问(browse access),仅仅只对事务而言的。<br>READ COMMITTED称为游标稳定(cursor stability)。<br>REPEATABLE READ是2.9999°的 隔离，没有幻读的保护。<br>SERIALIZABLE称为隔离，或3’。SQL和SQL 2标准的默认事务 隔离级别是SERIALIZABLE。 </p>
-<p>InnoDB存储引擎默认的支持隔离级别是REPEATABLE READ,但是与标准SQL不同 的是，InnoDB存储引擎在REPEATABLE READ事务隔离级别下，使用Next-Key Lock锁的 算法，因此避免幻读的产生。这与其他数据库系统(如Microsoft SQL Server数据库)是不 同的。所以说，InnoDB存储引擎在默认REPEATABLE READ的事务隔离级别下已经能完全保证事务的隔离性要求，即达到SQL标准的SERIALIZABLE隔离级别。 </p>
+<p>READ UNCOMMITTED称为浏览访问(browse access),仅仅只对事务而言的。<br>READ COMMITTED称为游标稳定(cursor stability)。<br>REPEATABLE READ是2.9999°的 隔离，没有幻读的保护。<br>SERIALIZABLE称为隔离，或3’。SQL和SQL 2标准的默认事务 隔离级别是SERIALIZABLE。</p>
+<p>InnoDB存储引擎默认的支持隔离级别是REPEATABLE READ,但是与标准SQL不同 的是，InnoDB存储引擎在REPEATABLE READ事务隔离级别下，使用Next-Key Lock锁的 算法，因此避免幻读的产生。这与其他数据库系统(如Microsoft SQL Server数据库)是不 同的。所以说，InnoDB存储引擎在默认REPEATABLE READ的事务隔离级别下已经能完全保证事务的隔离性要求，即达到SQL标准的SERIALIZABLE隔离级别。</p>
 <p>隔离级别越低，事务请求的锁越少，或者保持锁的时间就越短。这也是为什么大多数 数据库系统默认的事务隔离级别是READ COMMITTED。</p>
 <h1 id="Mysql事务的实现"><a href="#Mysql事务的实现" class="headerlink" title="Mysql事务的实现"></a>Mysql事务的实现</h1><p>在Mysql中原子性、一致性、持久性通过数据库的redo和undo 来完成。隔离性用锁实现。</p>
 <h2 id="隔离性的实现"><a href="#隔离性的实现" class="headerlink" title="隔离性的实现"></a>隔离性的实现</h2><p>隔离性由第6章讲述的锁得以实现。<br>7.2.1    redo<br>在InnoDB存储引擎中，事务日志通过重做(redo)日志文件和InnoDB存储引擎的日志 缓冲(InnoDB Log Buffer)来实现。当开始一个事务时，会记录该事务的一个LSN  (Log<br>Sequence Number,日志序列号)，当事务执行时，会往InnoDB存储引擎的日志缓冲里插<br>入事务日志I当事务提交时，必须将InnoDB存储引擎的日志缓冲写入磁盘(默认的实现， 即innodb_flush_log_at_trx_commit= 1)。也就是在写数据前，需要先写日志。这种方式称 为预写日志方式(Write-Ahead Logging, WAL)。<br>InnoDB存储引擎通过预写日志的方式来保证事务的完整性。这意味着磁盘上存储的数<br>据页和内存缓冲池中的页是不同步的，对于内存缓冲池中页的修改，先是写入重做日志文<br>件，然后再写入磁盘，因此是一种异步的方式。可以通过命令SHOW ENGINE INNODB STATUS来观察当前磁盘和日志的“差距”：<br>create table z (a int,primary key(a))engine-innodb;</p>
@@ -501,8 +502,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Java集合/CurrentHashMap源码解析/index.html" rel="prev" title="CurrentHashMap源码解析">
-                CurrentHashMap源码解析 <i class="fa fa-chevron-right"></i>
+              <a href="/面试/java面试宝典/index.html" rel="prev" title="java面试宝典">
+                java面试宝典 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -596,7 +597,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -607,7 +608,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

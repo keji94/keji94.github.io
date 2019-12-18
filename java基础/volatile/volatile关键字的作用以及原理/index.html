@@ -88,7 +88,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/cpu_mesi.jpg">
 <meta property="og:image" content="https://keji-image.oss-cn-hangzhou.aliyuncs.com/JMM.png">
-<meta property="og:updated_time" content="2019-12-18T12:09:02.192Z">
+<meta property="og:updated_time" content="2019-12-18T12:20:50.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="volatile关键字的作用以及原理">
 <meta name="twitter:description" content="物理计算机的并发问题CPU在摩尔定律的指导下以每18个月翻一番的速度在发展，然而内存和硬盘的发展速度远远不及CPU。内存和硬盘的运算速度和CPU查了几个数量级。为了解决这个问题，CPU厂商在CPU中内置了少量的高速缓存以解决I/O速度和CPU运算速度之间的不匹配问题。  所谓高速缓存也就是，当程序在运行过程中，会将运算需要的数据从主存复制一份到CPU的高速缓存当中，那么CPU进行计算时就可以直接从">
@@ -412,6 +412,7 @@
 <p><img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/cpu_mesi.jpg" alt></p>
 <p>所谓高速缓存也就是，当程序在运行过程中，会将运算需要的数据从主存复制一份到CPU的高速缓存当中，那么CPU进行计算时就可以直接从它的高速缓存读取数据和向其中写入数据，当运算结束之后，再将高速缓存中的数据刷新到主存当中。</p>
 <p>但是高速缓存引入了一个新的问题：缓存一致性（Cache Coherence）。在多核CPU系统中，每个CPU都有自己的高速缓存，而它们又公用一块主内存（Main Memory）。当多个CPU的运算任务都涉及同一块主内存区域时，将可能导致各自的缓存不一致。如果真发生这种情况，那同步回到主内存时以谁的缓存数据为准呢？</p>
+<a id="more"></a>
 <h2 id="解决缓存一致性问题"><a href="#解决缓存一致性问题" class="headerlink" title="解决缓存一致性问题"></a>解决缓存一致性问题</h2><p>一般来说，有两种方式解决缓存一致性问题</p>
 <ul>
 <li><p>通过在总线加LOCK#锁的方式</p>
@@ -544,8 +545,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/redis/redis zset数据结构使用案例以及原理解析/index.html" rel="next" title="redis zset数据结构使用案例以及原理解析">
-                <i class="fa fa-chevron-left"></i> redis zset数据结构使用案例以及原理解析
+              <a href="/分库分表/Sharding-JDBC系列之Springboot2中使用Shariding-JDBC分库分表/index.html" rel="next" title="Sharding-JDBC系列之Springboot2中使用Shariding-JDBC分库分表">
+                <i class="fa fa-chevron-left"></i> Sharding-JDBC系列之Springboot2中使用Shariding-JDBC分库分表
               </a>
             
           </div>
@@ -649,7 +650,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -660,7 +661,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="克己的博客">
 <meta property="og:description" content="前面分析了ArrayList和HashMap的源码，今天分析下HashSet的源码。HashSet作为Java集合框架的一员，也是非常重要的，虽然平时用的没有前面两个多，但是在一些特定的场景可以帮助我们快速解决问题，所以掌握其特性也是非常重要的。 类注释首先还是先看下官方的类注释，快速了解HashSet的特性。 此类实现Set接口，由哈希表（实际上是HashMap实例）支持。它不能保证集合的迭代顺">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-18T12:09:02.192Z">
+<meta property="og:updated_time" content="2019-12-18T12:20:50.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java集合之JDK1.8HashSet源码解析">
 <meta name="twitter:description" content="前面分析了ArrayList和HashMap的源码，今天分析下HashSet的源码。HashSet作为Java集合框架的一员，也是非常重要的，虽然平时用的没有前面两个多，但是在一些特定的场景可以帮助我们快速解决问题，所以掌握其特性也是非常重要的。 类注释首先还是先看下官方的类注释，快速了解HashSet的特性。 此类实现Set接口，由哈希表（实际上是HashMap实例）支持。它不能保证集合的迭代顺">
@@ -402,6 +402,7 @@
 <p>这个类的迭代器方法返回的迭代器是快速失败的：如果在创建迭代器之后的任何时候修改了set，​​除了通过迭代器自己的remove方法之外，Iterator都将抛出ConcurrentModificationException。因此，在并发修改的情况下，迭代器快速而干净地失败，而不是在未来的未确定时间冒着任意的，非确定性行为的风险。</p>
 <p>请注意，迭代器的快速失败行为无法阿紫存在不同步的并发修改时做出任何硬性保证。快速失败迭代器会尽最大努力抛出ConcurrentModificationException。因此，不要编写这个异常的程序：迭代器的快速失败行为应仅用于检测错误。</p>
 <p>由于HashSet的底层是HashMap,它的类注释和HashMap差不多，其特性也和HashMap差不多。</p>
+<a id="more"></a>
 <h1 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h1><p>同HashMap一样，HashSet也有4个构造方法</p>
 <p><strong>HashSet()</strong><br>构建一个空的set集合，其底层的HashMap实例使用默认的初始容量(16)和加载因子(0.75)。</p>
 <p><strong>HashSet(Collection&lt;? extends E&gt; c)</strong><br>使用其他集合创建一个新得HashSet</p>
@@ -500,8 +501,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/容器/Java集合之JDK1.8CopyOnWriteArrayList源码解析/index.html" rel="prev" title="java集合系列之JDK8CopyOnWriteArrayList源码解析">
-                java集合系列之JDK8CopyOnWriteArrayList源码解析 <i class="fa fa-chevron-right"></i>
+              <a href="/数据结构/Java数据结构：二叉树与二叉搜索树/index.html" rel="prev" title="Java数据结构：二叉树与二叉搜索树">
+                Java数据结构：二叉树与二叉搜索树 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -595,7 +596,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -606,7 +607,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
