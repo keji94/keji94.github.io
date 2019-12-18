@@ -1,3 +1,14 @@
+
+---
+layout: post
+title: Java集合之JDK1.8HashSet源码解析
+date: 2019-06-01 15:01:18
+categories: 
+  - 容器
+tags:
+  - 容器,HashSet
+---
+
 前面分析了ArrayList和HashMap的源码，今天分析下HashSet的源码。HashSet作为Java集合框架的一员，也是非常重要的，虽然平时用的没有前面两个多，但是在一些特定的场景可以帮助我们快速解决问题，所以掌握其特性也是非常重要的。
 
 # 类注释
