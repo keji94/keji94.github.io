@@ -1,3 +1,13 @@
+---
+layout: post
+title: Java数据结构:树（Tree）
+date: 2019-06-01 15:01:18
+categories: 
+  - 数据结构
+tags:
+  - 数据结构
+---
+
 # Java数据结构:树（Tree）
 
 # 计算机科学中的树
