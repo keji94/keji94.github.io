@@ -3,7 +3,7 @@
 layout: post
 title: Java集合之JDK1.8HashSet源码解析
 date: 2019-06-01 15:01:18
-categories: 
+categories:
   - 容器
 tags:
   - 容器,HashSet
@@ -25,6 +25,7 @@ tags:
 
 由于HashSet的底层是HashMap,它的类注释和HashMap差不多，其特性也和HashMap差不多。
 
+<!-- more -->
 # 构造方法
 
 同HashMap一样，HashSet也有4个构造方法

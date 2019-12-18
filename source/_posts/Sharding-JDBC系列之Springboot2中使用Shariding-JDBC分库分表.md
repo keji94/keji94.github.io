@@ -1,3 +1,14 @@
+---
+layout: post
+title: Sharding-JDBC系列之Springboot2中使用Shariding-JDBC分库分表
+date: 2019-05-6 19:40:36
+categories:
+  - 分库分表
+tags:
+  - 分库分表
+---
+
+
 最近在工作中使用Sharding-JDBC做了分库分表，目前项目已经上线并稳定运行，闲暇时于记录下使用过程以及踩过的坑，希望对准备使用Sharding-JDBC做分库分表的同学有些帮助。
 
 # 业务背景
@@ -101,7 +112,7 @@ spring:
       broadcast-tables: # 配置广播表，适合数据量不大，但是每个数据源都存在的表
         - xtgy_chaxunympz
       default-data-source-name: master0 #默认数据源，没有配置分库分表规则的表，会使用默认数据源
-      master-slave-rules: #配置主从规则 
+      master-slave-rules: #配置主从规则
         master0:
           master-data-source-name: master0
           slave-data-source-names: master0slave0

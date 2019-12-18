@@ -2,7 +2,7 @@
 layout: post
 title: java集合系列之JDK8CopyOnWriteArrayList源码解析
 date: 2019-06-01 15:01:18
-categories: 
+categories:
   - 容器
 tags:
   - 容器
@@ -33,7 +33,7 @@ final void setArray(Object[] a) {
 　　array = a;
 }
 ```
-
+<!-- more -->
 空参构造就是创建了一个新的长度为0的Object数组，并且将该数组赋值给使用volatile修饰的成员变量**array**
 
 ```java
