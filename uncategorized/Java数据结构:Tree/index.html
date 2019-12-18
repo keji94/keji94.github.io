@@ -82,7 +82,7 @@
 <meta name="description" content="Java数据结构:树（Tree）计算机科学中的树在计算机科学中，树（英语：tree）是一种抽象数据类型（ADT）或是实现这种抽象数据类型的数据结构，用来模拟具有树状结构性质的数据集合。它是由n（n&amp;gt;0）个有限节点组成一个具有层次关系的集合。把它叫做“树”是因为它看起来像一棵倒挂的树，也就是说它是根朝上，而叶朝下的。它具有以下的特点：  每个节点都只有有限个子节点或无子节点； 没有父节点的节点">
 <meta property="og:type" content="article">
 <meta property="og:title" content="克己的博客">
-<meta property="og:url" content="/uncategorized/Java数据结构 Tree/index.html">
+<meta property="og:url" content="/uncategorized/Java数据结构:Tree/index.html">
 <meta property="og:site_name" content="克己的博客">
 <meta property="og:description" content="Java数据结构:树（Tree）计算机科学中的树在计算机科学中，树（英语：tree）是一种抽象数据类型（ADT）或是实现这种抽象数据类型的数据结构，用来模拟具有树状结构性质的数据集合。它是由n（n&amp;gt;0）个有限节点组成一个具有层次关系的集合。把它叫做“树”是因为它看起来像一棵倒挂的树，也就是说它是根朝上，而叶朝下的。它具有以下的特点：  每个节点都只有有限个子节点或无子节点； 没有父节点的节点">
 <meta property="og:locale" content="zh-Hans">
@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/tree_pre_iter.png">
 <meta property="og:image" content="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/tree_last_iter.png">
 <meta property="og:image" content="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/tree_floor_iter.png">
-<meta property="og:updated_time" content="2019-07-21T09:21:37.112Z">
+<meta property="og:updated_time" content="2019-12-18T08:25:47.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="克己的博客">
 <meta name="twitter:description" content="Java数据结构:树（Tree）计算机科学中的树在计算机科学中，树（英语：tree）是一种抽象数据类型（ADT）或是实现这种抽象数据类型的数据结构，用来模拟具有树状结构性质的数据集合。它是由n（n&amp;gt;0）个有限节点组成一个具有层次关系的集合。把它叫做“树”是因为它看起来像一棵倒挂的树，也就是说它是根朝上，而叶朝下的。它具有以下的特点：  每个节点都只有有限个子节点或无子节点； 没有父节点的节点">
@@ -125,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="/uncategorized/Java数据结构 Tree/">
+  <link rel="canonical" href="/uncategorized/Java数据结构:Tree/">
 
 
 
@@ -300,7 +300,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="/uncategorized/Java数据结构 Tree/index.html">
+    <link itemprop="mainEntityOfPage" href="/uncategorized/Java数据结构:Tree/index.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="克己">
@@ -329,8 +329,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-21T17:21:37+08:00">
-                2019-07-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-18T16:25:47+08:00">
+                2019-12-18
               </time>
             
 
@@ -347,7 +347,7 @@
 
           
           
-             <span id="/uncategorized/Java数据结构 Tree/index.html" class="leancloud_visitors" data-flag-title>
+             <span id="/uncategorized/Java数据结构:Tree/index.html" class="leancloud_visitors" data-flag-title>
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -387,6 +387,7 @@
 <li>树里面没有环路(cycle)</li>
 </ul>
 <p><img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/tree.png" alt></p>
+<a id="more"></a>
 <h1 id="为什么需要树"><a href="#为什么需要树" class="headerlink" title="为什么需要树"></a>为什么需要树</h1><p>为什么要用到树呢？因为它通常结合了另外两种数据结构的优点：<br>一种是有序数组，另一种是链表。在树中查找数据项的速度和在有序数组中查找一样快， 并且插入数据项和删除数据项的速度也和链表一样。下面，我们先来稍微思考一下这些话题，然后<br>再深入地研究树的细节。</p>
 <h2 id="在有序数组中插入数据项太慢"><a href="#在有序数组中插入数据项太慢" class="headerlink" title="在有序数组中插入数据项太慢"></a>在有序数组中插入数据项太慢</h2><p>假设数组中的所有数据项都有序的排列—这就是有序数组，用二分查找法可以在有序数组中快速地查找特定的值。它的过程是先査看数组的正中间的数据项，如果那个数据项值比要找的大，就缩小査找范围，在数组的后半段中找；如果小， 就在前半段找。反复这个过程，查找数据所需的时间是O(logN)。同时也可以迅速地遍历有序数组， 按顺序访问每个数据项。</p>
 <p>然而，想在有序数组中插入一个新数据项，就必须首先査找新数据项插入的位置，然后把所有<br>比新数据项大的数据项向后移动一位，来给新数据项腾出空间。这样多次的移动很费时，’平均来讲<br>要移动数组中一半的数据项(N/2次移动)。删除数据项也需要多次的移动，所以也很慢。<br>显而易见，如果要做很多的插入和删除操作，就不该选用有序数组。</p>
@@ -573,7 +574,7 @@
               
                 <a href="/archives/index.html">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
