@@ -11,25 +11,20 @@ tags:
 
 # 概览
 
-LinkedHashMap实现了Map接口继承至HashMap，它在HashMap的基础上，通过一条双向链表是插入顺序和访问顺序保持一致。LinkedHashMap除了对双向链表的维护外，基本都是对HashMap的操作，所以在看LinkedHashMap源码之前，强烈建议先看看HashMap的源码,可以参考我的这一篇：[](https://zhuanlan.zhihu.com/p/72296421)
+LinkedHashMap实现了Map接口继承至HashMap，它在HashMap的基础上，通过一条双向链表是插入顺序和访问顺序保持一致。LinkedHashMap除了对双向链表的维护外，基本都是对HashMap的操作，所以在看LinkedHashMap源码之前，强烈建议先看看HashMap的源码,可以参考我的这一篇：[Java集合之HashMap源码解析(JDK8)](https://zhuanlan.zhihu.com/p/72296421)
 
 本篇文章不会再详细解析HashMap的东西，将重点放在LinkedHashMap对双向链表的维护上。
 
 # 构造函数
 
-照例从创建LinkedHashMap对象说起，依次为起点，一步步解开LinkedHashMap的神秘面纱。
+照例从创建LinkedHashMap对象说起，已此为起点，一步步解开LinkedHashMap的神秘面纱。
 
 ```java
-　LinkedHashMap()
-　使用默认初始容量16和默认加载因子0.75创建一个LinkedHashMap
-　LinkedHashMap(int initialCapacity)
-　使用自定义初始容量和默认加载因子0.75创建一个LinkedHashMap
-　LinkedHashMap(int initialCapacity, float loadFactor)
-　使用自定义初始容量和自动以加载因子创建一个LinkedHashMap
-　LinkedHashMap(int initialCapacity, float loadFactor, boolean accessOrder)
-　使用自定义初始容量和自动以加载因子创建一个LinkedHashMap,并且可以设置accessOrder,accessOrder为true，调用get方法会改变内部结构，这一点后面会细讲
-　LinkedHashMap(Map<? extends K,? extends V> m)
-　使用Map子类实例创建一个LinkedHashMap
+　LinkedHashMap() 使用默认初始容量16和默认加载因子0.75创建一个LinkedHashMap
+　LinkedHashMap(int initialCapacity) 使用自定义初始容量和默认加载因子0.75创建一个LinkedHashMap
+　LinkedHashMap(int initialCapacity, float loadFactor) 使用自定义初始容量和自动以加载因子创建一个LinkedHashMap
+　LinkedHashMap(int initialCapacity, float loadFactor, boolean accessOrder) 使用自定义初始容量和自动以加载因子创建一个LinkedHashMap,并且可以设置accessOrder,accessOrder为true，调用get方法会改变内部结构，这一点后面会细讲
+　LinkedHashMap(Map<? extends K,? extends V> m) 使用Map子类实例创建一个LinkedHashMap
 ```
 <!-- more -->
 
@@ -126,7 +121,7 @@ transient LinkedHashMap.Entry<K,V> tail;
 transient LinkedHashMap.Entry<K,V> head;
 ```
 
-这个方法的代码并不复杂，不一一解释了，我么只需要知道最终的效果是将get()方法取出的节点，放到了链表的最后，使之成为尾部节点，从而改变了数据在LinkedHashMap中的存储顺序，它的迭代顺序就是最后访问其条目的顺序。这种特性很适合构建LRU Cache
+这个方法的代码并不复杂，不一一解释了，我们只需要知道最终的效果是将get()方法取出的节点，放到了链表的最后，使之成为尾部节点，从而改变了数据在LinkedHashMap中的存储顺序，它的迭代顺序就是最后访问其条目的顺序。这种特性很适合构建LRU Cache
 
 ## LRU Cache
 
