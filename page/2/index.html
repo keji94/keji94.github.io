@@ -294,7 +294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="/数据结构/Java数据结构：二叉树与二叉搜索树/index.html">
+    <link itemprop="mainEntityOfPage" href="/容器/Java集合之JDK1.8CopyOnWriteArrayList源码解析/index.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="克己">
@@ -313,7 +313,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/数据结构/Java数据结构：二叉树与二叉搜索树/index.html" itemprop="url">Java数据结构：二叉树与二叉搜索树</a></h1>
+                <a class="post-title-link" href="/容器/Java集合之JDK1.8CopyOnWriteArrayList源码解析/index.html" itemprop="url">java集合系列之JDK8CopyOnWriteArrayList源码解析</a></h1>
         
 
         <div class="post-meta">
@@ -348,8 +348,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构/index.html" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
+                  <a href="/categories/容器/index.html" itemprop="url" rel="index">
+                    <span itemprop="name">容器</span>
                   </a>
                 </span>
 
@@ -365,7 +365,7 @@
 
           
           
-             <span id="/数据结构/Java数据结构：二叉树与二叉搜索树/index.html" class="leancloud_visitors" data-flag-title="Java数据结构：二叉树与二叉搜索树">
+             <span id="/容器/Java集合之JDK1.8CopyOnWriteArrayList源码解析/index.html" class="leancloud_visitors" data-flag-title="java集合系列之JDK8CopyOnWriteArrayList源码解析">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -397,14 +397,12 @@
 
       
         
-          <h1 id="Java数据结构：二叉树与二叉搜索树"><a href="#Java数据结构：二叉树与二叉搜索树" class="headerlink" title="Java数据结构：二叉树与二叉搜索树"></a>Java数据结构：二叉树与二叉搜索树</h1><p>上一篇介绍了树这种数据结构，并用Java代码使用链表实现了树。<a href="https://zhuanlan.zhihu.com/p/74141967" target="_blank" rel="noopener"></a>,接下来介绍树的其中一种特例，二叉树。</p>
-<p>在计算机科学中，二叉树（英语：Binary tree）是每个节点最多只有两个分支（即不存在分支度大于2的节点）的树结构。通常分支被称作“左子树”或“右子树”。二叉树的分支具有左右次序，不能随意颠倒。</p>
-<p>二叉树的第 <img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/i.svg" alt>层至多拥有 <img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/2i-1.svg" alt>个节点；深度为 <img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/k.svg" alt>的二叉树至多总共有<img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/2k-1.svg" alt>个节点（定义根节点所在深度 <img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/k0%3D0.svg" alt>），而总计拥有节点数匹配的，称为“满二叉树”；深度为 <img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/k.svg" alt>有<img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/n.svg" alt>个节点的二叉树，当且仅当其中的每一节点，都可以和同样深度<img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/k.svg" alt>的满二叉树，序号为1到<img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/n.svg" alt>的节点一对一对应时，称为完全二叉树。对任何一棵非空的二叉树<img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/t.svg" alt>，如果其叶片（终端节点）数为 <img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/n0.svg" alt="title">，分支度为2的节点数为 <img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/n2.svg" alt="title">，则 <img src="https://keji-image.oss-cn-hangzhou.aliyuncs.com/keji-blog-hexo/n0%3Dn2.svg" alt="title">。</p>
-<p>与普通树不同，普通树的节点个数至少为1，而二叉树的节点个数可以为0；普通树节点的最大分支度没有限制，而二叉树节点的最大分支度为2；普通树的节点无左、右次序之分，而二叉树的节点有左、右次序之分。</p>
-<p>二叉树通常作为数据结构应用，典型用法是对节点定义一个标记函数，将一些值与每个节点相关系。这样标记的二叉树就可以实现二叉搜索树和二叉堆，并应用于高效率的搜索和排序。</p>
+          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>CopyOnWriteArrayList是java.util.concurrent包中的一员，是ArrayList的线程安全版本。其实现原理正如它的类名描述的一样，在进行修改的时候，复制一份数据为新数组，并在新数组上面修改，最后将原来的数组引用指向新数组。</p>
+<h1 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h1><p>CopyOnWriteArrayList拥有三个构造函数，分别是空参构造、传递一个集合的构造、传递一个数组的构造,下面对这三个构造函数一一讲解</p>
+<h2 id="public-CopyOnWriteArrayList"><a href="#public-CopyOnWriteArrayList" class="headerlink" title="public CopyOnWriteArrayList()"></a>public CopyOnWriteArrayList()</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">　* 构造一个空的list</span></span><br><span class="line"><span class="comment">　*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">CopyOnWriteArrayList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">　　setArray(<span class="keyword">new</span> Object[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">　* Sets the array.</span></span><br><span class="line"><span class="comment">　*/</span></span><br><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setArray</span><span class="params">(Object[] a)</span> </span>&#123;</span><br><span class="line">　　array = a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/数据结构/Java数据结构：二叉树与二叉搜索树/index.html#more" rel="contents">
+            <a class="btn" href="/容器/Java集合之JDK1.8CopyOnWriteArrayList源码解析/index.html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
