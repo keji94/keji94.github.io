@@ -204,8 +204,7 @@ NIO，有人解释为new I/O,有人解释为Non-block I/O(我更倾向后者)。
 
 * 进行异步I/O操作的缓冲区ByteBuffer等;
 * 进行异步I/O操作的管道Pipe；
-* 进行各种I/O操作（异步或者同步）的Channel,包括ServerSocketChannel和
-* SocketChannel：
+* 进行各种I/O操作（异步或者同步）的Channel,包括ServerSocketChannel和SocketChannel;
 * 多种字符集的编码能力和解码能力；
 * 实现非阻塞I/O操作的多路复用器selector：
 * 基千流行的Perl实现的正则表达式类库；
@@ -277,7 +276,7 @@ public class TimeServerNio {
                 //采用默认值
             }
         }
-        
+
         //创建了一个被称为MultiplexerTimeServer的多路复用类， 它是个一个独立
         //的线程， 负责轮洵多路复用器Selctor,可以处理多个客户端的并发接入
         MultiplexerTimeServer timeServer = new MultiplexerTimeServer(port);
@@ -598,7 +597,7 @@ NIO编程难度确实比同步阻塞BIO大很多， 上面的NIO 例子**并没�
 
 ### NIO优点总结
 1. 客户端发起的连接操作是异步的， 可以通过在多路复用器注册OP_CONNECT等待后续结果， 不需要像之前的客户端那样被同步阻塞。
-2. Socketchannel的读写操作都是异步的， 如果没有可读写的数据它不会同步等待，直接返回， 这样I/O通信线程就可以处理其他的链路， 不需要同步等待这个链路可用。 
+2. Socketchannel的读写操作都是异步的， 如果没有可读写的数据它不会同步等待，直接返回， 这样I/O通信线程就可以处理其他的链路， 不需要同步等待这个链路可用。
 3. 线程模型的优化： 由于JDK的Selector在Linux等主流操作系统上通过epoll实现， 它没有连接句柄数的限制(只受限于操作系统的最大句柄数或者对单个进程的句柄限制)， 这意味着一个Selector线程可以同时处理成千上万个客户端连接， 而且性能不会随着客户端的增加而线性下降， 因此， 它非常适合做高性能、 高负载的网络服务器。
 
 ## AIO
