@@ -26,7 +26,6 @@ install:
 script:
     - hexo clean
     - hexo g
-    - hexo d
 #    - hexo g && gulp
 
 after_script:
