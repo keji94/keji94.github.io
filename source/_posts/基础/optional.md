@@ -1,7 +1,6 @@
----
 title: Java8新特性 使用Optional避免NPE
 date: 2019-03-12 12:24:01
-categories: 基础
+categories: java8
 ---
 # 前言
 相信每一个Java程序员都碰到过NPE异常，每个避免NPE，往往会在代码中写很多if判断，形成代码污染。为了解决这个问题，Google公司著名的Guava项目引入了Optional类，Guava通过使用检查空值的方式来防止代码污染，它鼓励程序员写更干净的代码。受到Google Guava的启发，Optional类已经成为Java 8类库的一部分。

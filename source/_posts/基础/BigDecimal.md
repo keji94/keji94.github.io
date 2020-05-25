@@ -1,9 +1,9 @@
----
 title: BigDecimal使用案例
 author: keji
-categories:
-  - 基础
 date: 2019-03-11 19:40:36
+categories: 
+    - java基础
+    - BigDecimal
 ---
 # 创建BigDecimal对象
 创建BigDecimal对象常用的方式有2种：

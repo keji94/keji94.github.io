@@ -1,12 +1,13 @@
 ---
 layout: post
 title: HashMap源码解析
-categories:
+date: 2019-06-01 15:01:18
+categories: 
   - 集合
+  - HashMap
 tags:
   - HashMap
   - list
-date: 2019-06-01 15:01:18
 ---
 
 哈希表（hash table）也叫散列表，是一种非常重要的数据结构，应用场景及其丰富，许多缓存技术（比如memcached）的核心其实就是在内存中维护一张大的哈希表，而HashMap的实现原理也常常出现在各类的面试题中，重要性可见一斑。本文会对java集合框架中的对应实现HashMap的实现原理进行讲解，然后会对JDK8的HashMap源码进行分析。

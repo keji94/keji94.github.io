@@ -1,9 +1,10 @@
 ---
 layout: post
 title: ==，equals，hashCode的区别和联系
-categories:
-  - 基础
 date: 2019-03-16 19:40:36
+categories: 
+  - java基础
+  - equals
 ---
 
 ## == 和equals

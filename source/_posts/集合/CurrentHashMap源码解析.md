@@ -1,8 +1,8 @@
 ---
 layout: post
 title: CurrentHashMap源码解析
-categories:
-  - 集合
+categories: 
+  - Java集合
 tags:
   - semper
   - fermentum
