@@ -2,8 +2,7 @@
 layout: post
 title: Java集合之JDK1.8LinkedHashMap源码解析
 categories:
-  - consectetur
-  - malesuada
+  - 集合
 tags:
   - semper
   - fermentum

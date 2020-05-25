@@ -1,7 +1,9 @@
+---
 title: Java IO模型
 author: 克己
 tags: []
-categories: []
+categories:
+  - IO
 date: 2019-03-20 20:46:00
 ---
 # Linux系统的五种IO模式

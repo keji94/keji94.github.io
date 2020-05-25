@@ -1,11 +1,11 @@
 ---
 layout: post
 title: redis zset数据结构使用案例以及原理解析
-date: 2019-05-6 19:40:36
-categories: 
-  - redis
+categories:
+  - Redis
 tags:
   - redis
+date: 2019-05-06 19:40:36
 ---
 
 # 前言

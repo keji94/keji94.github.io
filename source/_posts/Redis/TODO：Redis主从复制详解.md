@@ -2,8 +2,7 @@
 layout: post
 title: Lorem ipsum
 categories: 
-  - consectetur
-  - malesuada
+  
 tags:
   - semper
   - fermentum

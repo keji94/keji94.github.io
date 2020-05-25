@@ -1,10 +1,9 @@
 ---
 layout: post
 title: Java集合之ArrayList 源码解析
-date: 2019-03-16 19:40:36
-categories: 
-  - java基础
+categories:
   - 集合
+date: 2019-03-16 19:40:36
 ---
 
 ArrayList是Java最常用的几种数据结构之一， 同时也是面试热点。了解其内部实现原理是非常必要的。
