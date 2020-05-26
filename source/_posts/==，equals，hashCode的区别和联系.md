@@ -2,9 +2,8 @@
 layout: post
 title: ==，equals，hashCode的区别和联系
 date: 2019-03-16 19:40:36
-categories: 
-  - java基础
-  - equals
+categories:
+  - 基础
 ---
 
 ## == 和equals
@@ -64,7 +63,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class HashCodeAndEquals {
 
     public static void main(String[] args) {
-        
+
         User p1 = new User(100,"eee");
         User p2 = new User(100,"eee");
         User p3 = new User(200,"aaa");
